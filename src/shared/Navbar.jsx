@@ -74,14 +74,14 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-1">{links}</ul>
             </div>
-            <div className="navbar-end">
-                <button className="btn bg-red-500 text-white text-[0.8rem] tracking-wider">
+            <div className="navbar-end gap-1">
+                <button className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none">
                     Logout
                 </button>
-                <Link className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider">
+                <Link className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
                     Login
                 </Link>
-                <Link className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider">
+                <Link className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
                     Register
                 </Link>
             </div>

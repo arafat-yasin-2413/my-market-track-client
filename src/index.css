@@ -16,7 +16,7 @@
 
 
 .nav.active{
-    @apply bg-blue-500 text-white
+    @apply bg-white text-blue-600 font-bold outline
 }
 
 
