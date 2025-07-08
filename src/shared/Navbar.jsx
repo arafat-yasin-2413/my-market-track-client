@@ -78,10 +78,10 @@ const Navbar = () => {
                 <button className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none">
                     Logout
                 </button>
-                <Link className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
+                <Link to="/login" className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
                     Login
                 </Link>
-                <Link className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
+                <Link to="/register" className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
                     Register
                 </Link>
             </div>
