@@ -1,8 +1,39 @@
 import React from "react";
+import { FaChartLine } from "react-icons/fa";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
+    const links = (
+        <>
+            <li>
+                <NavLink
+                    to="/"
+                    className="nav text-[0.8rem] font-semibold tracking-wider"
+                >
+                    Home
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/allProducts"
+                    className="nav text-[0.8rem] font-semibold tracking-wider"
+                >
+                    All Products
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/dashboard"
+                    className="nav text-[0.8rem] font-semibold tracking-wider"
+                >
+                    Dashboard
+                </NavLink>
+            </li>
+        </>
+    );
+
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-blue-100 shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div
@@ -30,52 +61,29 @@ const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                     >
-                        <li>
-                            <a>Item 1</a>
-                        </li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li>
-                                    <a>Submenu 1</a>
-                                </li>
-                                <li>
-                                    <a>Submenu 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a>Item 3</a>
-                        </li>
+                        {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <Link>
+                    <p className="flex justify-center items-center gap-0.5 text-2xl font-extrabold">
+                        <FaChartLine className="text-blue-600"></FaChartLine>
+                        Market<span className="text-blue-600">Track</span>
+                    </p>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    <li>
-                        <a>Item 1</a>
-                    </li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li>
-                                    <a>Submenu 1</a>
-                                </li>
-                                <li>
-                                    <a>Submenu 2</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li>
-                        <a>Item 3</a>
-                    </li>
-                </ul>
+                <ul className="menu menu-horizontal px-1 gap-1">{links}</ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <button className="btn bg-red-500 text-white text-[0.8rem] tracking-wider">
+                    Logout
+                </button>
+                <Link className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider">
+                    Login
+                </Link>
+                <Link className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider">
+                    Register
+                </Link>
             </div>
         </div>
     );
