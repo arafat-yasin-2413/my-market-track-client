@@ -20,6 +20,13 @@
 }
 
 
+
+.custom-toast-position{
+    top: 80px;
+    right: 50px;
+}
+
+
 /* input:-webkit-autofill {
   font-size: 1.2rem !important;
   transition: background-color 5000s ease-in-out 0s;
