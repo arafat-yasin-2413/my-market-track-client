@@ -4,7 +4,7 @@ import "./index.css";
 import { RouterProvider } from "react-router";
 import { router } from "./router/routes.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
-import { ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")).render(
             
                 autoClose={2000}
                 hideProgressBar={false}
-                newestOnTop={false}
+                newestOnTop
                 closeOnClick
                 rtl={false}
                 pauseOnFocusLoss
@@ -21,6 +21,7 @@ createRoot(document.getElementById("root")).render(
                 pauseOnHover
                 theme="light"
                 toastClassName="custom-toast-position"
+                transition={Slide}
             ></ToastContainer>
             <AuthProvider>
                 <RouterProvider router={router}></RouterProvider>

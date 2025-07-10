@@ -1,6 +1,9 @@
 import React from "react";
 import { FaChartLine } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
+import MarketTrackLogo from "../components/MarketTrackLogo/MarketTrackLogo";
+import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
     const links = (
@@ -31,6 +34,23 @@ const Navbar = () => {
             </li>
         </>
     );
+
+    const {logOut} = useAuth();
+
+
+
+    const handleLogOut =() =>{
+        logOut()
+        .then(()=>{
+            toast.success('Logout Successfull')
+        })
+        .catch(error=>{
+            toast.error(error.message);
+        })
+    }
+
+
+
 
     return (
         <div className="navbar bg-blue-100 shadow-sm">
@@ -64,18 +84,15 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Link>
-                    <p className="flex justify-center items-center gap-0.5 text-2xl font-extrabold">
-                        <FaChartLine className="text-blue-600"></FaChartLine>
-                        Market<span className="text-blue-600">Track</span>
-                    </p>
+                <Link to="/">
+                    <MarketTrackLogo></MarketTrackLogo>
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-1">{links}</ul>
             </div>
             <div className="navbar-end gap-1">
-                <button className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none">
+                <button onClick={handleLogOut} className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none">
                     Logout
                 </button>
                 <Link to="/login" className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">

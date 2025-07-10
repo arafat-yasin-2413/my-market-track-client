@@ -4,12 +4,14 @@ import Divider from "./Divider";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Register = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm();
     const { createUser } = useAuth();
 
@@ -17,7 +19,9 @@ const Register = () => {
         console.log(data);
         createUser(data.email, data.password)
         .then((result) => {
+            toast.success('Account Created Successfully')
             console.log(result.user);
+            reset();
         })
         .catch(error=>{
             console.error(error);
@@ -36,7 +40,7 @@ const Register = () => {
                     <input
                         type="text"
                         {...register("name", { required: true })}
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-4"
+                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2"
                         placeholder="your name"
                     />
 
@@ -49,7 +53,7 @@ const Register = () => {
                     <input
                         type="email"
                         {...register("email", { required: true })}
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-4"
+                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2"
                         placeholder="photo"
                     />
                     {errors.email?.type === "required" && (
@@ -60,9 +64,13 @@ const Register = () => {
                     <label>Photo</label>
                     <input
                         type="file"
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-4"
+                        {...register("photo", { required: true })}
+                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2"
                         placeholder="Email"
                     />
+                    {errors.photo?.type === "required" && (
+                        <p className="text-red-500">Photo is required</p>
+                    )}
 
                     {/* password field */}
                     <label>Password</label>
