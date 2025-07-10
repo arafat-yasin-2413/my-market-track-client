@@ -35,22 +35,17 @@ const Navbar = () => {
         </>
     );
 
-    const {logOut} = useAuth();
+    const { logOut, user } = useAuth();
 
-
-
-    const handleLogOut =() =>{
+    const handleLogOut = () => {
         logOut()
-        .then(()=>{
-            toast.success('Logout Successfull')
-        })
-        .catch(error=>{
-            toast.error(error.message);
-        })
-    }
-
-
-
+            .then(() => {
+                toast.success("Logout Successfull");
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
 
     return (
         <div className="navbar bg-blue-100 shadow-sm">
@@ -84,21 +79,35 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Link to="/">
-                    <MarketTrackLogo></MarketTrackLogo>
-                </Link>
+
+
+                <MarketTrackLogo></MarketTrackLogo>
+
+                
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-1">{links}</ul>
             </div>
+
+            <div>{user && <h4>{user.email}</h4>}</div>
+
             <div className="navbar-end gap-1">
-                <button onClick={handleLogOut} className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none">
+                <button
+                    onClick={handleLogOut}
+                    className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none"
+                >
                     Logout
                 </button>
-                <Link to="/login" className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
+                <Link
+                    to="/login"
+                    className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300"
+                >
                     Login
                 </Link>
-                <Link to="/register" className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300">
+                <Link
+                    to="/register"
+                    className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300"
+                >
                     Register
                 </Link>
             </div>

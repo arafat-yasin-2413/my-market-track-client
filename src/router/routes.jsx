@@ -5,6 +5,9 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import PrivateRoute from "../routes/PrivateRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
+import AddProduct from "../pages/AddProduct/AddProduct";
 
 export const router = createBrowserRouter([
     {
@@ -29,6 +32,18 @@ export const router = createBrowserRouter([
                 path: 'register',
                 Component: Register,
             }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+        </PrivateRoute>,
+        children: [
+            {
+                path: 'addProduct',
+                Component: AddProduct,
+            },
         ]
     },
     {
