@@ -3,11 +3,14 @@ import { NavLink, Outlet } from "react-router";
 import MarketTrackLogo from "../components/MarketTrackLogo/MarketTrackLogo";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
+import DashboardMenu from "../components/DashboardMenu/DashboardMenu";
+import { AiFillHome } from "react-icons/ai";
+import { FaBullhorn, FaCartPlus, FaFolderOpen } from "react-icons/fa6";
+import { FaBoxes } from "react-icons/fa";
 
 const DashboardLayout = () => {
     return (
         <>
-
             <Navbar></Navbar>
 
             <div className="drawer lg:drawer-open">
@@ -19,7 +22,6 @@ const DashboardLayout = () => {
                 <div className="drawer-content flex flex-col min-h-full">
                     {/* Navbar */}
                     <div className="navbar bg-base-300 w-full lg:hidden">
-                        
                         {/* dashboard menu button */}
                         <div className="flex-none">
                             <label
@@ -56,18 +58,20 @@ const DashboardLayout = () => {
                         aria-label="close sidebar"
                         className="drawer-overlay"
                     ></label>
-                    <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                        {/* Sidebar content here */}
-                        <MarketTrackLogo></MarketTrackLogo>
-                        <li>
-                            <a>Home</a>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/addProduct">
-                                Add Product
-                            </NavLink>
-                        </li>
-                    </ul>
+
+                    <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                    <MarketTrackLogo></MarketTrackLogo>
+                    <div className="divider"></div>
+                        <ul>
+                            {/* Sidebar content here */}
+
+                            <DashboardMenu title={"Home"} link={"/"} Icon={AiFillHome}></DashboardMenu>
+                            <DashboardMenu title={"Add Product"} link="/dashboard/addProduct" Icon={FaCartPlus}></DashboardMenu>
+                            <DashboardMenu title={"My Products"} link="/dashboard/myProducts" Icon={FaBoxes}></DashboardMenu>
+                            <DashboardMenu title={"Add Advertisement"} link="/dashboard/addAdvertisement" Icon={FaBullhorn}></DashboardMenu>
+                            <DashboardMenu title={"My Advertisements"} link="/dashboard/myAdvertisements" Icon={FaFolderOpen}></DashboardMenu>
+                        </ul>
+                    </div>
                 </div>
             </div>
 

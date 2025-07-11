@@ -16,9 +16,12 @@
 
 
 .nav.active{
-    @apply bg-white text-blue-600 font-bold outline
+    @apply bg-white text-blue-600 font-bold outline;
 }
 
+.dashboardLink.active{
+    @apply bg-blue-100 font-bold text-blue-600
+}
 
 
 .custom-toast-position{

@@ -8,6 +8,9 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateRoute from "../routes/PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddProduct from "../pages/AddProduct/AddProduct";
+import MyProducts from "../pages/MyProducts/MyProducts";
+import AddAdvertisement from "../pages/AddAdvertisement/AddAdvertisement";
+import MyAdvertisements from "../pages/MyAdvertisements/MyAdvertisements";
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +46,18 @@ export const router = createBrowserRouter([
             {
                 path: 'addProduct',
                 Component: AddProduct,
+            },
+            {
+                path: 'myProducts',
+                Component: MyProducts,
+            },
+            {
+                path: 'addAdvertisement',
+                Component: AddAdvertisement,
+            },
+            {
+                path: 'myAdvertisements',
+                Component: MyAdvertisements,
             },
         ]
     },
