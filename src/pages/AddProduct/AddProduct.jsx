@@ -2,42 +2,104 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAuth from "../../hooks/useAuth";
+import { FaCartPlus } from "react-icons/fa6";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
+
 
 const AddProductForm = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
+        watch,
+        reset,
     } = useForm();
 
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const {user} = useAuth();
+    const axiosSecure = useAxiosSecure();
 
-    const onSubmit = (data) => {
-        data.date = selectedDate;
+
+    const onSubmit = async(data) => {
+
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        const formattedPrice = parseInt(data.price);
+        
+        const newProduct = {
+            email: user?.email,
+            name: data.vendorName || "",
+            marketName: data.marketName,
+            marketDescription: data.marketDescription,
+            date: formattedDate,
+            itemName: data.itemName,
+            status: data.status || "pending",
+            productImage: data.productImage,
+            price: formattedPrice,
+            prices: [
+                {
+                    date: formattedDate,
+                    price: formattedPrice,
+                }
+            ],
+            itemDescription: data.itemDescription || "simple description",
+        };
+
+
         console.log("Form data:", data);
+
+
+        try{
+            const res = await axiosSecure.post("/addProduct", newProduct);
+            console.log(res.data);
+            if(res.data.insertedId) {
+                toast.success("Product Added Successfully!");
+                reset();
+                setSelectedDate(new Date());
+            }
+            else{
+                toast.error("Failed to add product. Try again.");
+            }
+        }
+        
+        catch (error){
+            console.error('error occured when adding product : ', error);
+            toast.error('Something went wrong');
+        }
+
     };
 
     return (
         <div className="max-w-5xl mx-auto p-6 bg-white shadow rounded-lg">
-            <h2 className="text-2xl font-bold mb-6 text-center">
-                🛒 Add Product
+            <h2 className="text-2xl flex justify-center items-center font-bold mb-6 text-center gap-2">
+                {/* 🛒 Add Product */}
+                <FaCartPlus></FaCartPlus>
+                Add Product
             </h2>
+
+            
+
+            
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
                 {/* Vendor Info */}
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Vendor Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                        {/* email */}
                         <div>
                             <label>Email (read-only)</label>
                             <input
                                 type="email"
-                                defaultValue="vendor@example.com"
+                                value={user?.email}
                                 readOnly
                                 className="w-full mt-1 border border-gray-300 p-2 rounded"
                             />
                         </div>
 
+                        {/* name */}
                         <div>
                             <label>Vendor Name (optional)</label>
                             <input
@@ -54,6 +116,7 @@ const AddProductForm = () => {
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Market Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* market name */}
                         <div>
                             <label>Market Name</label>
                             <input
@@ -69,15 +132,18 @@ const AddProductForm = () => {
                             )}
                         </div>
 
-                        <div>
-                            <label>Date</label>
+                        {/* date */}
+                        <div className="">
+                            <label>Date</label> <br />
                             <DatePicker
                                 selected={selectedDate}
                                 onChange={(date) => setSelectedDate(date)}
+                                dateFormat="dd/MM/yyyy"
                                 className="w-full mt-1 border border-gray-300 p-2 rounded"
                             />
                         </div>
 
+                        {/* market description */}
                         <div className="md:col-span-2">
                             <label>Market Description</label>
                             <textarea
@@ -100,6 +166,8 @@ const AddProductForm = () => {
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Product Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                        {/* product name */}
                         <div>
                             <label>Item Name</label>
                             <input
@@ -115,6 +183,7 @@ const AddProductForm = () => {
                             )}
                         </div>
 
+                        {/* status */}
                         <div>
                             <label>Status</label>
                             <select
@@ -127,6 +196,7 @@ const AddProductForm = () => {
                             </select>
                         </div>
 
+                        {/* product image */}
                         <div>
                             <label>Product Image (URL)</label>
                             <input
@@ -144,6 +214,7 @@ const AddProductForm = () => {
                             )}
                         </div>
 
+                        {/* price */}
                         <div>
                             <label>Price per Unit (৳)</label>
                             <input
@@ -160,6 +231,7 @@ const AddProductForm = () => {
                             )}
                         </div>
 
+                        {/* product description */}
                         <div className="md:col-span-2">
                             <label>Item Description (optional)</label>
                             <textarea
@@ -175,7 +247,7 @@ const AddProductForm = () => {
                 <div className="text-center">
                     <button
                         type="submit"
-                        className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                        className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
                     >
                         Submit Product
                     </button>
