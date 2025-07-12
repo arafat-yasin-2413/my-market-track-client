@@ -192,6 +192,7 @@ const AddProductForm = () => {
                             >
                                 <option value="pending">Pending</option>
                                 <option value="approved">Approved</option>
+                                <option value="approved">Rejected</option>
                             </select>
                         </div>
 

@@ -118,7 +118,7 @@ const Register = () => {
                             </Link>
                         </p>
                     </div>
-                    <button className="w-full bg-black text-white py-2 rounded-full mt-2">
+                    <button className="w-full bg-black text-white py-2 rounded-full mt-2 cursor-pointer">
                         Register
                     </button>
                 </form>

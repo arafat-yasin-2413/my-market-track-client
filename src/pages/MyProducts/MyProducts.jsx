@@ -1,9 +1,139 @@
-import React from 'react';
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyProducts = () => {
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
+
+    const { data: products = [], refetch } = useQuery({
+        queryKey: ["my-product", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/products?email=${user.email}`);
+            return res.data;
+        },
+    });
+
+    const statusColors = {
+        pending: "bg-yellow-100 text-yellow-700",
+        approved: "bg-green-100 text-green-700",
+        rejected: "bg-red-100 text-red-700",
+    };
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            // console.log(result);
+            if (result.isConfirmed) {
+                try {
+                    const res = await axiosSecure.delete(`/products/${id}`);
+                    console.log(res.data);
+
+                    if (res.data?.deletedCount) {
+
+                        Swal.fire(
+                            "Deleted!",
+                            "Your product has been deleted.",
+                            "success"
+                        );
+                        refetch();
+                    } else {
+                        Swal.fire(
+                            "Failed!",
+                            res.data?.message || "Something went wrong",
+                            "error"
+                        );
+                    }
+                } catch (err) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: err?.message || "Something went wrong!",
+                    });
+                }
+            }
+        });
+    };
+
     return (
-        <div>
-            my products page
+        <div className="p-4">
+            {products.length > 0 ? (
+                <div className="overflow-x-auto rounded-lg shadow border border-gray-200">
+                    <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
+                        <thead className="bg-gray-50 text-gray-700 text-left">
+                            <tr>
+                                <th className="px-4 py-3">SL</th>
+                                <th className="px-4 py-3">Item Name</th>
+                                <th className="px-4 py-3">Price</th>
+                                <th className="px-4 py-3">Market Name</th>
+                                <th className="px-4 py-3">Date</th>
+                                <th className="px-4 py-3">Status</th>
+                                <th className="px-4 py-3 text-center">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100 text-gray-700">
+                            {products.map((product, index) => (
+                                <tr
+                                    key={product._id}
+                                    className="hover:bg-gray-50 transition"
+                                >
+                                    <td className="px-4 py-2">{index + 1}</td>
+                                    <td className="px-4 py-2 font-medium">
+                                        {product.itemName}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {product.price} ৳
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {product.marketName}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {product.date}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        <span
+                                            className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                                                statusColors[product.status] ||
+                                                "bg-gray-100 text-gray-600"
+                                            }`}
+                                        >
+                                            {product.status}
+                                        </span>
+                                    </td>
+                                    <td className="px-4 py-2 text-center space-x-2">
+                                        <button className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded">
+                                            Update
+                                        </button>
+                                        <button
+                                            onClick={() =>
+                                                handleDelete(product._id)
+                                            }
+                                            className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <div className="text-center text-gray-500 py-10 text-lg">
+                    No data available
+                </div>
+            )}
         </div>
     );
 };
