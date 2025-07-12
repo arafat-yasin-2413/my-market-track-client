@@ -65,7 +65,7 @@ const DashboardLayout = () => {
                         <ul>
                             {/* Sidebar content here */}
 
-                            <DashboardMenu title={"Home"} link={"/"} Icon={AiFillHome}></DashboardMenu>
+                            <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
                             <DashboardMenu title={"Add Product"} link="/dashboard/addProduct" Icon={FaCartPlus}></DashboardMenu>
                             <DashboardMenu title={"My Products"} link="/dashboard/myProducts" Icon={FaBoxes}></DashboardMenu>
                             <DashboardMenu title={"Add Advertisement"} link="/dashboard/addAdvertisement" Icon={FaBullhorn}></DashboardMenu>

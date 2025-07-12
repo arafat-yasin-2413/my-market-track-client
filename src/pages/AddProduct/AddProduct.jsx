@@ -132,13 +132,13 @@ const AddProductForm = () => {
                         </div>
 
                         {/* date */}
-                        <div className="">
+                        <div>
                             <label>Date</label> <br />
                             <DatePicker
                                 selected={selectedDate}
                                 onChange={(date) => setSelectedDate(date)}
                                 dateFormat="dd/MM/yyyy"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
+                                className="mt-1 w-full border border-gray-300 p-2 rounded"
                             />
                         </div>
 

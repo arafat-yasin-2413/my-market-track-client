@@ -3,6 +3,8 @@ import React from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { FaEye } from "react-icons/fa6";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 const MyProducts = () => {
     const { user } = useAuth();
@@ -112,16 +114,19 @@ const MyProducts = () => {
                                         </span>
                                     </td>
                                     <td className="px-4 py-2 text-center space-x-2">
-                                        <button className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded">
-                                            Update
+                                        <button className="bg-gray-500 hover:bg-gray-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
+                                            <h4> <FaEye></FaEye> </h4>
+                                        </button>
+                                        <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
+                                            <h4> <FaEdit></FaEdit> </h4>
                                         </button>
                                         <button
                                             onClick={() =>
                                                 handleDelete(product._id)
                                             }
-                                            className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+                                            className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded cursor-pointer"
                                         >
-                                            Delete
+                                            <h4> <FaTrashAlt></FaTrashAlt> </h4>
                                         </button>
                                     </td>
                                 </tr>

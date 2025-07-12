@@ -1,7 +1,7 @@
 import React from "react";
 import Divider from "./Divider";
 import SocialLogin from "./SocialLogin";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -9,6 +9,11 @@ import { toast } from "react-toastify";
 const Login = () => {
     const navigate = useNavigate();
     const {signIn} = useAuth();
+    const location = useLocation();
+
+
+    const from = location.state?.from || "/";
+
     const {
         register,
         handleSubmit,
@@ -23,7 +28,7 @@ const Login = () => {
         .then(result=>{
             toast.success('Login Successfull')
             console.log(result.user);
-            navigate('/');
+            navigate(from);
         })
         .catch(error=>{
             toast.error(error.message);
