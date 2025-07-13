@@ -11,6 +11,8 @@ import AddProduct from "../pages/AddProduct/AddProduct";
 import MyProducts from "../pages/MyProducts/MyProducts";
 import AddAdvertisement from "../pages/AddAdvertisement/AddAdvertisement";
 import MyAdvertisements from "../pages/MyAdvertisements/MyAdvertisements";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import Payment from "../pages/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +22,12 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home,
+            },
+            {
+                path: 'products/details/:id',
+                element: <PrivateRoute>
+                    <ProductDetails></ProductDetails>
+                </PrivateRoute>,
             }
         ]
     },
@@ -59,6 +67,10 @@ export const router = createBrowserRouter([
                 path: 'myAdvertisements',
                 Component: MyAdvertisements,
             },
+            {
+                path: 'payment/:id',
+                Component: Payment,
+            }
         ]
     },
     {

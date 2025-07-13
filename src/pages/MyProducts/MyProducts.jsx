@@ -5,10 +5,12 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEye } from "react-icons/fa6";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Navigate, useNavigate } from "react-router";
 
 const MyProducts = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     const { data: products = [], refetch } = useQuery({
         queryKey: ["my-product", user?.email],
@@ -23,6 +25,16 @@ const MyProducts = () => {
         approved: "bg-green-100 text-green-700",
         rejected: "bg-red-100 text-red-700",
     };
+
+
+    const handleViewProduct = async(id)=>{
+        // console.log('id received : ',id);
+        const result = await axiosSecure.get(`/products/${id}`);
+        console.log(result.data);
+        const product = result.data;
+        
+        navigate(`/products/details/${id}`, {state: {product}});
+    }
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -87,12 +99,14 @@ const MyProducts = () => {
                         <tbody className="divide-y divide-gray-100 text-gray-700">
                             {products.map((product, index) => (
                                 <tr
-                                    key={product._id}
-                                    className="hover:bg-gray-50 transition"
+                                key={product._id}
+                                className="hover:bg-gray-50 transition"
                                 >
+                                
                                     <td className="px-4 py-2">{index + 1}</td>
                                     <td className="px-4 py-2 font-medium">
                                         {product.itemName}
+                                        {/* {product._id} */}
                                     </td>
                                     <td className="px-4 py-2">
                                         {product.price} ৳
@@ -114,7 +128,7 @@ const MyProducts = () => {
                                         </span>
                                     </td>
                                     <td className="px-4 py-2 text-center space-x-2">
-                                        <button className="bg-gray-500 hover:bg-gray-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
+                                        <button onClick={()=>handleViewProduct(product._id)} className="bg-gray-500 hover:bg-gray-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
                                             <h4> <FaEye></FaEye> </h4>
                                         </button>
                                         <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
