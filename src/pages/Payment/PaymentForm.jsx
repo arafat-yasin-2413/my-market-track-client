@@ -1,55 +1,111 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useState } from 'react';
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { useParams } from "react-router";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const PaymentForm = () => {
-
-    const stripe = useStripe()
+    const stripe = useStripe();
     const elements = useElements();
+    const { productId } = useParams();
+    const axiosSecure = useAxiosSecure();
 
-    const [error, setError] = useState('');
+    // console.log("product id : ", productId);
 
+    const [error, setError] = useState("");
 
-    const handleSubmit = async(e) =>{
+    const { isPending, data: productInfo = {} } = useQuery({
+        queryKey: ["product", productId],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/products/${productId}`);
+            return res.data;
+        },
+    });
+
+    if (isPending) {
+        return <LoadingSpinner></LoadingSpinner>;
+    }
+
+    // console.log('product info : ', productInfo);
+    const amount = productInfo.price;
+    const amountInCents = amount * 100;
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-
-        if(!stripe || !elements) {
+        if (!stripe || !elements) {
             return;
         }
 
         const card = elements.getElement(CardElement);
 
-        if(!card) {
+        if (!card) {
             return;
         }
 
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
-            type: 'card',
-            card
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card,
         });
 
-        if(error){
+        if (error) {
             // console.log('[error]', error);
             setError(error.message);
+        } else {
+            setError("");
+            console.log("[payment method]", paymentMethod);
+        }
+
+        // create payment intent
+        const res = await axiosSecure.post("/create-payment-intent", {
+            amountInCents,
+            productId,
+        });
+        console.log("res from intent", res);
+
+        const clientSecret = res.data.clientSecret;
+
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement),
+                billing_details: {
+                    name: "Jhankar vaiya",
+                    // TODO: user's name from useAuth
+                },
+            },
+        });
+
+        if(result.error) {
+            console.log(result.error.message);
         }
         else{
-            setError('');
-            console.log('[payment method]', paymentMethod);
+            if(result.paymentIntent.status === 'succeeded'){
+                console.log('Payment succeeded!');
+                console.log(result);
+            }
         }
-    }
+    };
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className='border rounded border-blue-200 max-w-md mt-10 p-4'>
-                <CardElement className='p-4 border rounded border-gray-200'>
+            <form
+                onSubmit={handleSubmit}
+                className="border rounded border-blue-200 max-w-md mt-10 p-4"
+            >
+                <CardElement className="p-4 border rounded border-gray-200"></CardElement>
 
-                </CardElement>
+                {error && (
+                    <p className="text-red-500 mt-2 font-medium">{error}</p>
+                )}
 
-                {
-                    error && <p className='text-red-500 mt-2 font-medium'>{error}</p>
-                }
-
-                <button className='btn w-full mt-4 bg-blue-500' type='submit' disabled={!stripe}>Pay</button>
+                <button
+                    className="btn w-full mt-4 bg-blue-500"
+                    type="submit"
+                    disabled={!stripe}
+                >
+                    Pay ${amount}
+                </button>
             </form>
         </div>
     );

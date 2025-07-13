@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
                 Component: MyAdvertisements,
             },
             {
-                path: 'payment/:id',
+                path: 'payment/:productId',
                 Component: Payment,
             }
         ]
