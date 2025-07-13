@@ -44,8 +44,6 @@ const PaymentHistory = () => {
                                     Transaction ID
                                 </th>
 
-                            
-
                                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                                     Product ID
                                 </th>
@@ -53,7 +51,7 @@ const PaymentHistory = () => {
                                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                                     Amount
                                 </th>
-                                
+
                                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                                     Paid At
                                 </th>
@@ -76,8 +74,6 @@ const PaymentHistory = () => {
                                         {payment.transactionId}
                                     </td>
 
-                                  
-
                                     <td
                                         className="px-4 py-3 text-sm text-gray-700 font-mono"
                                         title={payment.productId}
@@ -89,8 +85,6 @@ const PaymentHistory = () => {
                                         ${payment.amount}
                                     </td>
 
-                                   
-
                                     <td
                                         className="px-4 py-3 text-sm text-gray-700"
                                         title={new Date(
@@ -99,7 +93,15 @@ const PaymentHistory = () => {
                                     >
                                         {new Date(
                                             payment.paidAt
-                                        ).toLocaleString()}
+                                        ).toLocaleDateString()}{" "}
+                                        {new Date(
+                                            payment.paidAt
+                                        ).toLocaleTimeString([], {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            second: "2-digit",
+                                            hour12: true,
+                                        })}
                                     </td>
                                 </tr>
                             ))}
