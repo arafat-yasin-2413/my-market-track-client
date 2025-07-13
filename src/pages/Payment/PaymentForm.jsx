@@ -1,15 +1,19 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const { productId } = useParams();
     const axiosSecure = useAxiosSecure();
+    const {user} = useAuth();
+    const navigate = useNavigate();
 
     // console.log("product id : ", productId);
 
@@ -70,19 +74,38 @@ const PaymentForm = () => {
             payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
-                    name: "Jhankar vaiya",
-                    // TODO: user's name from useAuth
+                    name: user?.displayName,
+                    email: user?.email,
                 },
             },
         });
 
         if(result.error) {
             console.log(result.error.message);
+            setError(result.error.message);
         }
         else{
+            setError('');
             if(result.paymentIntent.status === 'succeeded'){
                 console.log('Payment succeeded!');
                 console.log(result);
+                const transactionId = result.paymentIntent.id;
+
+                // now create payment history
+                const paymentData = {
+                    productId,
+                    email: user?.email,
+                    amount: amount,
+                    transactionId: transactionId,
+                    paymentMethod: result.paymentIntent.payment_method_types,
+                }
+
+                const paymentRes = await axiosSecure.post('/payments', paymentData);
+                if(paymentRes.data.insertedId){
+                    // console.log('Payment successfully logged to the db.');
+                    toast.success('Payment Successfully saved to DB.');
+                    navigate('/dashboard/myProducts');
+                }
             }
         }
     };
