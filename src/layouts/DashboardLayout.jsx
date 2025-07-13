@@ -6,7 +6,7 @@ import Footer from "../shared/Footer";
 import DashboardMenu from "../components/DashboardMenu/DashboardMenu";
 import { AiFillHome } from "react-icons/ai";
 import { FaBullhorn, FaCartPlus, FaFolderOpen } from "react-icons/fa6";
-import { FaBoxes } from "react-icons/fa";
+import { FaBoxes, FaHistory } from "react-icons/fa";
 
 const DashboardLayout = () => {
     return (
@@ -70,6 +70,7 @@ const DashboardLayout = () => {
                             <DashboardMenu title={"My Products"} link="/dashboard/myProducts" Icon={FaBoxes}></DashboardMenu>
                             <DashboardMenu title={"Add Advertisement"} link="/dashboard/addAdvertisement" Icon={FaBullhorn}></DashboardMenu>
                             <DashboardMenu title={"My Advertisements"} link="/dashboard/myAdvertisements" Icon={FaFolderOpen}></DashboardMenu>
+                            <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>
                         </ul>
                     </div>
                 </div>

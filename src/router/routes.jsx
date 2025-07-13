@@ -13,6 +13,7 @@ import AddAdvertisement from "../pages/AddAdvertisement/AddAdvertisement";
 import MyAdvertisements from "../pages/MyAdvertisements/MyAdvertisements";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Payment from "../pages/Payment/Payment";
+import PaymentHistory from "../pages/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -70,7 +71,11 @@ export const router = createBrowserRouter([
             {
                 path: 'payment/:productId',
                 Component: Payment,
-            }
+            },
+            {
+                path: 'paymentHistory',
+                Component: PaymentHistory,
+            },
         ]
     },
     {
