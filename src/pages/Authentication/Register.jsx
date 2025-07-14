@@ -14,7 +14,7 @@ const Register = () => {
         formState: { errors },
         reset,
     } = useForm();
-    const { createUser } = useAuth();
+    const { createUser,updateUserProfile } = useAuth();
     const [profilePic, setProfilePic] = useState('');
 
     const onSubmit = (data) => {
@@ -23,6 +23,33 @@ const Register = () => {
         .then((result) => {
             toast.success('Account Created Successfully')
             console.log(result.user);
+
+            // update user info to DB
+
+
+            // update user info to Firebase
+            const userProfile = {
+                displayName: data.name,
+                photoURL: profilePic
+            }
+            updateUserProfile(userProfile)
+            .then(()=>{
+                console.log('profile name, picture updated');
+            })
+            .catch(error=>{
+                console.log('failed to upload picture.');
+            })
+
+
+
+
+
+
+
+
+
+
+
             reset();
         })
         .catch(error=>{
