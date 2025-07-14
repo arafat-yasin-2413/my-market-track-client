@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import axios from "axios";
+import useAxios from "../../hooks/useAxios";
 
 const Register = () => {
     const {
@@ -16,15 +17,26 @@ const Register = () => {
     } = useForm();
     const { createUser,updateUserProfile } = useAuth();
     const [profilePic, setProfilePic] = useState('');
+    const axiosPublic = useAxios();
 
     const onSubmit = (data) => {
         console.log(data);
         createUser(data.email, data.password)
-        .then((result) => {
+        .then( async (result) => {
             toast.success('Account Created Successfully')
             console.log(result.user);
 
             // update user info to DB
+            const userInfo = {
+                email: data.email,
+                role: 'user',
+                createdAt: new Date().toISOString(),
+                lastLogin: new Date().toISOString(),
+            }
+
+            const userRes = await axiosPublic.post(`/users`,userInfo);
+            console.log(userRes.data);
+
 
 
             // update user info to Firebase

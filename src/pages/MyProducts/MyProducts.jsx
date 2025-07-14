@@ -6,6 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEye } from "react-icons/fa6";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Navigate, useNavigate } from "react-router";
+import { FiBox } from "react-icons/fi";
 
 const MyProducts = () => {
     const { user } = useAuth();
@@ -26,15 +27,14 @@ const MyProducts = () => {
         rejected: "bg-red-100 text-red-700",
     };
 
-
-    const handleViewProduct = async(id)=>{
+    const handleViewProduct = async (id) => {
         // console.log('id received : ',id);
         const result = await axiosSecure.get(`/products/${id}`);
         console.log(result.data);
         const product = result.data;
-        
-        navigate(`/products/details/${id}`, {state: {product}});
-    }
+
+        navigate(`/products/details/${id}`, { state: { product } });
+    };
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -53,7 +53,6 @@ const MyProducts = () => {
                     console.log(res.data);
 
                     if (res.data?.deletedCount) {
-
                         Swal.fire(
                             "Deleted!",
                             "Your product has been deleted.",
@@ -79,7 +78,7 @@ const MyProducts = () => {
     };
 
     return (
-        <div className="p-4">
+        <div className="bg-white shadow rounded-lg p-4">
             {products.length > 0 ? (
                 <div className="overflow-x-auto rounded-lg shadow border border-gray-200">
                     <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
@@ -99,10 +98,9 @@ const MyProducts = () => {
                         <tbody className="divide-y divide-gray-100 text-gray-700">
                             {products.map((product, index) => (
                                 <tr
-                                key={product._id}
-                                className="hover:bg-gray-50 transition"
+                                    key={product._id}
+                                    className="hover:bg-gray-50 transition"
                                 >
-                                
                                     <td className="px-4 py-2">{index + 1}</td>
                                     <td className="px-4 py-2 font-medium">
                                         {product.itemName}
@@ -128,11 +126,22 @@ const MyProducts = () => {
                                         </span>
                                     </td>
                                     <td className="px-4 py-2 text-center space-x-2">
-                                        <button onClick={()=>handleViewProduct(product._id)} className="bg-gray-500 hover:bg-gray-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
-                                            <h4> <FaEye></FaEye> </h4>
+                                        <button
+                                            onClick={() =>
+                                                handleViewProduct(product._id)
+                                            }
+                                            className="bg-gray-500 hover:bg-gray-600 text-white text-sm px-3 py-1 rounded cursor-pointer"
+                                        >
+                                            <h4>
+                                                {" "}
+                                                <FaEye></FaEye>{" "}
+                                            </h4>
                                         </button>
                                         <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
-                                            <h4> <FaEdit></FaEdit> </h4>
+                                            <h4>
+                                                {" "}
+                                                <FaEdit></FaEdit>{" "}
+                                            </h4>
                                         </button>
                                         <button
                                             onClick={() =>
@@ -140,7 +149,10 @@ const MyProducts = () => {
                                             }
                                             className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded cursor-pointer"
                                         >
-                                            <h4> <FaTrashAlt></FaTrashAlt> </h4>
+                                            <h4>
+                                                {" "}
+                                                <FaTrashAlt></FaTrashAlt>{" "}
+                                            </h4>
                                         </button>
                                     </td>
                                 </tr>
@@ -149,9 +161,18 @@ const MyProducts = () => {
                     </table>
                 </div>
             ) : (
-                <div className="text-center text-gray-500 py-10 text-lg">
-                    No data available
-                </div>
+                <>
+                    <div>
+                        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-center justify-center">
+                            <FiBox className="text-blue-600" />
+                            My Products
+                        </h2>
+
+                        <p className="text-center text-gray-500">
+                            No Products found
+                        </p>
+                    </div>
+                </>
             )}
         </div>
     );

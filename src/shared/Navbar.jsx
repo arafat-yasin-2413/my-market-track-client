@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router";
 import MarketTrackLogo from "../components/MarketTrackLogo/MarketTrackLogo";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import DropdownProfile from "../components/DropdownProfile/DropdownProfile";
 
 const Navbar = () => {
     const { logOut, user } = useAuth();
@@ -96,6 +97,9 @@ const Navbar = () => {
             <div className="navbar-end gap-1">
                 {user ? (
                     <>
+
+                        <DropdownProfile></DropdownProfile>
+
                         <button
                             onClick={handleLogOut}
                             className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none cursor-pointer"

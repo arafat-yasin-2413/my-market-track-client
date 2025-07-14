@@ -2,20 +2,38 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
+import { MdEmail } from "react-icons/md";
 
 const SocialLogin = () => {
 
     const {signInWithGoogle} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosPublic = useAxios();
 
     const from = location.state?.from || "/";
 
     const handleGoogleSignIn = () =>{
         signInWithGoogle()
-        .then(result=>{
+        .then(async(result)=>{
             toast.success('Login with Google Successfull')
             console.log(result.user);
+
+            const user = result.user;
+
+            const userInfo = {
+                email: user.email,
+                role: 'user',
+                createdAt: new Date().toISOString(),
+                lastLogin: new Date().toISOString(),
+            }
+
+            const res = await axiosPublic.post('/users', userInfo);
+            console.log('user update info : ', res.data);
+
+
+
             navigate(from);
         })
         .catch(error=>{
