@@ -10,12 +10,17 @@ import {
     updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
+import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+
 
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const axiosSecure = useAxiosSecure();
+
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -38,13 +43,28 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         setLoading(true);
+        localStorage.removeItem('token');
         return signOut(auth);
     };
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
             setUser(currentUser);
             console.log("user in auth state change : ", currentUser);
+
+
+            if(currentUser?.email) {
+
+                const res = await axiosSecure.post(`/jwt`,{email: currentUser?.email})
+                // console.log(res.data.token);
+                localStorage.setItem("token",res.data.token);
+            }
+
+            else{
+                localStorage.removeItem('token');
+            }
+
+
             setLoading(false);
         });
         return () => {

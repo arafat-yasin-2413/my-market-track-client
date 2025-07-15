@@ -18,8 +18,12 @@ const MyProducts = () => {
         queryFn: async () => {
             const res = await axiosSecure.get(`/products?email=${user.email}`);
             return res.data;
+        
         },
     });
+
+
+    
 
     const statusColors = {
         pending: "bg-yellow-100 text-yellow-700",
