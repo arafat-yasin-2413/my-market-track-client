@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { FaUser } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 
 const AllUser = () => {
     const axiosSecure = useAxiosSecure();
@@ -32,12 +32,16 @@ const AllUser = () => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto p-6 bg-white shadow-xl rounded-2xl">
+        <div className="p-6 bg-white shadow-xl rounded-2xl">
             <h2 className="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-2 text-gray-800">
-                <FaUser /> All Users
+                <FaUsers /> All Users
             </h2>
 
-            <div className="overflow-x-auto">
+            {
+                users.length === 0 ? (<p className="text-center text-gray-500">
+                    No User found.
+                </p>) : (
+<div className="overflow-x-auto">
                 <table className="min-w-full text-sm text-left border border-gray-200 rounded-xl">
                     <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
                         <tr>
@@ -67,15 +71,15 @@ const AllUser = () => {
                                     {user.name}
                                 </td>
                                 <td className="px-6 py-4">{user.email}</td>
-                                <td className="px-6 py-4 capitalize">
-                                    {user.role}
+                                <td className="px-6 py-4 capitalize font-semibold">
+                                    <span className="bg-blue-500 text-white rounded-full px-2 py-0.5">{user.role}</span>
                                 </td>
                                 <td className="px-6 py-4">
                                     {new Date(
                                         user.createdAt
                                     ).toLocaleTimeString([], {
                                         year: "numeric",
-                                        month: "short", // অথবা "2-digit" বা "long"
+                                        month: "short",
                                         day: "2-digit",
                                         hour: "2-digit",
                                         minute: "2-digit",
@@ -88,6 +92,10 @@ const AllUser = () => {
                     </tbody>
                 </table>
             </div>
+                )
+            }
+
+            
         </div>
     );
 };

@@ -10,7 +10,6 @@ import {
     updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
-import axios from "axios";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
