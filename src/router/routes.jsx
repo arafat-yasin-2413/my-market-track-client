@@ -14,6 +14,7 @@ import MyAdvertisements from "../pages/MyAdvertisements/MyAdvertisements";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Payment from "../pages/Payment/Payment";
 import PaymentHistory from "../pages/PaymentHistory/PaymentHistory";
+import AllUser from "../pages/AllUser/AllUser";
 
 export const router = createBrowserRouter([
     {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
             {
                 path: 'paymentHistory',
                 Component: PaymentHistory,
+            },
+            {
+                path: 'allUser',
+                Component: AllUser,
             },
         ]
     },

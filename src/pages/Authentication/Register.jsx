@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Divider from "./Divider";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
@@ -18,9 +18,12 @@ const Register = () => {
     const { createUser,updateUserProfile } = useAuth();
     const [profilePic, setProfilePic] = useState('');
     const axiosPublic = useAxios();
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
+        
         console.log(data);
+        
         createUser(data.email, data.password)
         .then( async (result) => {
             toast.success('Account Created Successfully')
@@ -29,7 +32,9 @@ const Register = () => {
             // update user info to DB
             const userInfo = {
                 email: data.email,
+                name: data.name,
                 role: 'user',
+                photo: profilePic,
                 createdAt: new Date().toISOString(),
                 lastLogin: new Date().toISOString(),
             }
@@ -51,6 +56,7 @@ const Register = () => {
             .catch(error=>{
                 console.log('failed to upload picture.');
             })
+            navigate('/');
 
 
 
@@ -124,7 +130,7 @@ const Register = () => {
                     <input
                         onChange={handleImageUpload}
                         type="file"
-                        
+                        name="photo"
                         className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2 tracking-wider text-[1.1rem]"
                         placeholder="your photo"
                     />
