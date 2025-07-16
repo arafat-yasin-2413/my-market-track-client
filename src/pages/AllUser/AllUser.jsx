@@ -71,7 +71,17 @@ const AllUser = () => {
                                     {user.role}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {new Date(user.createdAt).toLocaleString()}
+                                    {new Date(
+                                        user.createdAt
+                                    ).toLocaleTimeString([], {
+                                        year: "numeric",
+                                        month: "short", // অথবা "2-digit" বা "long"
+                                        day: "2-digit",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        second: "2-digit",
+                                        hour12: true,
+                                    })}
                                 </td>
                             </tr>
                         ))}

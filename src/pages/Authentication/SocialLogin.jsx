@@ -24,6 +24,8 @@ const SocialLogin = () => {
 
             const userInfo = {
                 email: user.email,
+                name: user.displayName,
+                photo: user.photoURL,
                 role: 'user',
                 createdAt: new Date().toISOString(),
                 lastLogin: new Date().toISOString(),
