@@ -15,6 +15,9 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Payment from "../pages/Payment/Payment";
 import PaymentHistory from "../pages/PaymentHistory/PaymentHistory";
 import AllUser from "../pages/AllUser/AllUser";
+import AllOrder from "../pages/AllOrder/AllOrder";
+import AllAdvertisement from "../pages/AllAdvertisement/AllAdvertisement";
+import AllProduct from "../pages/AllProduct/AllProduct";
 
 export const router = createBrowserRouter([
     {
@@ -80,6 +83,18 @@ export const router = createBrowserRouter([
             {
                 path: 'allUser',
                 Component: AllUser,
+            },
+            {
+                path: 'allOrder',
+                Component: AllOrder,
+            },
+            {
+                path: 'allAdvertisement',
+                Component: AllAdvertisement,
+            },
+            {
+                path: 'allProduct',
+                Component: AllProduct,
             },
         ]
     },

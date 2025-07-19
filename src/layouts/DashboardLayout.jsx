@@ -6,9 +6,15 @@ import Footer from "../shared/Footer";
 import DashboardMenu from "../components/DashboardMenu/DashboardMenu";
 import { AiFillHome } from "react-icons/ai";
 import { FaBullhorn, FaCartPlus, FaFolderOpen } from "react-icons/fa6";
-import { FaBoxes, FaHistory, FaUsers } from "react-icons/fa";
+import { FaBoxes, FaBoxOpen, FaClipboardList, FaHistory, FaUsers } from "react-icons/fa";
+import useUserRole from "../hooks/useUserRole";
+import { MdCampaign } from "react-icons/md";
 
 const DashboardLayout = () => {
+
+    const {role, isPending} = useUserRole();
+    console.log(role);
+
     return (
         <>
             <Navbar></Navbar>
@@ -71,7 +77,20 @@ const DashboardLayout = () => {
                             <DashboardMenu title={"Add Advertisement"} link="/dashboard/addAdvertisement" Icon={FaBullhorn}></DashboardMenu>
                             <DashboardMenu title={"My Advertisements"} link="/dashboard/myAdvertisements" Icon={FaFolderOpen}></DashboardMenu>
                             <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>
-                            <DashboardMenu title={"All Users"} link="/dashboard/allUser" Icon={FaUsers}></DashboardMenu>
+
+                        {
+                            !isPending && role === 'admin' && 
+                            <>
+                                <DashboardMenu title={"All Users"} link="/dashboard/allUser" Icon={FaUsers}></DashboardMenu>
+                                <DashboardMenu title={"All Product"} link="/dashboard/allProduct" Icon={FaBoxOpen}></DashboardMenu>
+                                <DashboardMenu title={"All Advertisement"} link="/dashboard/allAdvertisement" Icon={MdCampaign}></DashboardMenu>
+                                <DashboardMenu title={"All Order"} link="/dashboard/allOrder" Icon={FaClipboardList}></DashboardMenu>
+                            
+                            </>
+                        }    
+                            
+
+                        
                         </ul>
                     </div>
                 </div>
