@@ -18,6 +18,8 @@ import AllUser from "../pages/AllUser/AllUser";
 import AllOrder from "../pages/AllOrder/AllOrder";
 import AllAdvertisement from "../pages/AllAdvertisement/AllAdvertisement";
 import AllProduct from "../pages/AllProduct/AllProduct";
+import ForbiddenPage from "../pages/ForbiddenPage/ForbiddenPage";
+import AdminRoute from "../routes/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -33,7 +35,11 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <ProductDetails></ProductDetails>
                 </PrivateRoute>,
-            }
+            },
+            {
+                path: 'forbidden',
+                Component: ForbiddenPage,
+            },
         ]
     },
     {
@@ -82,19 +88,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'allUser',
-                Component: AllUser,
+                element: <AdminRoute><AllUser></AllUser></AdminRoute>,
             },
             {
                 path: 'allOrder',
-                Component: AllOrder,
+                element: <AdminRoute><AllOrder></AllOrder></AdminRoute>,
             },
             {
                 path: 'allAdvertisement',
-                Component: AllAdvertisement,
+                element: <AdminRoute><AllAdvertisement></AllAdvertisement></AdminRoute>
             },
             {
                 path: 'allProduct',
-                Component: AllProduct,
+                element: <AdminRoute><AllProduct></AllProduct></AdminRoute>
             },
         ]
     },
