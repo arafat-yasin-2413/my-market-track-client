@@ -6,19 +6,29 @@ const axiosSecure = axios.create({
 });
 
 const useAxiosSecure = () => {
-    const token = localStorage.getItem("token");
+    // const navigate = useNavigate();
 
-    axiosSecure.interceptors.request.use((config) => {
-        config.headers.Authorization = `Bearer ${token}`;
+    axiosSecure.interceptors.request.use(
+        (config) => {
+            const token = localStorage.getItem("token");
+            config.headers.Authorization = `Bearer ${token}`;
 
-        return config;
-    }, error=>{
-        return Promise.reject(error)
-    });
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
+    );
 
-    axiosSecure.interceptors.response.use((res) => {
-        return res;
-    });
+    axiosSecure.interceptors.response.use(
+        (res) => {
+            return res;
+        },
+        (error) => {
+            console.log("inside response interceptor : ", error.status);
+            return Promise.reject(error);
+        }
+    );
     return axiosSecure;
 };
 
