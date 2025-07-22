@@ -72,12 +72,22 @@ const DashboardLayout = () => {
                             {/* Sidebar content here */}
 
                             <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
-                            <DashboardMenu title={"Add Product"} link="/dashboard/addProduct" Icon={FaCartPlus}></DashboardMenu>
-                            <DashboardMenu title={"My Products"} link="/dashboard/myProducts" Icon={FaBoxes}></DashboardMenu>
-                            <DashboardMenu title={"Add Advertisement"} link="/dashboard/addAdvertisement" Icon={FaBullhorn}></DashboardMenu>
-                            <DashboardMenu title={"My Advertisements"} link="/dashboard/myAdvertisements" Icon={FaFolderOpen}></DashboardMenu>
+
                             <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>
 
+                        
+                        {
+                            !isPending && (role === 'vendor' ) && 
+                            <>
+                                <DashboardMenu title={"Add Product"} link="/dashboard/addProduct" Icon={FaCartPlus}></DashboardMenu>
+                                <DashboardMenu title={"My Products"} link="/dashboard/myProducts" Icon={FaBoxes}></DashboardMenu>
+                                <DashboardMenu title={"Add Advertisement"} link="/dashboard/addAdvertisement" Icon={FaBullhorn}></DashboardMenu>
+                                <DashboardMenu title={"My Advertisements"} link="/dashboard/myAdvertisements" Icon={FaFolderOpen}></DashboardMenu>
+                            </>
+                        }
+                        
+                        
+                        
                         {
                             !isPending && role === 'admin' && 
                             <>

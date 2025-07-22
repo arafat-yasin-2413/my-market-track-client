@@ -20,6 +20,8 @@ import AllAdvertisement from "../pages/AllAdvertisement/AllAdvertisement";
 import AllProduct from "../pages/AllProduct/AllProduct";
 import ForbiddenPage from "../pages/ForbiddenPage/ForbiddenPage";
 import AdminRoute from "../routes/AdminRoute";
+import VendorRoute from "../routes/VendorRoute";
+import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 
 export const router = createBrowserRouter([
     {
@@ -64,19 +66,23 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: 'addProduct',
-                Component: AddProduct,
+                element: <VendorRoute><AddProduct></AddProduct></VendorRoute>,
+            },
+            {
+                path: 'updateProduct/:id',
+                element: <VendorRoute><UpdateProduct></UpdateProduct></VendorRoute>,
             },
             {
                 path: 'myProducts',
-                Component: MyProducts,
+                element: <VendorRoute><MyProducts></MyProducts></VendorRoute>,
             },
             {
                 path: 'addAdvertisement',
-                Component: AddAdvertisement,
+                element: <VendorRoute><AddAdvertisement></AddAdvertisement></VendorRoute>,
             },
             {
                 path: 'myAdvertisements',
-                Component: MyAdvertisements,
+                element: <VendorRoute><MyAdvertisements></MyAdvertisements></VendorRoute>,
             },
             {
                 path: 'payment/:productId',

@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEye } from "react-icons/fa6";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { FiBox } from "react-icons/fi";
 
 const MyProducts = () => {
@@ -141,12 +141,19 @@ const MyProducts = () => {
                                                 <FaEye></FaEye>{" "}
                                             </h4>
                                         </button>
-                                        <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
-                                            <h4>
-                                                {" "}
-                                                <FaEdit></FaEdit>{" "}
-                                            </h4>
-                                        </button>
+
+                                        <Link to={`/dashboard/updateProduct/${product._id}`}>
+                                        
+                                            <button 
+                                            
+                                            className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
+                                                <h4>
+                                                    {" "}
+                                                    <FaEdit></FaEdit>{" "}
+                                                </h4>
+                                            </button>
+                                        </Link>
+                                        
                                         <button
                                             onClick={() =>
                                                 handleDelete(product._id)
