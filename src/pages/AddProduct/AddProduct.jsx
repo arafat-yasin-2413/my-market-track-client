@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { FaCartPlus } from "react-icons/fa6";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
-
+import axios from "axios";
 
 const AddProductForm = () => {
     const {
@@ -14,18 +14,46 @@ const AddProductForm = () => {
         handleSubmit,
         formState: { errors },
         reset,
+        setValue,
     } = useForm();
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const {user} = useAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [previewImage, setPreviewImage] = useState("");
+    const [uploading, setUploading] = useState(false);
 
+    const handleImageUpload = async (e) => {
+        const imageFile = e.target.files[0];
+        if (!imageFile) return;
 
-    const onSubmit = async(data) => {
+        setUploading(true);
+        const formData = new FormData();
+        formData.append("image", imageFile);
 
+        const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_image_upload_key
+        }`;
+
+        try {
+            const res = await axios.post(imageUploadUrl, formData);
+            console.log(res.data);
+            // console.log(res.data.data);
+
+            const imageUrl = res.data.data.url;
+            setValue("productImage", imageUrl);
+            setPreviewImage(imageUrl);
+        } catch (error) {
+            console.log("Upload error: ", error);
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    const onSubmit = async (data) => {
         const formattedDate = selectedDate.toISOString().split("T")[0];
         const formattedPrice = parseInt(data.price);
-        
+
         const newProduct = {
             email: user?.email,
             name: data.vendorName || "",
@@ -40,33 +68,28 @@ const AddProductForm = () => {
                 {
                     date: formattedDate,
                     price: formattedPrice,
-                }
+                },
             ],
             itemDescription: data.itemDescription || "simple description",
         };
 
-
         console.log("Form data:", data);
 
-
-        try{
+        try {
             const res = await axiosSecure.post("/addProduct", newProduct);
             console.log(res.data);
-            if(res.data.insertedId) {
+            if (res.data.insertedId) {
                 toast.success("Product Added Successfully!");
                 reset();
                 setSelectedDate(new Date());
-            }
-            else{
+                setPreviewImage("");
+            } else {
                 toast.error("Failed to add product. Try again.");
             }
+        } catch (error) {
+            console.error("error occured when adding product : ", error);
+            toast.error("Something went wrong");
         }
-        
-        catch (error){
-            console.error('error occured when adding product : ', error);
-            toast.error('Something went wrong');
-        }
-
     };
 
     return (
@@ -77,16 +100,11 @@ const AddProductForm = () => {
                 Add Product
             </h2>
 
-            
-
-            
-
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
                 {/* Vendor Info */}
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Vendor Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                         {/* email */}
                         <div>
                             <label>Email (read-only)</label>
@@ -165,7 +183,6 @@ const AddProductForm = () => {
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Product Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                         {/* product name */}
                         <div>
                             <label>Item Name</label>
@@ -198,15 +215,42 @@ const AddProductForm = () => {
 
                         {/* product image */}
                         <div>
-                            <label>Product Image (URL)</label>
+                            <label>Upload Image</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                name="productImage"
+                                onChange={handleImageUpload}
+                                className="mt-1 w-full border border-gray-300 p-2 rounded"
+                            />
+                            {uploading && (
+                                <p className="text-blue-600 text-sm mt-1">
+                                    Uploading...
+                                </p>
+                            )}
+
+                            {/* Preview Image */}
+                            {previewImage && (
+                                <div className="mt-2">
+                                    
+                                    <img
+                                        src={previewImage}
+                                        alt="Preview"
+                                        className="w-40 h-28 object-cover mt-1 border rounded"
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                        {/* product image hidden input field. registerd by react hook form */}
+                        <div className="hidden">
                             <input
                                 type="text"
                                 {...register("productImage", {
                                     required: true,
                                 })}
-                                placeholder="https://example.com/image.jpg"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
                             />
+
                             {errors.productImage && (
                                 <p className="text-red-500 text-sm">
                                     Image URL is required

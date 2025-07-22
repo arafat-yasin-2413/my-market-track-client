@@ -6,15 +6,18 @@ import { toast } from "react-toastify";
 import { FaEdit } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import DatePicker from "react-datepicker";
+import axios from "axios";
 
 const UpdateProduct = () => {
     const { id } = useParams();
     // console.log('id : ', id);
-    const {user} = useAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [previewImage, setPreviewImage] = useState("");
+    const [uploading, setUploading] = useState(false);
 
     const {
         register,
@@ -23,62 +26,98 @@ const UpdateProduct = () => {
         formState: { errors },
     } = useForm();
 
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const res = await axiosSecure.get(`/products/${id}`);
+                const product = res.data;
 
-      useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await axiosSecure.get(`/products/${id}`);
-        const product = res.data;
+                setValue("vendorName", product.name);
+                setValue("marketName", product.marketName);
+                setValue("marketDescription", product.marketDescription);
+                setValue("itemName", product.itemName);
+                setValue("status", product.status);
+                setValue("productImage", product.productImage);
+                setValue("price", product.price);
+                setValue("itemDescription", product.itemDescription);
+                setSelectedDate(new Date(product.date));
+                setLoading(false);
+            } catch (err) {
+                console.error("Failed to fetch product", err);
+                toast.error("Failed to load product.");
+            }
+        };
 
-        setValue("vendorName", product.name);
-        setValue("marketName", product.marketName);
-        setValue("marketDescription", product.marketDescription);
-        setValue("itemName", product.itemName);
-        setValue("status", product.status);
-        setValue("productImage", product.productImage);
-        setValue("price", product.price);
-        setValue("itemDescription", product.itemDescription);
-        setSelectedDate(new Date(product.date));
-        setLoading(false);
-      } catch (err) {
-        console.error("Failed to fetch product", err);
-        toast.error("Failed to load product.");
-      }
+        fetchProduct();
+    }, [axiosSecure, id, setValue]);
+
+
+
+    const handleImageUpload = async (e) => {
+        const imageFile = e.target.files[0];
+        if (!imageFile) return;
+
+        setUploading(true);
+        const formData = new FormData();
+        formData.append("image", imageFile);
+
+        const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_image_upload_key
+        }`;
+
+        try {
+            const res = await axios.post(imageUploadUrl, formData);
+            console.log(res.data);
+            // console.log(res.data.data);
+
+            const imageUrl = res.data.data.url;
+            setValue("productImage", imageUrl);
+            setPreviewImage(imageUrl);
+        } catch (error) {
+            console.log("Upload error: ", error);
+        } finally {
+            setUploading(false);
+        }
     };
 
-    fetchProduct();
-  }, [axiosSecure, id, setValue]);
+    const onSubmit = async (data) => {
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        const updatedProduct = {
+            name: data.vendorName || "",
+            marketName: data.marketName,
+            marketDescription: data.marketDescription,
+            date: formattedDate,
+            itemName: data.itemName,
+            status: data.status || "pending",
+            productImage: data.productImage,
+            price: parseInt(data.price),
+            itemDescription: data.itemDescription || "simple description",
+        };
 
-  const onSubmit = async (data) => {
-    const formattedDate = selectedDate.toISOString().split("T")[0];
-    const updatedProduct = {
-      name: data.vendorName || "",
-      marketName: data.marketName,
-      marketDescription: data.marketDescription,
-      date: formattedDate,
-      itemName: data.itemName,
-      status: data.status || "pending",
-      productImage: data.productImage,
-      price: parseInt(data.price),
-      itemDescription: data.itemDescription || "simple description",
+        try {
+            const res = await axiosSecure.put(
+                `/updateProduct/${id}`,
+                updatedProduct
+            );
+            if (res.data.modifiedCount > 0) {
+                setPreviewImage("");
+                navigate("/dashboard/myProducts");
+                toast.success("Product updated successfully!");
+            } else {
+                toast.info("No changes made.");
+            }
+        } catch (err) {
+            console.error("Error updating product", err);
+            toast.error("Failed to update product.");
+        }
     };
 
-    try {
-      const res = await axiosSecure.put(`/updateProduct/${id}`, updatedProduct);
-      if (res.data.modifiedCount > 0) {
-        navigate('/dashboard/myProducts');
-        toast.success("Product updated successfully!");
-      } else {
-        toast.info("No changes made.");
-      }
-    } catch (err) {
-      console.error("Error updating product", err);
-      toast.error("Failed to update product.");
-    }
-  };
-
-
-    if (loading) return <p className="text-center w-fit justify-center items-center">Loading...</p>
+    if (loading)
+        return (
+            <p className="text-center w-fit justify-center items-center">
+                Loading...
+            </p>
+        );
 
     return (
         <div className="max-w-5xl mx-auto p-6 bg-white shadow rounded-lg">
@@ -202,15 +241,42 @@ const UpdateProduct = () => {
 
                         {/* product image */}
                         <div>
-                            <label>Product Image (URL)</label>
+                            <label>Upload Image</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                name="productImage"
+                                onChange={handleImageUpload}
+                                className="mt-1 w-full border border-gray-300 p-2 rounded"
+                            />
+                            {uploading && (
+                                <p className="text-blue-600 text-sm mt-1">
+                                    Uploading...
+                                </p>
+                            )}
+
+                            {/* Preview Image */}
+                            {previewImage && (
+                                <div className="mt-2">
+                                    
+                                    <img
+                                        src={previewImage}
+                                        alt="Preview"
+                                        className="w-40 h-28 object-cover mt-1 border rounded"
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                        {/* product image hidden input field. registerd by react hook form */}
+                        <div className="hidden">
                             <input
                                 type="text"
                                 {...register("productImage", {
                                     required: true,
                                 })}
-                                placeholder="https://example.com/image.jpg"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
                             />
+
                             {errors.productImage && (
                                 <p className="text-red-500 text-sm">
                                     Image URL is required

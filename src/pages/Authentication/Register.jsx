@@ -54,7 +54,7 @@ const Register = () => {
                 console.log('profile name, picture updated');
             })
             .catch(error=>{
-                console.log('failed to upload picture.');
+                console.log('failed to upload picture.', error);
             })
             navigate('/');
 
