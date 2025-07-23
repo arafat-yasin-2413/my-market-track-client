@@ -2,15 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useUserRole from "../../hooks/useUserRole";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
 import { TbCurrencyTaka } from "react-icons/tb";
+import useUserRole from "../../hooks/useUserRole";
 
 const ProductDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
-    const { role } = useUserRole(); // 'admin', 'vendor', 'user', etc.
+    const { role } = useUserRole();
 
     const {
         data: product = {},
