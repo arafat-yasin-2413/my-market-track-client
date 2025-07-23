@@ -1,38 +1,49 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { Link } from "react-router";
 
 const ProductCard = ({ product }) => {
-    console.log(product);
-
-    const { date, itemName, marketName, price, productImage } = product || {};
+    const { _id, date, itemName, marketName, price, productImage, name } = product || {};
 
     return (
-        <div className="card flex flex-col justify-center items-center border border-gray-200 shadow-md">
-            <img
-                className="w-48"
-                src={productImage}
-                alt={`image of ${itemName}`}
-            />
+        <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 flex flex-col">
+           
+            <Link to={`/products/details/${_id}`}>
+                <img
+                    src={productImage}
+                    alt={`image of ${itemName}`}
+                    className="w-60 object-cover p-2"
+                />
+            </Link>
 
-            <h4 className="mt-2 mb-6 font-semibold text-[1.2rem]">
-                {itemName}
-            </h4>
+           
+            <div className="p-4 flex flex-col flex-grow">
+                <h2 className="text-lg font-semibold text-gray-800 mb-2">{itemName}</h2>
 
-            <h5 className="flex justify-center items-center my-2">
-                <span className="flex justify-center items-center mr-1 text-red-500 font-bold text-[1.4rem]">
-                    {" "}
-                    <TbCurrencyTaka></TbCurrencyTaka> {price}
-                </span>
-                per KG
-            </h5>
-            <p className="flex flex-col justify-center items-center">
-                <h5 className="bg-gray-300 rounded p-0.5 mb-1">{date}</h5>
-                <h5 className="bg-gray-400 text-white rounded p-1 mb-2">{marketName}</h5>
-            </p>
-            <button className="btn bg-red-600 text-white rounded-full mb-8">
-                <FaPlus></FaPlus> Add to Bag
-            </button>
+                <div className="flex items-center text-red-600 text-[1rem] font-bold mb-2">
+                    <span className="flex justify-center items-center text-[1.4rem]"><TbCurrencyTaka className="text-xl"></TbCurrencyTaka>{price}</span>
+                    <span className="ml-1 text-gray-600 text-sm font-medium">/KG</span>
+                </div>
+
+                <div className="text-sm text-gray-500 mb-1 font-medium">
+                    <span className="inline-block bg-gray-200 px-2 py-0.5 rounded-full mr-2">
+                        {date}
+                    </span>
+                    <span className="inline-block bg-gray-400 text-white px-2 py-0.5 rounded-full">
+                        {marketName}
+                    </span>
+                </div>
+
+                <p className="text-sm text-gray-700 mt-1">Vendor: <span className="font-medium">{name}</span></p>
+
+               
+                <button
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-4"
+                >
+                    <FaPlus /> Add to Bag
+                </button>
+            </div>
         </div>
     );
 };
