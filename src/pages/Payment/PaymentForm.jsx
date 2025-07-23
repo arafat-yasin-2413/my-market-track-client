@@ -33,6 +33,7 @@ const PaymentForm = () => {
 
     // console.log('product info : ', productInfo);
     const amount = productInfo.price;
+    const productName = productInfo.itemName;
     const amountInCents = amount * 100;
 
     const handleSubmit = async (e) => {
@@ -94,6 +95,7 @@ const PaymentForm = () => {
                 // now create payment history
                 const paymentData = {
                     productId,
+                    productName,
                     email: user?.email,
                     amount: amount,
                     transactionId: transactionId,

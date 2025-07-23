@@ -18,6 +18,7 @@ const UpdateProduct = () => {
     const navigate = useNavigate();
     const [previewImage, setPreviewImage] = useState("");
     const [uploading, setUploading] = useState(false);
+    const [existingPrices, setExistingPrices] = useState([]);
 
     const {
         register,
@@ -41,6 +42,9 @@ const UpdateProduct = () => {
                 setValue("price", product.price);
                 setValue("itemDescription", product.itemDescription);
                 setSelectedDate(new Date(product.date));
+
+                setPreviewImage(product.productImage);
+                setExistingPrices(product.prices || []);
                 setLoading(false);
             } catch (err) {
                 console.error("Failed to fetch product", err);
@@ -82,6 +86,21 @@ const UpdateProduct = () => {
 
     const onSubmit = async (data) => {
         const formattedDate = selectedDate.toISOString().split("T")[0];
+        const newPrice = parseInt(data.price);
+
+        const updatedPrices = [
+            ...existingPrices,
+            {
+                date: formattedDate,
+                price: newPrice,
+            },
+        ];
+
+        updatedPrices.sort((a,b)=> new Date(a.date) - new Date(b.date));
+        const latestPrice = updatedPrices[updatedPrices.length - 1].price;
+
+
+
         const updatedProduct = {
             name: data.vendorName || "",
             marketName: data.marketName,
@@ -90,7 +109,8 @@ const UpdateProduct = () => {
             itemName: data.itemName,
             status: data.status || "pending",
             productImage: data.productImage,
-            price: parseInt(data.price),
+            price: latestPrice,
+            prices: updatedPrices,
             itemDescription: data.itemDescription || "simple description",
         };
 

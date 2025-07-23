@@ -90,6 +90,7 @@ const MyProducts = () => {
                             <tr>
                                 <th className="px-4 py-3">SL</th>
                                 <th className="px-4 py-3">Item Name</th>
+                                <th className="px-4 py-3">Item Image</th>
                                 <th className="px-4 py-3">Price</th>
                                 <th className="px-4 py-3">Market Name</th>
                                 <th className="px-4 py-3">Date</th>
@@ -109,6 +110,11 @@ const MyProducts = () => {
                                     <td className="px-4 py-2 font-medium">
                                         {product.itemName}
                                         {/* {product._id} */}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {
+                                            <img className="w-16" src={product.productImage} alt="" />
+                                        }
                                     </td>
                                     <td className="px-4 py-2">
                                         {product.price} ৳

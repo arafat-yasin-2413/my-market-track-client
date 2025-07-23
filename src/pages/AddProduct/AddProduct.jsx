@@ -22,12 +22,14 @@ const AddProductForm = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [previewImage, setPreviewImage] = useState("");
     const [uploading, setUploading] = useState(false);
+    // const [selectedFileName, setSelectedFileName] = useState("");
 
     const handleImageUpload = async (e) => {
         const imageFile = e.target.files[0];
         if (!imageFile) return;
 
         setUploading(true);
+        // setSelectedFileName(imageFile.name);
         const formData = new FormData();
         formData.append("image", imageFile);
 
@@ -112,7 +114,7 @@ const AddProductForm = () => {
                                 type="email"
                                 value={user?.email}
                                 readOnly
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded"
                             />
                         </div>
 
@@ -121,9 +123,10 @@ const AddProductForm = () => {
                             <label>Vendor Name (optional)</label>
                             <input
                                 type="text"
+                                value={user?.displayName}
                                 placeholder="Vendor Name"
                                 {...register("vendorName")}
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded"
                             />
                         </div>
                     </div>
@@ -140,7 +143,7 @@ const AddProductForm = () => {
                                 type="text"
                                 {...register("marketName", { required: true })}
                                 placeholder="e.g., Karwan Bazar"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded"
                             />
                             {errors.marketName && (
                                 <p className="text-red-500 text-sm">
@@ -156,7 +159,7 @@ const AddProductForm = () => {
                                 selected={selectedDate}
                                 onChange={(date) => setSelectedDate(date)}
                                 dateFormat="dd/MM/yyyy"
-                                className="mt-1 w-full border border-gray-300 p-2 rounded"
+                                className="mt-1 w-full border border-gray-300 font-semibold p-2 rounded"
                             />
                         </div>
 
@@ -168,7 +171,7 @@ const AddProductForm = () => {
                                     required: true,
                                 })}
                                 placeholder="Location, history, etc."
-                                className="w-full mt-1 border border-gray-300 p-2 rounded h-24"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded h-24"
                             ></textarea>
                             {errors.marketDescription && (
                                 <p className="text-red-500 text-sm">
@@ -190,7 +193,7 @@ const AddProductForm = () => {
                                 type="text"
                                 {...register("itemName", { required: true })}
                                 placeholder="e.g., Onion"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded"
                             />
                             {errors.itemName && (
                                 <p className="text-red-500 text-sm">
@@ -205,7 +208,7 @@ const AddProductForm = () => {
                             <select
                                 {...register("status")}
                                 defaultValue="pending"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded bg-white text-gray-800"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded bg-white text-gray-800"
                             >
                                 <option value="pending">Pending</option>
                                 <option value="approved">Approved</option>
@@ -216,18 +219,21 @@ const AddProductForm = () => {
                         {/* product image */}
                         <div>
                             <label>Upload Image</label>
+
                             <input
                                 type="file"
                                 accept="image/*"
                                 name="productImage"
                                 onChange={handleImageUpload}
-                                className="mt-1 w-full border border-gray-300 p-2 rounded"
+                                className="mt-1 w-full border border-gray-300 font-semibold p-2 rounded"
                             />
+                            
                             {uploading && (
                                 <p className="text-blue-600 text-sm mt-1">
                                     Uploading...
                                 </p>
                             )}
+
 
                             {/* Preview Image */}
                             {previewImage && (
@@ -266,7 +272,7 @@ const AddProductForm = () => {
                                 step="0.01"
                                 {...register("price", { required: true })}
                                 placeholder="e.g., 30"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded"
                             />
                             {errors.price && (
                                 <p className="text-red-500 text-sm">
@@ -281,7 +287,7 @@ const AddProductForm = () => {
                             <textarea
                                 {...register("itemDescription")}
                                 placeholder="Fresh, good quality, etc."
-                                className="w-full mt-1 border border-gray-300 p-2 rounded h-20"
+                                className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded h-20"
                             ></textarea>
                         </div>
                     </div>

@@ -43,6 +43,12 @@ const PaymentHistory = () => {
                                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                                     Transaction ID
                                 </th>
+                                
+                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+                                    Product Name
+                                </th>
+
+
 
                                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                                     Product ID
@@ -68,14 +74,21 @@ const PaymentHistory = () => {
                                     </td>
 
                                     <td
-                                        className="px-4 py-3 text-sm text-blue-700 font-mono"
+                                        className="px-4 py-3 text-sm text-blue-700"
                                         title={payment.transactionId}
                                     >
                                         {payment.transactionId}
                                     </td>
+                                    
+                                    <td
+                                        className="px-4 py-3 text-sm"
+                                        title={payment.productName}
+                                    >
+                                        {payment.productName}
+                                    </td>
 
                                     <td
-                                        className="px-4 py-3 text-sm text-gray-700 font-mono"
+                                        className="px-4 py-3 text-sm text-gray-700"
                                         title={payment.productId}
                                     >
                                         {payment.productId}
