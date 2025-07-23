@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useUserRole from "../../hooks/useUserRole";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
 import { TbCurrencyTaka } from "react-icons/tb";
@@ -9,10 +10,7 @@ import { TbCurrencyTaka } from "react-icons/tb";
 const ProductDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
-    // const location = useLocation();
-    // const product = location.state?.product;
-    // const navigate = useNavigate();
-    // console.log(product);
+    const { role } = useUserRole(); // 'admin', 'vendor', 'user', etc.
 
     const {
         data: product = {},
@@ -27,8 +25,10 @@ const ProductDetails = () => {
         },
     });
 
+    if (isLoading) return <LoadingSpinner />;
+    if (isError) return toast.error(error.message);
+
     const {
-        _id,
         email,
         date,
         itemDescription,
@@ -39,85 +39,124 @@ const ProductDetails = () => {
         price,
         status,
         productImage,
+        prices = [],
     } = product || {};
 
-    // const handlePay = (id) => {
-    //     navigate(`/dashboard/payment/${id}`)
-    // }
-
-    if (isLoading) return LoadingSpinner;
-    if (isError) return toast.error(error.message);
+    const selectedPriceObj = prices.find((p) => p.date === date);
+    const selectedPrice = selectedPriceObj?.price ?? price;
 
     return (
-        <div className="max-w-4xl mx-auto my-12 p-6 bg-white shadow-lg rounded-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <div className="flex justify-center items-center">
+        <div className="max-w-4xl mx-auto my-10 bg-white shadow-lg p-6 rounded-lg border border-gray-200">
+            <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex-1 flex justify-center">
                     <img
                         src={productImage}
                         alt={itemName}
-                        className="w-full max-w-sm rounded-lg shadow-md "
+                        className="w-full max-w-sm rounded-md shadow-md"
                     />
                 </div>
 
-             
-                <div>
-                    <h2 className="text-2xl font-bold text-gray-800 mb-3">
+                <div className="flex-1 space-y-4 text-gray-800">
+                    <h2 className="text-3xl font-bold text-gray-900">
                         {itemName}
                     </h2>
-                    <p className="text-xl flex  mb-4">
-                        <span className="flex items-center text-red-600 mr-2 font-bold"><TbCurrencyTaka></TbCurrencyTaka> {price}</span> per KG
-                    </p>
 
-                    <div className="space-y-3 text-gray-700 text-base leading-relaxed">
+                    
+                    <div>
+                        <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                            Current Price
+                        </h3>
+                        <p className="text-2xl text-red-600 font-bold flex items-center">
+                            <TbCurrencyTaka className="mr-1" />
+                            {selectedPrice}{" "}
+                            <span className="ml-2 text-base text-gray-500">
+                                per KG
+                            </span>
+                        </p>
+                    </div>
+
+                 
+
+                    {prices.length > 1 && (
+                        <div className="mt-6">
+                            <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                                Previous Prices
+                            </h3>
+                            <ul className="space-y-2 list-disc list-inside text-gray-700">
+                                {prices
+                                    .filter((p) => p.date !== date)
+                                    .map((p, index) => (
+                                        <li key={index}>
+                                            <span className="font-medium">
+                                                {p.date}:
+                                            </span>{" "}
+                                            <TbCurrencyTaka className="inline-block mr-1" />
+                                            {p.price}
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    <div className="space-y-1 text-sm">
                         <p>
-                            <span className="font-semibold text-gray-800">
+                            <span className="font-medium text-gray-700">
                                 Date:
                             </span>{" "}
                             {date}
                         </p>
                         <p>
-                            <span className="font-semibold text-gray-800">
-                                Market Name:
+                            <span className="font-medium text-gray-700">
+                                Market:
                             </span>{" "}
                             {marketName}
                         </p>
                         <p>
-                            <span className="font-semibold text-gray-800">
+                            <span className="font-medium text-gray-700">
+                                Market Details:
+                            </span>{" "}
+                            {marketDescription}
+                        </p>
+                        <p>
+                            <span className="font-medium text-gray-700">
+                                Item Description:
+                            </span>{" "}
+                            {itemDescription}
+                        </p>
+                        <p>
+                            <span className="font-medium text-gray-700">
                                 Vendor:
                             </span>{" "}
                             {name}
                         </p>
                         <p>
-                            <span className="font-semibold text-gray-800">
+                            <span className="font-medium text-gray-700">
                                 Vendor Email:
                             </span>{" "}
                             {email}
                         </p>
                         <p>
-                            <span className="font-semibold text-gray-800">
+                            <span className="font-medium text-gray-700">
                                 Status:
                             </span>{" "}
                             {status}
                         </p>
-                        <p>
-                            <span className="font-semibold text-gray-800">
-                                Market Description:
-                            </span>
-                            <br /> {marketDescription}
-                        </p>
-                        <p>
-                            <span className="font-semibold text-gray-800">
-                                Item Description:
-                            </span>
-                            <br /> {itemDescription}
-                        </p>
                     </div>
 
-              
-                    <div className="mt-6">
-                        <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-full transition duration-200">
-                            Add to Bag
+                    <div className="mt-6 flex gap-4">
+                        <button
+                            disabled={role === "admin" || role === "vendor"}
+                            className={`px-5 py-2 rounded-full text-white font-semibold transition duration-200 ${
+                                role === "admin" || role === "vendor"
+                                    ? "bg-gray-400 cursor-not-allowed"
+                                    : "bg-blue-600 hover:bg-blue-700"
+                            }`}
+                        >
+                            Add to Watchlist
+                        </button>
+
+                        <button className="px-5 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition duration-200">
+                            Buy Product
                         </button>
                     </div>
                 </div>
