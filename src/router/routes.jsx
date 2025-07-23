@@ -17,11 +17,12 @@ import PaymentHistory from "../pages/DashboardPages/Shared/PaymentHistory/Paymen
 import AllUser from "../pages/DashboardPages/Admin/AllUser/AllUser";
 import AllOrder from "../pages/DashboardPages/Admin/AllOrder/AllOrder";
 import AllAdvertisement from "../pages/DashboardPages/Admin/AllAdvertisement/AllAdvertisement";
-import AllProduct from "../pages/DashboardPages/Admin/AllProductAdmin/AllProductAdmin";
 import ForbiddenPage from "../shared/ForbiddenPage/ForbiddenPage";
 import AdminRoute from "../routes/AdminRoute";
 import VendorRoute from "../routes/VendorRoute";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
+import AllProductAdmin from "../pages/DashboardPages/Admin/AllProductAdmin/AllProductAdmin";
+import AllProduct from "../components/AllProduct/AllProduct";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'allProduct',
+                Component: AllProduct,
             
             },
             {
@@ -109,8 +111,8 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><AllAdvertisement></AllAdvertisement></AdminRoute>
             },
             {
-                path: 'allProduct',
-                element: <AdminRoute><AllProduct></AllProduct></AdminRoute>
+                path: 'allProductAdmin',
+                element: <AdminRoute><AllProductAdmin></AllProductAdmin></AdminRoute>
             },
         ]
     },

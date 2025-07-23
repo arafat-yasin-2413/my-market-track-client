@@ -92,7 +92,7 @@ const DashboardLayout = () => {
                             !isPending && role === 'admin' && 
                             <>
                                 <DashboardMenu title={"All Users"} link="/dashboard/allUser" Icon={FaUsers}></DashboardMenu>
-                                <DashboardMenu title={"All Product"} link="/dashboard/allProduct" Icon={FaBoxOpen}></DashboardMenu>
+                                <DashboardMenu title={"All Product"} link="/dashboard/allProductAdmin" Icon={FaBoxOpen}></DashboardMenu>
                                 <DashboardMenu title={"All Advertisement"} link="/dashboard/allAdvertisement" Icon={MdCampaign}></DashboardMenu>
                                 <DashboardMenu title={"All Order"} link="/dashboard/allOrder" Icon={FaClipboardList}></DashboardMenu>
                             

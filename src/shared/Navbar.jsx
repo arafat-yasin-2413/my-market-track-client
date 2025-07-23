@@ -21,10 +21,10 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink
-                    to="/allProducts"
+                    to="/allProduct"
                     className="nav text-[0.8rem] font-semibold tracking-wider"
                 >
-                    All Products
+                    All Product
                 </NavLink>
             </li>
 

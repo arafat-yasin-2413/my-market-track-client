@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AllProduct = () => {
+const AllProductAdmin = () => {
     return (
         <div>
-            all product page
+            all product page for admin only
         </div>
     );
 };
 
-export default AllProduct;
+export default AllProductAdmin;
