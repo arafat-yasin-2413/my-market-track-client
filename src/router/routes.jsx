@@ -4,21 +4,21 @@ import Home from "../pages/Home/Home/Home";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
-import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ErrorPage from "../shared/ErrorPage/ErrorPage";
 import PrivateRoute from "../routes/PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-import AddProduct from "../pages/AddProduct/AddProduct";
-import MyProducts from "../pages/MyProducts/MyProducts";
-import AddAdvertisement from "../pages/AddAdvertisement/AddAdvertisement";
-import MyAdvertisements from "../pages/MyAdvertisements/MyAdvertisements";
+import AddProduct from "../pages/DashboardPages/Vendor/AddProduct/AddProduct";
+import MyProducts from "../pages/DashboardPages/Vendor/MyProducts/MyProducts";
+import AddAdvertisement from "../pages/DashboardPages/Vendor/AddAdvertisement/AddAdvertisement";
+import MyAdvertisements from "../pages/DashboardPages/Vendor/MyAdvertisements/MyAdvertisements";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
-import Payment from "../pages/Payment/Payment";
-import PaymentHistory from "../pages/PaymentHistory/PaymentHistory";
-import AllUser from "../pages/AllUser/AllUser";
-import AllOrder from "../pages/AllOrder/AllOrder";
-import AllAdvertisement from "../pages/AllAdvertisement/AllAdvertisement";
-import AllProduct from "../pages/AllProduct/AllProduct";
-import ForbiddenPage from "../pages/ForbiddenPage/ForbiddenPage";
+import Payment from "../pages/DashboardPages/Shared/Payment/Payment";
+import PaymentHistory from "../pages/DashboardPages/Shared/PaymentHistory/PaymentHistory";
+import AllUser from "../pages/DashboardPages/Admin/AllUser/AllUser";
+import AllOrder from "../pages/DashboardPages/Admin/AllOrder/AllOrder";
+import AllAdvertisement from "../pages/DashboardPages/Admin/AllAdvertisement/AllAdvertisement";
+import AllProduct from "../pages/DashboardPages/Admin/AllProductAdmin/AllProductAdmin";
+import ForbiddenPage from "../shared/ForbiddenPage/ForbiddenPage";
 import AdminRoute from "../routes/AdminRoute";
 import VendorRoute from "../routes/VendorRoute";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
@@ -37,6 +37,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <ProductDetails></ProductDetails>
                 </PrivateRoute>,
+            },
+            {
+                path: 'allProduct',
+            
             },
             {
                 path: 'forbidden',

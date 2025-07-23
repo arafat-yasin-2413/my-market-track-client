@@ -1,8 +1,8 @@
 import React from "react";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
 import { MdPayment } from "react-icons/md";
 
 const PaymentHistory = () => {

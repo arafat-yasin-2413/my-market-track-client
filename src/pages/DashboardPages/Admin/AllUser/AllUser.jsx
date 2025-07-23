@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
 import { FaUsers } from "react-icons/fa";
 import { toast } from "react-toastify";
 
