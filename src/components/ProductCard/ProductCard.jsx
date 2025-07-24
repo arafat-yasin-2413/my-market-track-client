@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa";
+import { FaEye } from "react-icons/fa6";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router";
 
@@ -8,7 +9,7 @@ const ProductCard = ({ product }) => {
 
     return (
         <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 flex flex-col">
-           
+            
             <Link to={`/products/details/${_id}`}>
                 <img
                     src={productImage}
@@ -24,6 +25,11 @@ const ProductCard = ({ product }) => {
                 <div className="flex items-center text-red-600 text-[1rem] font-bold mb-2">
                     <span className="flex justify-center items-center text-[1.4rem]"><TbCurrencyTaka className="text-xl"></TbCurrencyTaka>{price}</span>
                     <span className="ml-1 text-gray-600 text-sm font-medium">/KG</span>
+                
+                    <Link to={`/products/details/${_id}`} className="ml-6 text-black flex items-center gap-2 bg-sky-100 px-2 py-0.5 rounded cursor-pointer hover:bg-black hover:text-white">
+                        <FaEye></FaEye> View Details
+                    </Link>
+
                 </div>
 
                 <div className="text-sm text-gray-500 mb-1 font-medium">
