@@ -23,6 +23,7 @@ import VendorRoute from "../routes/VendorRoute";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 import AllProductAdmin from "../pages/DashboardPages/Admin/AllProductAdmin/AllProductAdmin";
 import AllProduct from "../components/AllProduct/AllProduct";
+import UserRoutesOnly from "../routes/UserRoutesOnly";
 
 export const router = createBrowserRouter([
     {
@@ -92,11 +93,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'payment/:productId',
-                Component: Payment,
+                element: <UserRoutesOnly>
+                    <Payment></Payment>
+                </UserRoutesOnly>,
             },
             {
                 path: 'paymentHistory',
-                Component: PaymentHistory,
+                element: <UserRoutesOnly>
+                    <PaymentHistory></PaymentHistory>
+                </UserRoutesOnly>,
             },
             {
                 path: 'allUser',

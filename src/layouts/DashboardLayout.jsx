@@ -70,14 +70,18 @@ const DashboardLayout = () => {
                     <MarketTrackLogo></MarketTrackLogo>
                     <div className="divider"></div>
                         <ul>
-                            {/* Sidebar content here */}
+                            {
+                                !isPending && (role === 'user') &&
+                            <>
+                                
+                                <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
+                                <DashboardMenu title={"View Price Trends"} link={"/dashboard/priceTrends"} Icon={GrLineChart}></DashboardMenu>
+                                <DashboardMenu title={"Mangage Watchlist"} link={"/dashboard/watchlist"} Icon={FaHeart}></DashboardMenu>
+                                <DashboardMenu title={"My Order List"} link={"/dashboard/myOrderList"} Icon={FaListAlt}></DashboardMenu>
+                                <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>
+                            </>
 
-                            <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
-                            <DashboardMenu title={"View Price Trends"} link={"/dashboard/priceTrends"} Icon={GrLineChart}></DashboardMenu>
-                            <DashboardMenu title={"Mangage Watchlist"} link={"/dashboard/watchlist"} Icon={FaHeart}></DashboardMenu>
-                            <DashboardMenu title={"My Order List"} link={"/dashboard/myOrderList"} Icon={FaListAlt}></DashboardMenu>
-                            <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>
-
+                            }
                         
                         {
                             !isPending && (role === 'vendor' ) && 
