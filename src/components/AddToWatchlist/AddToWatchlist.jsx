@@ -49,7 +49,7 @@ const AddToWatchlist = ({ product }) => {
             name: singleUser.name,
             email: singleUser.email,
             userPhoto: singleUser.photo,
-            productId: product._id,
+            product: product,
             addedTime: new Date().toISOString(),
         };
 
