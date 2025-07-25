@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ const ProductDetails = () => {
     const axiosSecure = useAxiosSecure();
     const { role } = useUserRole();
 
+
     const {
         data: product = {},
         isLoading,
@@ -21,9 +22,13 @@ const ProductDetails = () => {
         queryKey: ["product", id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/products/${id}`);
+            // console.log('product details page: ', res.data);
+
             return res.data;
         },
     });
+
+    // console.log('product after query : ', product);
 
     if (isLoading) return <LoadingSpinner />;
     if (isError) return toast.error(error.message);
@@ -45,6 +50,8 @@ const ProductDetails = () => {
     const selectedPriceObj = prices.find((p) => p.date === date);
     const selectedPrice = selectedPriceObj?.price ?? price;
 
+  
+
     return (
         <div className="max-w-4xl mx-auto my-10 bg-white shadow-lg p-6 rounded-lg border border-gray-200">
             <div className="flex flex-col md:flex-row gap-8">
@@ -61,7 +68,6 @@ const ProductDetails = () => {
                         {itemName}
                     </h2>
 
-                    
                     <div>
                         <h3 className="text-xl font-semibold text-gray-800 mb-2">
                             Current Price
@@ -74,8 +80,6 @@ const ProductDetails = () => {
                             </span>
                         </p>
                     </div>
-
-                 
 
                     {prices.length > 1 && (
                         <div className="mt-6">
@@ -155,9 +159,13 @@ const ProductDetails = () => {
                             Add to Watchlist
                         </button>
 
-                        <button className="px-5 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition duration-200">
-                            Buy Product
-                        </button>
+                        <Link to={`/dashboard/payment/${product._id}`}>
+                            <button
+                                className="px-5 py-2 btn rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition duration-200"
+                            >
+                                Buy Product
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

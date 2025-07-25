@@ -106,7 +106,7 @@ const PaymentForm = () => {
                 if(paymentRes.data.insertedId){
                     // console.log('Payment successfully logged to the db.');
                     toast.success('Payment Successfully saved to DB.');
-                    navigate('/dashboard/myProducts');
+                    navigate('/dashboard/paymentHistory');
                 }
             }
         }
