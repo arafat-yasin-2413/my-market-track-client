@@ -6,11 +6,15 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
 import { TbCurrencyTaka } from "react-icons/tb";
 import AddToWatchlist from "../../components/AddToWatchlist/AddToWatchlist";
+import useUserRole from "../../hooks/useUserRole";
 
 const ProductDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
+    const { role } = useUserRole();
 
+    // console.log('role: ', role);
+ 
 
 
     const {
@@ -50,6 +54,8 @@ const ProductDetails = () => {
     const selectedPriceObj = prices.find((p) => p.date === date);
     const selectedPrice = selectedPriceObj?.price ?? price;
 
+
+    const isDisabled = role === "admin" || role === "vendor";
   
 
     return (
@@ -152,7 +158,7 @@ const ProductDetails = () => {
 
                         <Link to={`/dashboard/payment/${product._id}`}>
                             <button
-                                className="px-5 py-2 btn rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition duration-200"
+                                className={`px-5 py-2 btn rounded-full font-semibold transition duration-200 ${isDisabled ? "bg-green-200 cursor-not-allowed text-gray-700" : "bg-green-600 hover:bg-green-500 text-white"}`}
                             >
                                 Buy Product
                             </button>

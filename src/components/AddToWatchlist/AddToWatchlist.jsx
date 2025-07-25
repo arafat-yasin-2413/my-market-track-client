@@ -50,6 +50,7 @@ const AddToWatchlist = ({ product }) => {
             email: singleUser.email,
             userPhoto: singleUser.photo,
             productId: product._id,
+            addedTime: new Date().toISOString(),
         };
 
         try {

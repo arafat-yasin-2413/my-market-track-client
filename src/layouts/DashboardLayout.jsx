@@ -6,7 +6,8 @@ import Footer from "../shared/Footer";
 import DashboardMenu from "../components/DashboardMenu/DashboardMenu";
 import { AiFillHome } from "react-icons/ai";
 import { FaBullhorn, FaCartPlus, FaFolderOpen } from "react-icons/fa6";
-import { FaBoxes, FaBoxOpen, FaClipboardList, FaHistory, FaUsers } from "react-icons/fa";
+import { FaBoxes, FaBoxOpen, FaChartLine, FaClipboardList, FaHeart, FaHistory, FaListAlt, FaUsers } from "react-icons/fa";
+import { GrLineChart } from "react-icons/gr";
 import useUserRole from "../hooks/useUserRole";
 import { MdCampaign } from "react-icons/md";
 
@@ -72,7 +73,9 @@ const DashboardLayout = () => {
                             {/* Sidebar content here */}
 
                             <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
-
+                            <DashboardMenu title={"View Price Trends"} link={"/dashboard/priceTrends"} Icon={GrLineChart}></DashboardMenu>
+                            <DashboardMenu title={"Mangage Watchlist"} link={"/dashboard/watchlist"} Icon={FaHeart}></DashboardMenu>
+                            <DashboardMenu title={"My Order List"} link={"/dashboard/myOrderList"} Icon={FaListAlt}></DashboardMenu>
                             <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>
 
                         

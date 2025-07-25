@@ -8,7 +8,7 @@ const DashboardMenu = ({ title, link, Icon }) => {
     return (
         <>
             <li className="bg-base-100 my-2 rounded">
-                <NavLink className="dashboardLink text-base" to={link} end={isExactPath}>
+                <NavLink className="dashboardLink text-base font-semibold" to={link} end={isExactPath}>
                     {Icon && <Icon></Icon>}
                     {title}
                 </NavLink>
