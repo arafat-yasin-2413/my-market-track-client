@@ -5,12 +5,12 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
 import { TbCurrencyTaka } from "react-icons/tb";
-import useUserRole from "../../hooks/useUserRole";
+import AddToWatchlist from "../../components/AddToWatchlist/AddToWatchlist";
 
 const ProductDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
-    const { role } = useUserRole();
+
 
 
     const {
@@ -148,16 +148,7 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="mt-6 flex gap-4">
-                        <button
-                            disabled={role === "admin" || role === "vendor"}
-                            className={`px-5 py-2 rounded-full text-white font-semibold transition duration-200 ${
-                                role === "admin" || role === "vendor"
-                                    ? "bg-gray-400 cursor-not-allowed"
-                                    : "bg-blue-600 hover:bg-blue-700"
-                            }`}
-                        >
-                            Add to Watchlist
-                        </button>
+                        <AddToWatchlist product={product}></AddToWatchlist>
 
                         <Link to={`/dashboard/payment/${product._id}`}>
                             <button
