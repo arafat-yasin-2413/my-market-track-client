@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
 import ProductCard from "../ProductCard/ProductCard";
 import TitleAllProduct from "../TitleAllProduct/TitleAllProduct";
 import DatePicker from "react-datepicker";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const AllProduct = () => {
     const axiosSecure = useAxiosSecure();
@@ -79,7 +79,7 @@ const AllProduct = () => {
         }
     };
 
-    if (isLoading) return LoadingSpinner;
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>;
     if (isError) return toast.error(error.message);
 
     return (

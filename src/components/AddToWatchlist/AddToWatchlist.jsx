@@ -4,12 +4,14 @@ import useUserRole from "../../hooks/useUserRole";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddToWatchlist = ({ product }) => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const { role } = useUserRole();
     const [alreadyAdded, setAlreadyAdded] = useState(false);
+    const navigate = useNavigate();
 
     // console.log(product._id);
 
@@ -58,6 +60,7 @@ const AddToWatchlist = ({ product }) => {
             if (res.data?.insertedId) {
                 toast.success("Product added to your watchlist successfully.");
                 setAlreadyAdded(true);
+                navigate('/dashboard/myWatchlist');
             } else {
                 toast.error("Error occured when adding to watchlist!");
             }

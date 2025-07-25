@@ -6,6 +6,7 @@ import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner
 import { toast } from "react-toastify";
 import { FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const ManageWatchlist = () => {
     const { user } = useAuth();
@@ -16,6 +17,7 @@ const ManageWatchlist = () => {
         isLoading,
         isError,
         error,
+        refetch,
     } = useQuery({
         queryKey: ["watchlistItems", user?.email],
         queryFn: async () => {
@@ -25,6 +27,35 @@ const ManageWatchlist = () => {
             return res.data;
         },
     });
+
+    const handleRemove = (id) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, remove it!'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const res = await axiosSecure.delete(`/watchlist/${id}`);
+                if (res.data.success) {
+                    // Swal.fire('Deleted!', 'The item has been removed.', 'success');
+                    toast.success("Item removed from Watchlist Successfully.")
+                    refetch(); 
+                } else {
+                    // Swal.fire('Error!', res.data.message || 'Something went wrong.', 'error');
+                    toast.warning("Something went wrong!");
+                }
+            } catch (error) {
+                console.log(error);
+                Swal.fire('Error!', 'Failed to remove the item.', 'error');
+            }
+        }
+    });
+};
 
     console.log(watchlistItems);
     if (isLoading) {
@@ -113,7 +144,7 @@ const ManageWatchlist = () => {
                                             Add More
                                         </button>
                                     </Link>
-                                    <button className="px-3 py-1 cursor-pointer bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded shadow-sm transition duration-150">
+                                    <button onClick={()=> handleRemove(item._id)} className="px-3 py-1 cursor-pointer bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded shadow-sm transition duration-150">
                                         Remove
                                     </button>
                                 </td>
