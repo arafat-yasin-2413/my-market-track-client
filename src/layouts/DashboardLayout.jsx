@@ -76,7 +76,7 @@ const DashboardLayout = () => {
                                 
                                 <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
                                 <DashboardMenu title={"View Price Trends"} link={"/dashboard/priceTrends"} Icon={GrLineChart}></DashboardMenu>
-                                <DashboardMenu title={"Mangage Watchlist"} link={"/dashboard/watchlist"} Icon={FaHeart}></DashboardMenu>
+                                <DashboardMenu title={"Manage Watchlist"} link={"/dashboard/myWatchlist"} Icon={FaHeart}></DashboardMenu>
                                 <DashboardMenu title={"My Order List"} link={"/dashboard/myOrderList"} Icon={FaListAlt}></DashboardMenu>
                                 <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>
                             </>
