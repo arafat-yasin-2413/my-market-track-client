@@ -62,6 +62,7 @@ const AddProductForm = () => {
             marketName: data.marketName,
             marketDescription: data.marketDescription,
             date: formattedDate,
+            productCreationDate: formattedDate,
             itemName: data.itemName,
             status: data.status || "pending",
             productImage: data.productImage,

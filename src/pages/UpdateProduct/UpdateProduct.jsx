@@ -10,15 +10,16 @@ import axios from "axios";
 
 const UpdateProduct = () => {
     const { id } = useParams();
-    // console.log('id : ', id);
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
+
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
     const [previewImage, setPreviewImage] = useState("");
     const [uploading, setUploading] = useState(false);
     const [existingPrices, setExistingPrices] = useState([]);
+    const [fetchedProduct, setFetchedProduct] = useState({});
 
     const {
         register,
@@ -32,6 +33,7 @@ const UpdateProduct = () => {
             try {
                 const res = await axiosSecure.get(`/products/${id}`);
                 const product = res.data;
+                setFetchedProduct(product);
 
                 setValue("vendorName", product.name);
                 setValue("marketName", product.marketName);
@@ -42,7 +44,6 @@ const UpdateProduct = () => {
                 setValue("price", product.price);
                 setValue("itemDescription", product.itemDescription);
                 setSelectedDate(new Date(product.date));
-
                 setPreviewImage(product.productImage);
                 setExistingPrices(product.prices || []);
                 setLoading(false);
@@ -54,6 +55,9 @@ const UpdateProduct = () => {
 
         fetchProduct();
     }, [axiosSecure, id, setValue]);
+
+    // console.log(fetchedProduct);
+    const creationDate = fetchedProduct.productCreationDate;
 
 
 
@@ -71,9 +75,6 @@ const UpdateProduct = () => {
 
         try {
             const res = await axios.post(imageUploadUrl, formData);
-            console.log(res.data);
-            // console.log(res.data.data);
-
             const imageUrl = res.data.data.url;
             setValue("productImage", imageUrl);
             setPreviewImage(imageUrl);
@@ -85,21 +86,22 @@ const UpdateProduct = () => {
     };
 
     const onSubmit = async (data) => {
+        if (!data.price || isNaN(data.price)) {
+            toast.error("Price is invalid or missing");
+            return;
+        }
+
         const formattedDate = selectedDate.toISOString().split("T")[0];
-        const newPrice = parseInt(data.price);
+        const newPrice = parseFloat(data.price);
 
-        const updatedPrices = [
-            ...existingPrices,
-            {
-                date: formattedDate,
-                price: newPrice,
-            },
-        ];
+        const updatedPrices = existingPrices.filter(
+            (p) => p.date !== formattedDate
+        );
 
-        updatedPrices.sort((a,b)=> new Date(a.date) - new Date(b.date));
+        updatedPrices.push({ date: formattedDate, price: newPrice });
+
+        updatedPrices.sort((a, b) => new Date(a.date) - new Date(b.date));
         const latestPrice = updatedPrices[updatedPrices.length - 1].price;
-
-
 
         const updatedProduct = {
             name: data.vendorName || "",
@@ -120,9 +122,12 @@ const UpdateProduct = () => {
                 updatedProduct
             );
             if (res.data.modifiedCount > 0) {
+                toast.success("Product updated successfully!");
+                
+                setExistingPrices(updatedPrices);
+                setValue("price", latestPrice.toString());
                 setPreviewImage("");
                 navigate("/dashboard/myProducts");
-                toast.success("Product updated successfully!");
             } else {
                 toast.info("No changes made.");
             }
@@ -132,17 +137,12 @@ const UpdateProduct = () => {
         }
     };
 
-    if (loading)
-        return (
-            <p className="text-center w-fit justify-center items-center">
-                Loading...
-            </p>
-        );
+    if (loading) return <p className="text-center text-lg">Loading...</p>;
 
     return (
         <div className="max-w-5xl mx-auto p-6 bg-white shadow rounded-lg">
-            <h2 className="text-2xl flex justify-center items-center font-bold mb-6 text-center gap-2">
-                <FaEdit></FaEdit>
+            <h2 className="text-2xl flex justify-center items-center font-bold mb-6 gap-2">
+                <FaEdit />
                 Update Product
             </h2>
 
@@ -151,7 +151,6 @@ const UpdateProduct = () => {
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Vendor Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* email */}
                         <div>
                             <label>Email (read-only)</label>
                             <input
@@ -161,8 +160,6 @@ const UpdateProduct = () => {
                                 className="w-full mt-1 border border-gray-300 p-2 rounded"
                             />
                         </div>
-
-                        {/* name */}
                         <div>
                             <label>Vendor Name (optional)</label>
                             <input
@@ -175,11 +172,10 @@ const UpdateProduct = () => {
                     </div>
                 </section>
 
-                {/* Market Info */}
+                {/* market info */}
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Market Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* market name */}
                         <div>
                             <label>Market Name</label>
                             <input
@@ -195,18 +191,21 @@ const UpdateProduct = () => {
                             )}
                         </div>
 
-                        {/* date */}
                         <div>
                             <label>Date</label> <br />
                             <DatePicker
                                 selected={selectedDate}
                                 onChange={(date) => setSelectedDate(date)}
-                                dateFormat="dd/MM/yyyy"
+                                dateFormat="yyyy-MM-dd"
+                                minDate={creationDate}
+                                maxDate={new Date()}
                                 className="mt-1 w-full border border-gray-300 p-2 rounded"
+                                excludeDates={existingPrices.map(
+                                    (p) => new Date(p.date)
+                                )}
                             />
                         </div>
 
-                        {/* market description */}
                         <div className="md:col-span-2">
                             <label>Market Description</label>
                             <textarea
@@ -229,7 +228,6 @@ const UpdateProduct = () => {
                 <section>
                     <h3 className="text-lg font-semibold mb-4">Product Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* product name */}
                         <div>
                             <label>Item Name</label>
                             <input
@@ -245,27 +243,24 @@ const UpdateProduct = () => {
                             )}
                         </div>
 
-                        {/* status */}
                         <div>
                             <label>Status</label>
                             <select
                                 {...register("status")}
                                 defaultValue="pending"
-                                className="w-full mt-1 border border-gray-300 p-2 rounded bg-white text-gray-800"
+                                className="w-full mt-1 border border-gray-300 p-2 rounded bg-white"
                             >
                                 <option value="pending">Pending</option>
                                 <option value="approved">Approved</option>
-                                <option value="approved">Rejected</option>
+                                <option value="rejected">Rejected</option>
                             </select>
                         </div>
 
-                        {/* product image */}
                         <div>
                             <label>Upload Image</label>
                             <input
                                 type="file"
                                 accept="image/*"
-                                name="productImage"
                                 onChange={handleImageUpload}
                                 className="mt-1 w-full border border-gray-300 p-2 rounded"
                             />
@@ -274,11 +269,8 @@ const UpdateProduct = () => {
                                     Uploading...
                                 </p>
                             )}
-
-                            {/* Preview Image */}
                             {previewImage && (
                                 <div className="mt-2">
-                                    
                                     <img
                                         src={previewImage}
                                         alt="Preview"
@@ -288,7 +280,6 @@ const UpdateProduct = () => {
                             )}
                         </div>
 
-                        {/* product image hidden input field. registerd by react hook form */}
                         <div className="hidden">
                             <input
                                 type="text"
@@ -296,7 +287,6 @@ const UpdateProduct = () => {
                                     required: true,
                                 })}
                             />
-
                             {errors.productImage && (
                                 <p className="text-red-500 text-sm">
                                     Image URL is required
@@ -304,12 +294,11 @@ const UpdateProduct = () => {
                             )}
                         </div>
 
-                        {/* price */}
                         <div>
                             <label>Price per Unit (৳)</label>
                             <input
                                 type="number"
-                                step="0.01"
+                                step="0.1"
                                 {...register("price", { required: true })}
                                 placeholder="e.g., 30"
                                 className="w-full mt-1 border border-gray-300 p-2 rounded"
@@ -321,7 +310,6 @@ const UpdateProduct = () => {
                             )}
                         </div>
 
-                        {/* product description */}
                         <div className="md:col-span-2">
                             <label>Item Description (optional)</label>
                             <textarea
@@ -333,11 +321,10 @@ const UpdateProduct = () => {
                     </div>
                 </section>
 
-                {/* Submit */}
                 <div className="text-center">
                     <button
                         type="submit"
-                        className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
+                        className="px-6 py-2 cursor-pointer bg-blue-600 text-white rounded hover:bg-blue-700 transition"
                     >
                         Update Product
                     </button>

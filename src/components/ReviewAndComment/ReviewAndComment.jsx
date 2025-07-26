@@ -35,7 +35,7 @@ const ReviewAndComment = ({ product }) => {
         enabled: !!userEmail,
     });
 
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
 
     // getting reviews for this product
     const { data: reviewsForThisProduct = [], isLoading: reviewsLoading } =
