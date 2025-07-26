@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { TbCurrencyTaka } from "react-icons/tb";
 import AddToWatchlist from "../../components/AddToWatchlist/AddToWatchlist";
 import useUserRole from "../../hooks/useUserRole";
+import ReviewAndComment from "../../components/ReviewAndComment/ReviewAndComment";
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -59,7 +60,7 @@ const ProductDetails = () => {
   
 
     return (
-        <div className="max-w-4xl mx-auto my-10 bg-white shadow-lg p-6 rounded-lg border border-gray-200">
+        <div className="max-w-5xl mx-auto my-10 bg-white shadow-lg p-6 rounded-lg border border-gray-200">
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="flex-1 flex justify-center">
                     <img
@@ -166,6 +167,15 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+            <ReviewAndComment product={product}></ReviewAndComment>
+
         </div>
     );
 };
