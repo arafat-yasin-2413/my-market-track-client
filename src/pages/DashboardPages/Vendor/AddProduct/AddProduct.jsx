@@ -270,7 +270,7 @@ const AddProductForm = () => {
                             <label>Price per Unit (৳)</label>
                             <input
                                 type="number"
-                                step="0.01"
+                                step="1"
                                 {...register("price", { required: true })}
                                 placeholder="e.g., 30"
                                 className="w-full mt-1 border border-gray-300 font-semibold p-2 rounded"

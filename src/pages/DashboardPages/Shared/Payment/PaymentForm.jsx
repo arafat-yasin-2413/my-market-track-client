@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const PaymentForm = () => {
     const stripe = useStripe();
@@ -27,9 +28,24 @@ const PaymentForm = () => {
         },
     });
 
+
+    const userEmail = user?.email;
+    const { data: userInfo = {}} = useQuery({
+        queryKey: ["userInfo", userEmail],
+        queryFn: async()=>{
+            const res = await axiosSecure.get(`/users/${userEmail}`);
+            return res.data;
+
+        },
+        enabled: !!userEmail,
+    });
+
+
+
     if (isPending) {
         return <LoadingSpinner></LoadingSpinner>;
     }
+
 
     // console.log('product info : ', productInfo);
     const amount = productInfo.price;
@@ -106,7 +122,28 @@ const PaymentForm = () => {
                 if(paymentRes.data.insertedId){
                     // console.log('Payment successfully logged to the db.');
                     toast.success('Payment Successfully saved to DB.');
-                    navigate('/dashboard/paymentHistory');
+
+                    // create order object
+                    const orderData = {
+                        userEmail: userEmail,
+                        orderTime: new Date().toISOString(),
+                        product: productInfo,
+                    };
+
+                    try{
+                        const orderRes = await axiosSecure.post("/orders", orderData);
+                        if(orderRes.data.insertedId) {
+                            toast.success("Order saved to DB successfully.");
+                            navigate('/dashboard/paymentHistory');
+                        }
+                        else{
+                            toast.info("Order not saved to DB!!");
+                        }
+                    }
+                    catch(error){
+                        console.log(error);
+                        toast.error("Failed to save order!");
+                    }
                 }
             }
         }

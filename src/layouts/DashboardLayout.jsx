@@ -70,11 +70,13 @@ const DashboardLayout = () => {
                     <MarketTrackLogo></MarketTrackLogo>
                     <div className="divider"></div>
                         <ul>
+                            
+                            <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
+
                             {
                                 !isPending && (role === 'user') &&
                             <>
                                 
-                                <DashboardMenu title={"Home"} link={"/dashboard"} Icon={AiFillHome}></DashboardMenu>
                                 <DashboardMenu title={"View Price Trends"} link={"/dashboard/priceTrends"} Icon={GrLineChart}></DashboardMenu>
                                 <DashboardMenu title={"Manage Watchlist"} link={"/dashboard/myWatchlist"} Icon={FaHeart}></DashboardMenu>
                                 <DashboardMenu title={"My Order List"} link={"/dashboard/myOrderList"} Icon={FaListAlt}></DashboardMenu>

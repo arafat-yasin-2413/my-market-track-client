@@ -43,8 +43,6 @@ const AddToWatchlist = ({ product }) => {
         checkWatchlist();
     }, [singleUser._id, singleUser?.email, product._id, axiosSecure]);
 
-
-
     const handleAddToWatchlist = async () => {
         const watchlistData = {
             userId: singleUser._id,
@@ -60,7 +58,7 @@ const AddToWatchlist = ({ product }) => {
             if (res.data?.insertedId) {
                 toast.success("Product added to your watchlist successfully.");
                 setAlreadyAdded(true);
-                navigate('/dashboard/myWatchlist');
+                navigate("/dashboard/myWatchlist");
             } else {
                 toast.error("Error occured when adding to watchlist!");
             }
@@ -75,9 +73,11 @@ const AddToWatchlist = ({ product }) => {
     return (
         <button
             onClick={handleAddToWatchlist}
-            // disabled={isDisabled}
+            disabled={isDisabled}
             className={`px-5 py-2 btn rounded-full font-semibold transition duration-200 ${
-                isDisabled ? "bg-gray-400 text-gray-700 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"
+                isDisabled
+                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
             }`}
         >
             {alreadyAdded ? "Already in Watchlist" : "Add To Watchlist"}
