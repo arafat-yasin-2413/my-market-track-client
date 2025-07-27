@@ -15,10 +15,14 @@ const ProductPriceChart = ({ prices }) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
-    const formatDate = (date) => date?.toLocaleDateString("sv-SE"); // yyyy-mm-dd
+    const formatDate = (date) => date?.toLocaleDateString("sv-SE");
+
     const displayDate = (dateStr) => {
         const [y, m, d] = dateStr.split("-");
-        return `${d}-${m}-${y}`;
+
+        const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct","Nov","Dec"];
+        const monthName = months[parseInt(m, 10)-1];
+        return`${parseInt(d, 10)} ${monthName}`;
     };
 
     const availableDates = prices.map((p) => new Date(p.date));
@@ -112,16 +116,16 @@ const ProductPriceChart = ({ prices }) => {
 
             <div className="w-full h-[300px] overflow-x-auto">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={enrichedPrices}>
+                    <LineChart data={enrichedPrices} className="p-4">
                         <CartesianGrid stroke="#e5e7eb" strokeDasharray="5 5" />
                         <XAxis
                             dataKey="date"
                             tickFormatter={displayDate}
-                            angle={-45}
-                            textAnchor="end"
-                            height={60}
+                            // angle={-45}
+                            textAnchor="middle"
+                            height={70}
                             interval={0}
-                            tick={{ fontSize: 12 }}
+                            tick={{ fontSize: 14 }}
                         />
                         <YAxis />
                         <Tooltip
