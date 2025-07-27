@@ -51,6 +51,19 @@ const AllUser = () => {
         },
     });
 
+    const getRoleWiseColors = (role) => {
+        switch (role) {
+            case "admin":
+                return "bg-red-500";
+            case "vendor":
+                return "bg-green-500";
+            case "user":
+                return "bg-blue-500";
+            default:
+                return "bg-gray-400";
+        }
+    };
+
     if (isPending) return <LoadingSpinner />;
     if (isError)
         return (
@@ -100,10 +113,15 @@ const AllUser = () => {
                                     </td>
                                     <td className="px-6 py-4">{user.email}</td>
                                     <td className="px-6 py-4 capitalize font-semibold">
-                                        <span className="bg-blue-500 text-white rounded-full px-2 py-0.5">
+                                        <span
+                                            className={`${getRoleWiseColors(
+                                                user.role
+                                            )} text-white rounded-full px-2 py-0.5`}
+                                        >
                                             {user.role}
                                         </span>
                                     </td>
+
                                     <td className="px-6 py-4">
                                         {new Date(
                                             user.createdAt

@@ -71,6 +71,8 @@ const Register = () => {
             reset();
         })
         .catch(error=>{
+            // toast.error(error.message)
+            toast.error("Auth/Email already in user!");
             console.error(error);
         })
     };
@@ -131,6 +133,7 @@ const Register = () => {
                         onChange={handleImageUpload}
                         type="file"
                         name="photo"
+                        required
                         className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2 tracking-wider text-[1.1rem]"
                         placeholder="your photo"
                     />

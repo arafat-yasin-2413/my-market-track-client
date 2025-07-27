@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import DatePicker from "react-datepicker";
 import axios from "axios";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const UpdateProduct = () => {
     const { id } = useParams();
@@ -59,8 +60,6 @@ const UpdateProduct = () => {
     // console.log(fetchedProduct);
     const creationDate = fetchedProduct.productCreationDate;
 
-
-
     const handleImageUpload = async (e) => {
         const imageFile = e.target.files[0];
         if (!imageFile) return;
@@ -91,18 +90,35 @@ const UpdateProduct = () => {
             return;
         }
 
+        // User selected date
         const formattedDate = selectedDate.toISOString().split("T")[0];
         const newPrice = parseFloat(data.price);
 
-        const updatedPrices = existingPrices.filter(
-            (p) => p.date !== formattedDate
+        // Copy previous prices array
+        let updatedPrices = [...existingPrices];
+
+        // Check if selected date already exists
+        const existingIndex = updatedPrices.findIndex(
+            (p) => p.date === formattedDate
         );
 
-        updatedPrices.push({ date: formattedDate, price: newPrice });
+        // Update or Push price for selected date
+        if (existingIndex !== -1) {
+            updatedPrices[existingIndex].price = newPrice;
+        } else {
+            updatedPrices.push({ date: formattedDate, price: newPrice });
+        }
 
-        updatedPrices.sort((a, b) => new Date(a.date) - new Date(b.date));
-        const latestPrice = updatedPrices[updatedPrices.length - 1].price;
+        // Find latest date's price
+        const latestDatePriceObj = updatedPrices.reduce((latest, current) => {
+            return new Date(current.date) > new Date(latest.date)
+                ? current
+                : latest;
+        }, updatedPrices[0]);
 
+        const latestPrice = latestDatePriceObj.price;
+
+        // Prepare the updated product data
         const updatedProduct = {
             name: data.vendorName || "",
             marketName: data.marketName,
@@ -121,11 +137,10 @@ const UpdateProduct = () => {
                 `/updateProduct/${id}`,
                 updatedProduct
             );
+
             if (res.data.modifiedCount > 0) {
                 toast.success("Product updated successfully!");
-                
                 setExistingPrices(updatedPrices);
-                setValue("price", latestPrice.toString());
                 setPreviewImage("");
                 navigate("/dashboard/myProducts");
             } else {
@@ -137,7 +152,7 @@ const UpdateProduct = () => {
         }
     };
 
-    if (loading) return <p className="text-center text-lg">Loading...</p>;
+    if (loading) return <LoadingSpinner></LoadingSpinner>;
 
     return (
         <div className="max-w-5xl mx-auto p-6 bg-white shadow rounded-lg">
@@ -298,7 +313,7 @@ const UpdateProduct = () => {
                             <label>Price per Unit (৳)</label>
                             <input
                                 type="number"
-                                step="0.1"
+                                step="1"
                                 {...register("price", { required: true })}
                                 placeholder="e.g., 30"
                                 className="w-full mt-1 border border-gray-300 p-2 rounded"
