@@ -25,6 +25,7 @@ import AllProductAdmin from "../pages/DashboardPages/Admin/AllProductAdmin/AllPr
 import AllProduct from "../components/AllProduct/AllProduct";
 import UserRoutesOnly from "../routes/UserRoutesOnly";
 import ManageWatchlist from "../pages/DashboardPages/User/ManageWatchlist/ManageWatchlist";
+import OrderList from "../pages/DashboardPages/User/OrderList/OrderList";
 
 export const router = createBrowserRouter([
     {
@@ -88,6 +89,12 @@ export const router = createBrowserRouter([
                 path: 'myWatchlist',
                 element: <UserRoutesOnly>
                     <ManageWatchlist></ManageWatchlist>
+                </UserRoutesOnly>,
+            },
+            {
+                path: 'myOrderList',
+                element: <UserRoutesOnly>
+                    <OrderList></OrderList>
                 </UserRoutesOnly>,
             },
             {
