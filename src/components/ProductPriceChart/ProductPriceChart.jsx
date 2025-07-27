@@ -20,9 +20,22 @@ const ProductPriceChart = ({ prices }) => {
     const displayDate = (dateStr) => {
         const [y, m, d] = dateStr.split("-");
 
-        const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct","Nov","Dec"];
-        const monthName = months[parseInt(m, 10)-1];
-        return`${parseInt(d, 10)} ${monthName}`;
+        const months = [
+            "Jan",
+            "Feb",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ];
+        const monthName = months[parseInt(m, 10) - 1];
+        return `${parseInt(d, 10)} ${monthName}`;
     };
 
     const availableDates = prices.map((p) => new Date(p.date));
@@ -122,10 +135,19 @@ const ProductPriceChart = ({ prices }) => {
                             dataKey="date"
                             tickFormatter={displayDate}
                             // angle={-45}
-                            textAnchor="middle"
                             height={70}
                             interval={0}
-                            tick={{ fontSize: 14 }}
+                            tick={({ x, y, payload }) => (
+                                <text
+                                    x={x}
+                                    y={y + 30}
+                                    textAnchor="middle"
+                                    fontSize={14}
+                                    fill="#666"
+                                >
+                                    {displayDate(payload.value)}
+                                </text>
+                            )}
                         />
                         <YAxis />
                         <Tooltip
