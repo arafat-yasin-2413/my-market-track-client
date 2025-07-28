@@ -16,8 +16,6 @@ const Home = () => {
             {/* <Banner></Banner> */}
 
             <Test></Test>
-
-            <button onClick={handleToast} className="btn">click to test the toast</button>
             
         </div>
     );

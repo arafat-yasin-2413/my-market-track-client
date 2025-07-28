@@ -98,7 +98,6 @@ const AddProductForm = () => {
     return (
         <div className="max-w-5xl mx-auto p-6 bg-white shadow rounded-lg">
             <h2 className="text-2xl flex justify-center items-center font-bold mb-6 text-center gap-2">
-                {/* 🛒 Add Product */}
                 <FaCartPlus></FaCartPlus>
                 Add Product
             </h2>
