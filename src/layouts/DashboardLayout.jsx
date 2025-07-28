@@ -77,7 +77,7 @@ const DashboardLayout = () => {
                                 !isPending && (role === 'user') &&
                             <>
                                 
-                                <DashboardMenu title={"View Price Trends"} link={"/dashboard/priceTrends"} Icon={GrLineChart}></DashboardMenu>
+                                <DashboardMenu title={"View Price Trends"} link={"/dashboard/viewPriceTrends"} Icon={GrLineChart}></DashboardMenu>
                                 <DashboardMenu title={"Manage Watchlist"} link={"/dashboard/myWatchlist"} Icon={FaHeart}></DashboardMenu>
                                 <DashboardMenu title={"My Order List"} link={"/dashboard/myOrderList"} Icon={FaListAlt}></DashboardMenu>
                                 <DashboardMenu title={"Payment History"} link="/dashboard/paymentHistory" Icon={FaHistory}></DashboardMenu>

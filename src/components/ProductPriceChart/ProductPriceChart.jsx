@@ -23,11 +23,11 @@ const ProductPriceChart = ({ prices }) => {
         const months = [
             "Jan",
             "Feb",
-            "March",
-            "April",
+            "Mar",
+            "Apr",
             "May",
-            "June",
-            "July",
+            "Jun",
+            "Jul",
             "Aug",
             "Sep",
             "Oct",
@@ -66,7 +66,7 @@ const ProductPriceChart = ({ prices }) => {
     return (
         <div className="bg-white shadow-xl border border-gray-200 rounded-xl p-6 w-full">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                📊 Price Trend
+                Price Trend
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
