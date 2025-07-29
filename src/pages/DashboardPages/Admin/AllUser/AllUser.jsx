@@ -26,10 +26,22 @@ const AllUser = () => {
         queryKey: ["allUser"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users`);
-            setDisplayedUsers(res.data); // populate display list initially
-            return res.data;
+            return res.data; // ✅ No state update here
         },
     });
+
+    useEffect(() => {
+        if (users.length > 0) {
+            setDisplayedUsers(users);
+        }
+    }, [users]);
+
+    useEffect(() => {
+        if (searchText.trim() === "") {
+            setDisplayedUsers(users);
+            setHighlightedUserId(null);
+        }
+    }, [searchText, users]);
 
     const getSuggestions = () => {
         if (!searchText) return [];
@@ -47,7 +59,6 @@ const AllUser = () => {
     const handleSearch = async () => {
         const query = searchText.trim();
         if (!query) {
-            // Reset to default full list
             setHighlightedUserId(null);
             setDisplayedUsers(users);
             return;
@@ -56,11 +67,11 @@ const AllUser = () => {
         try {
             const res = await axiosSecure.get(`/users/search?query=${query}`);
             const matchedUsers = res.data;
+
             if (matchedUsers.length > 0) {
                 const matchedUser = matchedUsers[0];
                 setHighlightedUserId(matchedUser._id);
 
-                // Move matched user to top, rest follow
                 const reordered = [
                     matchedUser,
                     ...users.filter((u) => u._id !== matchedUser._id),
@@ -122,13 +133,6 @@ const AllUser = () => {
                 Error loading users.
             </div>
         );
-
-    useEffect(() => {
-        if (searchText.trim() === "") {
-            setDisplayedUsers(users);
-            setHighlightedUserId(null);
-        }
-    }, [searchText, users]);
 
     return (
         <div className="p-6 bg-white shadow-xl rounded-2xl">

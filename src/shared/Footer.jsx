@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="bg-base-200 text-base-content px-10 py-12">
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-                {/* Logo and Brand */}
+                
                 <div className="flex flex-col justify-center items-center sm:items-start gap-4">
                     <FaChartLine size={64} className="text-blue-600" />
                     <p className="text-3xl font-semibold">MarketTrack</p>
