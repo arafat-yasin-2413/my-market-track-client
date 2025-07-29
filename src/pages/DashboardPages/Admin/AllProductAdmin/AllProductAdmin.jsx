@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
-import { FaBoxOpen } from "react-icons/fa";
-
+import { FiEdit } from "react-icons/fi";
+import { FaBoxOpen, FaSyncAlt } from "react-icons/fa";
+import { MdAutorenew, MdCancel } from "react-icons/md";
+import { Link } from "react-router";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const AllProductAdmin = () => {
     const axiosSecure = useAxiosSecure();
+    const [showModal, setShowModal] = useState(false);
+    const [rejectionReason, setRejectionReason] = useState("");
+    const [adminFeedback, setAdminFeedback] = useState("");
+    const [selectedId, setSelectedId] = useState(null);
 
     const {
         data: products = [],
@@ -20,6 +27,47 @@ const AllProductAdmin = () => {
             return res.data;
         },
     });
+
+    
+    const handleApprove = async (id) => {
+        try {
+            const res = await axiosSecure.patch(`/products/approve/${id}`);
+            if (res.data.modifiedCount > 0) {
+                toast.success("Product approved!");
+                refetch();
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to approve product");
+        }
+    };
+
+    const handleReject = async (e) => {
+        e.preventDefault();
+        try {
+            const rejectionData = {
+                rejectionReason,
+                adminFeedback,
+            };
+            const res = await axiosSecure.put(
+                `/products/reject/${selectedId}`,
+                rejectionData
+            );
+            if (res.data.modifiedCount > 0) {
+                toast.success("Product rejected!");
+                setShowModal(false);
+                refetch();
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Rejection failed");
+        }
+    };
+
+    const openRejectModal = (id) => {
+        setSelectedId(id);
+        setShowModal(true);
+    };
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>;
@@ -34,84 +82,192 @@ const AllProductAdmin = () => {
             </h2>
 
             {/* Table */}
-            <div className="overflow-x-auto bg-white rounded-xl shadow">
-                <table className="table-auto w-full text-left">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="py-3 px-4 text-sm font-semibold text-gray-700 text-center">
-                                #
-                            </th>
-                            <th className="py-3 px-4 text-sm font-semibold text-gray-700">
-                                Product Name
-                            </th>
-                            <th className="py-3 px-4 text-sm font-semibold text-gray-700">
-                                Image
-                            </th>
-                            <th className="py-3 px-4 text-sm font-semibold text-gray-700">
-                                Vendor Name
-                            </th>
-                            <th className="py-3 px-4 text-sm font-semibold text-gray-700">
-                                Status
-                            </th>
-                            <th className="py-3 px-4 text-sm font-semibold text-gray-700 text-center">
-                                Actions
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product, index) => (
-                            <tr
-                                key={product._id}
-                                className="border-t hover:bg-gray-50 transition duration-200"
-                            >
-                                <td className="py-3 px-4 text-center">
-                                    {index + 1}
-                                </td>
-                                <td className="py-3 px-4">{product.itemName}</td>
-                                <td className="py-3 px-4">
-                                    <img
-                                        src={product.productImage}
-                                        alt="product"
-                                        className="w-16 h-16 p-2 border border-gray-200 object-cover rounded"
-                                    />
-                                </td>
-                                <td className="py-3 px-4">
-                                    {product.name}
-                                </td>
-                                <td className="py-3 px-4">
-                                    <span
-                                        className={`px-2 py-1 rounded text-xs font-medium ${
-                                            product.status === "approved"
-                                                ? "bg-green-100 text-green-700"
-                                                : product.status === "pending"
-                                                ? "bg-yellow-100 text-yellow-700"
-                                                : "bg-red-100 text-red-700"
-                                        }`}
-                                    >
-                                        {product.status}
-                                    </span>
-                                </td>
-                                <td className="py-3 px-4 text-center">
-                                    <div className="flex justify-center items-center gap-3">
-                                        <button
-                                            title="Edit"
-                                            className="text-blue-600 hover:text-blue-800"
+            {products.length > 0 ? (
+                <div className="overflow-x-auto bg-white rounded-xl shadow">
+                    <table className="table-auto w-full text-left">
+                        <thead className="bg-gray-100">
+                            <tr>
+                                <th className="py-3 px-4 text-sm font-semibold text-gray-700 text-center">
+                                    #
+                                </th>
+                                <th className="py-3 px-4 text-sm font-semibold text-gray-700">
+                                    Product Name
+                                </th>
+                                <th className="py-3 px-4 text-sm font-semibold text-gray-700">
+                                    Image
+                                </th>
+                                <th className="py-3 px-4 text-sm font-semibold text-gray-700">
+                                    Vendor Name
+                                </th>
+                                <th className="py-3 px-4 text-sm font-semibold text-gray-700">
+                                    Status
+                                </th>
+                                <th className="py-3 px-4 text-sm font-semibold text-gray-700 text-center">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {products.map((product, index) => (
+                                <tr
+                                    key={product._id}
+                                    className="border-t hover:bg-gray-50 transition duration-200"
+                                >
+                                    <td className="py-3 px-4 text-center">
+                                        {index + 1}
+                                    </td>
+                                    <td className="py-3 px-4">
+                                        {product.itemName}
+                                    </td>
+                                    <td className="py-3 px-4">
+                                        <img
+                                            src={product.productImage}
+                                            alt="product"
+                                            className="w-16 h-16 p-2 border border-gray-200 object-cover rounded"
+                                        />
+                                    </td>
+                                    <td className="py-3 px-4">
+                                        {product.name}
+                                    </td>
+                                    <td className="py-3 px-4">
+                                        <span
+                                            className={`px-2 py-1 rounded text-xs font-medium ${
+                                                product.status === "approved"
+                                                    ? "bg-green-100 text-green-700"
+                                                    : product.status ===
+                                                      "pending"
+                                                    ? "bg-yellow-100 text-yellow-700"
+                                                    : "bg-red-100 text-red-700"
+                                            }`}
                                         >
-                                            <FiEdit size={18} />
+                                            {product.status}
+                                        </span>
+                                    </td>
+                                    {/* <td className="text-center">
+                                    <div className="flex justify-center items-center gap-3">
+                                        <Link to={`/dashboard/updateProduct/${product._id}`}>
+                                            <button
+                                                title="Edit"
+                                                className="text-blue-600 hover:text-blue-800 cursor-pointer btn btn-sm"
+                                            >
+                                                <FiEdit size={18} />
+                                            </button>
+                                        </Link>
+                                        <button
+                                            title="Status"
+                                            className="text-red-600 hover:text-red-800 cursor-pointer btn btn-sm"
+                                        >
+                                            <FaSyncAlt size={18} />
                                         </button>
+                                        
                                         <button
                                             title="Delete"
-                                            className="text-red-600 hover:text-red-800"
+                                            className="text-red-600 hover:text-red-800 cursor-pointer btn btn-sm"
                                         >
-                                            <FiTrash2 size={18} />
+                                            <MdDeleteForever size={18} />
                                         </button>
                                     </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                                </td> */}
+
+                                    <td className="py-3 px-4 text-center">
+                                        {product.status === "pending" && (
+                                            <div className="flex justify-center gap-2">
+                                                <button
+                                                    onClick={() =>
+                                                        handleApprove(
+                                                            product._id
+                                                        )
+                                                    }
+                                                    className="btn btn-success btn-sm"
+                                                >
+                                                    Approve
+                                                </button>
+                                                <button
+                                                    onClick={() =>
+                                                        openRejectModal(
+                                                            product._id
+                                                        )
+                                                    }
+                                                    className="btn btn-error btn-sm"
+                                                >
+                                                    Reject
+                                                </button>
+                                            </div>
+                                        )}
+
+                                        {product.status === "approved" && (
+                                            <button
+                                                onClick={() =>
+                                                    openRejectModal(product._id)
+                                                }
+                                                className="btn btn-error btn-sm"
+                                            >
+                                                Reject
+                                            </button>
+                                        )}
+
+                                        {product.status === "rejected" && (
+                                            <button
+                                                onClick={() =>
+                                                    handleApprove(product._id)
+                                                }
+                                                className="btn btn-success btn-sm"
+                                            >
+                                                Approve
+                                            </button>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <p className="my-6 text-center text-2xl">No Products to Show</p>
+            )}
+
+            {showModal && (
+                <dialog id="reject_modal" className="modal modal-open">
+                    <div className="modal-box">
+                        <h3 className="font-bold text-lg mb-4">
+                            Reject Product
+                        </h3>
+                        <form onSubmit={handleReject} className="space-y-3">
+                            <input
+                                type="text"
+                                placeholder="Reason for rejection"
+                                className="input input-bordered w-full"
+                                value={rejectionReason}
+                                onChange={(e) =>
+                                    setRejectionReason(e.target.value)
+                                }
+                                required
+                            />
+                            <textarea
+                                placeholder="Admin Feedback"
+                                className="textarea textarea-bordered w-full"
+                                value={adminFeedback}
+                                onChange={(e) =>
+                                    setAdminFeedback(e.target.value)
+                                }
+                                required
+                            />
+                            <div className="modal-action">
+                                <button type="submit" className="btn btn-error">
+                                    Submit
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn"
+                                    onClick={() => setShowModal(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </dialog>
+            )}
         </div>
     );
 };

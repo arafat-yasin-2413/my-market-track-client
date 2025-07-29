@@ -8,12 +8,14 @@ import useAuth from "../../hooks/useAuth";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import useUserRole from "../../hooks/useUserRole";
 
 const UpdateProduct = () => {
     const { id } = useParams();
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
+    const { role } = useUserRole();
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [loading, setLoading] = useState(true);
@@ -142,7 +144,12 @@ const UpdateProduct = () => {
                 toast.success("Product updated successfully!");
                 setExistingPrices(updatedPrices);
                 setPreviewImage("");
-                navigate("/dashboard/myProducts");
+                if(role === "vendor"){
+                    navigate("/dashboard/myProducts");
+                }
+                if(role === "admin"){
+                    navigate("/dashboard/allProductAdmin");
+                }
             } else {
                 toast.info("No changes made.");
             }
