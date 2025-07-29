@@ -115,7 +115,7 @@ const AllProductAdmin = () => {
                         <thead className="bg-gray-100">
                             <tr>
                                 <th className="py-3 px-4 text-sm font-semibold text-gray-700 text-center">
-                                    #
+                                    SL
                                 </th>
                                 <th className="py-3 px-4 text-sm font-semibold text-gray-700">
                                     Product Name
@@ -125,6 +125,9 @@ const AllProductAdmin = () => {
                                 </th>
                                 <th className="py-3 px-4 text-sm font-semibold text-gray-700">
                                     Vendor Name
+                                </th>
+                                <th className="py-3 px-4 text-sm font-semibold text-gray-700">
+                                    Market Name
                                 </th>
                                 <th className="py-3 px-4 text-sm font-semibold text-gray-700">
                                     Status
@@ -155,6 +158,9 @@ const AllProductAdmin = () => {
                                     </td>
                                     <td className="py-3 px-4">
                                         {product.name}
+                                    </td>
+                                    <td className="py-3 px-4">
+                                        {product.marketName}
                                     </td>
                                     <td className="py-3 px-4">
                                         <span
