@@ -1,82 +1,124 @@
-import React, { useRef, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
+import React, { useState, useRef, useEffect } from "react";
 import { FaUsers } from "react-icons/fa";
-import { toast } from "react-toastify";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const AllUser = () => {
-    const axiosSecure = useAxiosSecure();
-    const queryClient = useQueryClient();
-    const modalRef = useRef(null);
-
+    const [users, setUsers] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
+    const [allRoles] = useState(["admin", "user", "moderator"]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [newRole, setNewRole] = useState("");
-    const allRoles = ["admin", "vendor", "user"];
+    const [searchText, setSearchText] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const [highlightedEmails, setHighlightedEmails] = useState([]);
+    const modalRef = useRef();
+    const axiosSecure = useAxiosSecure();
 
-    const {
-        data: users = [],
-        isPending,
-        isError,
-    } = useQuery({
-        queryKey: ["allUser"],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/users`);
-            return res.data;
-        },
-    });
+    useEffect(() => {
+        fetchUsers();
+    }, []);
 
-    const { mutate: updateRole } = useMutation({
-        mutationFn: async ({ userId, role }) => {
-            const res = await axiosSecure.patch(`/users/role/${userId}`, {
-                newRole: role,
-            });
-            return res.data;
-        },
-        onSuccess: (data) => {
-            if (data.modifiedCount > 0 || data.success) {
-                toast.success("Role updated successfully");
-                queryClient.invalidateQueries(["allUser"]);
-            } else {
-                toast.info("No changes were made.");
-            }
-
-            // Close modal & reset states
-            setSelectedUser(null);
-            setNewRole("");
-            modalRef.current?.close();
-        },
-        onError: () => {
-            toast.error("Failed to update role");
-        },
-    });
+    const fetchUsers = async () => {
+        const res = await axiosSecure.get("/users");
+        setUsers(res.data);
+        setAllUsers(res.data);
+    };
 
     const getRoleWiseColors = (role) => {
         switch (role) {
             case "admin":
                 return "bg-red-500";
-            case "vendor":
-                return "bg-green-500";
+            case "moderator":
+                return "bg-yellow-500";
             case "user":
-                return "bg-blue-500";
+                return "bg-green-500";
             default:
-                return "bg-gray-400";
+                return "bg-gray-500";
         }
     };
 
-    if (isPending) return <LoadingSpinner />;
-    if (isError)
-        return (
-            <div className="text-center p-10 text-red-600">
-                Error loading users.
-            </div>
-        );
+    const handleSearch = async () => {
+        if (!searchText.trim()) {
+            // Reset view if search is empty
+            setUsers(allUsers);
+            setHighlightedEmails([]);
+            return;
+        }
+
+        try {
+            const res = await axiosSecure.get(
+                `/users/search?query=${searchText}`
+            );
+            const matched = res.data;
+
+            // Highlight only matched users
+            const matchedEmails = matched.map((u) => u.email.toLowerCase());
+
+            // Merge matched users with all others (without duplicates)
+            const merged = [
+                ...matched,
+                ...allUsers.filter(
+                    (u) => !matchedEmails.includes(u.email.toLowerCase())
+                ),
+            ];
+
+            setUsers(merged);
+            setHighlightedEmails(matchedEmails);
+        } catch (error) {
+            console.error("Search error:", error);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setSearchText(value);
+
+        if (value.length === 0) {
+            setSuggestions([]);
+            setUsers(allUsers); // Reset list
+            setHighlightedEmails([]);
+            return;
+        }
+
+        const matches = allUsers
+            .filter(
+                (user) =>
+                    user.email.toLowerCase().includes(value.toLowerCase()) ||
+                    user.name.toLowerCase().includes(value.toLowerCase())
+            )
+            .map((user) => user.email);
+
+        setSuggestions(matches.slice(0, 5));
+    };
 
     return (
         <div className="p-6 bg-white shadow-xl rounded-2xl">
+            {/* Header */}
             <h2 className="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-2 text-gray-800">
                 <FaUsers /> All Users
             </h2>
+
+            {/* Search Bar */}
+            <div className="flex flex-col items-center justify-center mb-4 space-y-2">
+                <div className="flex items-center gap-2">
+                    <input
+                        type="text"
+                        placeholder="Search by email or name"
+                        className="input input-bordered w-72"
+                        value={searchText}
+                        onChange={handleInputChange}
+                        list="suggestion-list"
+                    />
+                    <button className="btn btn-primary" onClick={handleSearch}>
+                        Search
+                    </button>
+                </div>
+                <datalist id="suggestion-list">
+                    {suggestions.map((s, i) => (
+                        <option key={i} value={s} />
+                    ))}
+                </datalist>
+            </div>
 
             {users.length === 0 ? (
                 <p className="text-center text-gray-500">No User found.</p>
@@ -98,7 +140,13 @@ const AllUser = () => {
                             {users.map((user, index) => (
                                 <tr
                                     key={user._id}
-                                    className="border-t hover:bg-gray-50 transition"
+                                    className={`border-t hover:bg-gray-50 transition ${
+                                        highlightedEmails.includes(
+                                            user.email.toLowerCase()
+                                        )
+                                            ? "bg-yellow-100"
+                                            : ""
+                                    }`}
                                 >
                                     <td className="px-6 py-4">{index + 1}</td>
                                     <td className="px-6 py-4">
@@ -121,7 +169,6 @@ const AllUser = () => {
                                             {user.role}
                                         </span>
                                     </td>
-
                                     <td className="px-6 py-4">
                                         {new Date(
                                             user.createdAt

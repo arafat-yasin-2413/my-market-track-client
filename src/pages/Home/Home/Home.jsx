@@ -1,21 +1,20 @@
 import React from 'react';
+import AdsBanner from '../../../components/AdsBanner/AdsBanner';
 import Banner from '../Banner/Banner';
-import Test from '../Test/Test';
-import { toast } from 'react-toastify';
 
 
 const Home = () => {
 
-    const handleToast = () => {
-        toast.success('Toast successfull')
-    }
+
 
 
     return (
         <div>
-            {/* <Banner></Banner> */}
+            
+            <Banner></Banner>
+            
 
-            <Test></Test>
+            <AdsBanner></AdsBanner>
             
         </div>
     );

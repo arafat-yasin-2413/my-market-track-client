@@ -1,74 +1,50 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-
-import banner1 from "/assets/banner/banner-1.jpg";
-import banner2 from "/assets/banner/banner-2.jpg";
-import banner3 from "/assets/banner/banner-3.jpg";
+import { motion } from "framer-motion";
+import banner4 from "/assets/banner/banner-4.jpg";
+import { Link } from "react-router";
 
 const Banner = () => {
     return (
-        <Swiper
-            modules={[Navigation, Autoplay, Pagination]}
-            navigation
-            loop={true}
-            autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
+        <div className="relative w-full h-screen rounded-b-2xl">
+            
+            <img
+                src={banner4}
+                alt="Market Banner"
+                className="w-full h-full object-cover rounded-b-2xl"
+            />
+
+            
+            <div className="absolute inset-0 bg-black/50 rounded-b-2xl" />
+
+            
+            <motion.div
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-center text-white px-4"
+            >
+                <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg leading-tight">
+                    Track Every Market Move,
+                    <br className="hidden md:block" />
+                    Stay Ahead with Confidence
+                </h1>
+                <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-sm">
+                    MarketTrack empowers you with real-time data, trends, and
+                    insights — everything you need to make smarter investment
+                    decisions.
+                </p>
+                <Link to="/allProduct">
                 
-            }}
-            pagination= {{ clickable: true }}
-            speed={600}
-            className="h-full rounded"
-        >
-            {/* Slide 1 */}
-            <SwiperSlide>
-                <div className="relative w-full h-full">
-                    <img src={banner1} className="w-full h-full object-cover" />
-                    <div className="absolute top-1/3 left-10 text-white">
-                        <h2 className="text-4xl font-bold">
-                            Welcome to Our Store slide 1
-                        </h2>
-                        <p className="mt-2">Find your favorite items today.</p>
-                        <button className="mt-4 bg-blue-600 px-6 py-2 rounded">
-                            Shop Now
-                        </button>
-                    </div>
-                </div>
-            </SwiperSlide>
-
-            {/* Slide 2 */}
-            <SwiperSlide>
-                <div className="relative w-full h-full">
-                    <img src={banner2} className="w-full h-full object-cover" />
-                    <div className="absolute top-1/3 left-10 text-white">
-                        <h2 className="text-4xl font-bold">
-                            Best Deals Everyday slide 2
-                        </h2>
-                        <button className="mt-4 bg-green-600 px-6 py-2 rounded">
-                            See Offers
-                        </button>
-                    </div>
-                </div>
-            </SwiperSlide>
-
-            {/* Slide 3 */}
-            <SwiperSlide>
-                <div className="relative w-full h-full">
-                    <img src={banner3} className="w-full h-full object-cover" />
-                    <div className="absolute top-1/3 left-10 text-white">
-                        <h2 className="text-4xl font-bold">
-                            this is slide 3
-                        </h2>
-                        <button className="mt-4 bg-green-600 px-6 py-2 rounded">
-                            See Offers
-                        </button>
-                    </div>
-                </div>
-            </SwiperSlide>
-        </Swiper>
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded text-lg font-semibold shadow cursor-pointer"
+                    >
+                    Get Started
+                </motion.button>
+                    </Link>
+            </motion.div>
+        </div>
     );
 };
 
