@@ -28,6 +28,7 @@ import ManageWatchlist from "../pages/DashboardPages/User/ManageWatchlist/Manage
 import OrderList from "../pages/DashboardPages/User/OrderList/OrderList";
 import ViewPriceTrends from "../pages/DashboardPages/User/ViewPriceTrends/ViewPriceTrends";
 import VendorOrAdmin from "../routes/VendorOrAdmin";
+import TermsConditions from "../components/TermsCondition/TermsCondition";
 
 export const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
             {
                 path: 'forbidden',
                 Component: ForbiddenPage,
+            },
+            {
+                path: '/terms',
+                Component: TermsConditions,
             },
         ]
     },
