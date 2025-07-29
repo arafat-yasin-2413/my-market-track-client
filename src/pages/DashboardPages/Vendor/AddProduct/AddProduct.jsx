@@ -65,6 +65,8 @@ const AddProductForm = () => {
             productCreationDate: formattedDate,
             itemName: data.itemName,
             status: data.status || "pending",
+            rejectionReasons: "",
+            adminFeedback: "",
             productImage: data.productImage,
             price: formattedPrice,
             prices: [

@@ -7,6 +7,7 @@ import { FiEdit, FiTrash2 } from "react-icons/fi";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import useAxios from "../../../../hooks/useAxios";
+import { HiSpeakerphone } from "react-icons/hi";
 
 const MyAdvertisements = () => {
     const { user } = useAuth();
@@ -59,7 +60,7 @@ const MyAdvertisements = () => {
         formData.append("image", file); // "image" is the required key for imgbb
 
         const apiKey = import.meta.env.VITE_image_upload_key;
-        
+
         const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${apiKey}`;
 
         try {
@@ -116,8 +117,11 @@ const MyAdvertisements = () => {
 
     return (
         <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                <span className="text-blue-600">📢</span> My Advertisements
+            <h2 className="text-2xl font-bold mb-4 gap-2 flex justify-center items-center">
+                <span className="text-blue-600">
+                    <HiSpeakerphone></HiSpeakerphone>
+                </span>{" "}
+                My Advertisements
             </h2>
 
             <div className="overflow-x-auto rounded shadow-md border">
@@ -166,21 +170,23 @@ const MyAdvertisements = () => {
                                         {ad.status}
                                     </span>
                                 </td>
-                                <td className="py-3 px-4 align-middle text-base flex gap-2">
-                                    <button
-                                        onClick={() => handleUpdate(ad)}
-                                        className="text-blue-600 hover:text-blue-800"
-                                        title="Update"
-                                    >
-                                        <FiEdit size={18} />
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(ad._id)}
-                                        className="text-red-600 hover:text-red-800"
-                                        title="Delete"
-                                    >
-                                        <FiTrash2 size={18} />
-                                    </button>
+                                <td className="py-3 px-4 align-middle text-base">
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={() => handleUpdate(ad)}
+                                            className="text-blue-600 hover:text-blue-800"
+                                            title="Update"
+                                        >
+                                            <FiEdit size={18} />
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(ad._id)}
+                                            className="text-red-600 hover:text-red-800"
+                                            title="Delete"
+                                        >
+                                            <FiTrash2 size={18} />
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
