@@ -29,6 +29,7 @@ import OrderList from "../pages/DashboardPages/User/OrderList/OrderList";
 import ViewPriceTrends from "../pages/DashboardPages/User/ViewPriceTrends/ViewPriceTrends";
 import VendorOrAdmin from "../routes/VendorOrAdmin";
 import TermsConditions from "../components/TermsCondition/TermsCondition";
+import ProfilePage from "../shared/ProfilePage/ProfilePage";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             {
                 path: '/terms',
                 Component: TermsConditions,
+            },
+            {
+                path: '/profile',
+                Component: ProfilePage,
             },
         ]
     },
