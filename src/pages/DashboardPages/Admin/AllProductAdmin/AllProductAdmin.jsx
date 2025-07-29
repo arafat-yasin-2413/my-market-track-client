@@ -8,6 +8,7 @@ import { MdAutorenew, MdCancel } from "react-icons/md";
 import { Link } from "react-router";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const AllProductAdmin = () => {
     const axiosSecure = useAxiosSecure();
@@ -28,7 +29,6 @@ const AllProductAdmin = () => {
         },
     });
 
-    
     const handleApprove = async (id) => {
         try {
             const res = await axiosSecure.patch(`/products/approve/${id}`);
@@ -63,6 +63,33 @@ const AllProductAdmin = () => {
             toast.error("Rejection failed");
         }
     };
+
+
+    const handleRemoveProduct= async(id)=>{
+        Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const res = await axiosSecure.delete(`/products/${id}`);
+                if (res.data.deletedCount > 0) {
+                    Swal.fire("Deleted!", "Product has been deleted.", "success");
+                    refetch();
+                }
+            } catch (error) {
+                console.error("Delete error:", error);
+                Swal.fire("Error!", "Failed to delete product.", "error");
+            }
+        }
+    });
+
+    }
 
     const openRejectModal = (id) => {
         setSelectedId(id);
@@ -143,33 +170,8 @@ const AllProductAdmin = () => {
                                             {product.status}
                                         </span>
                                     </td>
-                                    {/* <td className="text-center">
-                                    <div className="flex justify-center items-center gap-3">
-                                        <Link to={`/dashboard/updateProduct/${product._id}`}>
-                                            <button
-                                                title="Edit"
-                                                className="text-blue-600 hover:text-blue-800 cursor-pointer btn btn-sm"
-                                            >
-                                                <FiEdit size={18} />
-                                            </button>
-                                        </Link>
-                                        <button
-                                            title="Status"
-                                            className="text-red-600 hover:text-red-800 cursor-pointer btn btn-sm"
-                                        >
-                                            <FaSyncAlt size={18} />
-                                        </button>
-                                        
-                                        <button
-                                            title="Delete"
-                                            className="text-red-600 hover:text-red-800 cursor-pointer btn btn-sm"
-                                        >
-                                            <MdDeleteForever size={18} />
-                                        </button>
-                                    </div>
-                                </td> */}
 
-                                    <td className="py-3 px-4 text-center">
+                                    <td className="py-3 px-4 text-center flex justify-center items-center gap-2">
                                         {product.status === "pending" && (
                                             <div className="flex justify-center gap-2">
                                                 <button
@@ -216,7 +218,19 @@ const AllProductAdmin = () => {
                                                 Approve
                                             </button>
                                         )}
+                                    <div>
+                                        <button
+                                            onClick={() =>
+                                                handleRemoveProduct(product._id)
+                                            }
+                                            className="text-red-600 hover:text-red-800 text-base btn btn-sm"
+                                            title="Remove Permanently"
+                                        >
+                                            <MdDeleteForever size={24}></MdDeleteForever>
+                                        </button>
+                                    </div>
                                     </td>
+
                                 </tr>
                             ))}
                         </tbody>

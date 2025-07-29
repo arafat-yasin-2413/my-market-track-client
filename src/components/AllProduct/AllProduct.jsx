@@ -22,7 +22,7 @@ const AllProduct = () => {
     } = useQuery({
         queryKey: ["allProduct"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/allProduct");
+            const res = await axiosSecure.get("/approvedProducts");
             return res.data;
         },
     });
