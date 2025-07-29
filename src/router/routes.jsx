@@ -33,7 +33,7 @@ import ProfilePage from "../shared/ProfilePage/ProfilePage";
 
 export const router = createBrowserRouter([
     {
-        path: '/',
+        path: "/",
         Component: RootLayout,
         children: [
             {
@@ -41,120 +41,173 @@ export const router = createBrowserRouter([
                 Component: Home,
             },
             {
-                path: 'products/details/:id',
-                element: <PrivateRoute>
-                    <ProductDetails></ProductDetails>
-                </PrivateRoute>,
+                path: "products/details/:id",
+                element: (
+                    <PrivateRoute>
+                        <ProductDetails></ProductDetails>
+                    </PrivateRoute>
+                ),
             },
             {
-                path: 'allProduct',
+                path: "allProduct",
                 Component: AllProduct,
-            
             },
             {
-                path: 'forbidden',
+                path: "forbidden",
                 Component: ForbiddenPage,
             },
             {
-                path: '/terms',
+                path: "/terms",
                 Component: TermsConditions,
             },
             {
-                path: '/profile',
-                Component: ProfilePage,
+                path: "/profile",
+                element: (
+                    <PrivateRoute>
+                        <ProfilePage></ProfilePage>
+                    </PrivateRoute>
+                ),
             },
-        ]
+        ],
     },
     {
-        path: '/',
+        path: "/",
         Component: AuthLayout,
         children: [
             {
-                path: 'login',
+                path: "login",
                 Component: Login,
             },
             {
-                path: 'register',
+                path: "register",
                 Component: Register,
-            }
-        ]
+            },
+        ],
     },
     {
-        path: '/dashboard',
-        element: <PrivateRoute>
-            <DashboardLayout></DashboardLayout>
-        </PrivateRoute>,
+        path: "/dashboard",
+        element: (
+            <PrivateRoute>
+                <DashboardLayout></DashboardLayout>
+            </PrivateRoute>
+        ),
         children: [
             {
-                path: 'addProduct',
-                element: <VendorRoute><AddProduct></AddProduct></VendorRoute>,
+                path: "addProduct",
+                element: (
+                    <VendorRoute>
+                        <AddProduct></AddProduct>
+                    </VendorRoute>
+                ),
             },
             {
-                path: 'updateProduct/:id',
-                element: <VendorOrAdmin>
-                    <UpdateProduct></UpdateProduct>
-                </VendorOrAdmin>,
+                path: "updateProduct/:id",
+                element: (
+                    <VendorOrAdmin>
+                        <UpdateProduct></UpdateProduct>
+                    </VendorOrAdmin>
+                ),
             },
             {
-                path: 'myProducts',
-                element: <VendorRoute><MyProducts></MyProducts></VendorRoute>,
+                path: "myProducts",
+                element: (
+                    <VendorRoute>
+                        <MyProducts></MyProducts>
+                    </VendorRoute>
+                ),
             },
             {
-                path: 'viewPriceTrends',
-                element: <UserRoutesOnly><ViewPriceTrends></ViewPriceTrends></UserRoutesOnly>,
+                path: "viewPriceTrends",
+                element: (
+                    <UserRoutesOnly>
+                        <ViewPriceTrends></ViewPriceTrends>
+                    </UserRoutesOnly>
+                ),
             },
             {
-                path: 'myWatchlist',
-                element: <UserRoutesOnly>
-                    <ManageWatchlist></ManageWatchlist>
-                </UserRoutesOnly>,
+                path: "myWatchlist",
+                element: (
+                    <UserRoutesOnly>
+                        <ManageWatchlist></ManageWatchlist>
+                    </UserRoutesOnly>
+                ),
             },
             {
-                path: 'myOrderList',
-                element: <UserRoutesOnly>
-                    <OrderList></OrderList>
-                </UserRoutesOnly>,
+                path: "myOrderList",
+                element: (
+                    <UserRoutesOnly>
+                        <OrderList></OrderList>
+                    </UserRoutesOnly>
+                ),
             },
             {
-                path: 'addAdvertisement',
-                element: <VendorRoute><AddAdvertisement></AddAdvertisement></VendorRoute>,
+                path: "addAdvertisement",
+                element: (
+                    <VendorRoute>
+                        <AddAdvertisement></AddAdvertisement>
+                    </VendorRoute>
+                ),
             },
             {
-                path: 'myAdvertisements',
-                element: <VendorRoute><MyAdvertisements></MyAdvertisements></VendorRoute>,
+                path: "myAdvertisements",
+                element: (
+                    <VendorRoute>
+                        <MyAdvertisements></MyAdvertisements>
+                    </VendorRoute>
+                ),
             },
             {
-                path: 'payment/:productId',
-                element: <UserRoutesOnly>
-                    <Payment></Payment>
-                </UserRoutesOnly>,
+                path: "payment/:productId",
+                element: (
+                    <UserRoutesOnly>
+                        <Payment></Payment>
+                    </UserRoutesOnly>
+                ),
             },
             {
-                path: 'paymentHistory',
-                element: <UserRoutesOnly>
-                    <PaymentHistory></PaymentHistory>
-                </UserRoutesOnly>,
+                path: "paymentHistory",
+                element: (
+                    <UserRoutesOnly>
+                        <PaymentHistory></PaymentHistory>
+                    </UserRoutesOnly>
+                ),
             },
             {
-                path: 'allUser',
-                element: <AdminRoute><AllUser></AllUser></AdminRoute>,
+                path: "allUser",
+                element: (
+                    <AdminRoute>
+                        <AllUser></AllUser>
+                    </AdminRoute>
+                ),
             },
             {
-                path: 'allOrder',
-                element: <AdminRoute><AllOrder></AllOrder></AdminRoute>,
+                path: "allOrder",
+                element: (
+                    <AdminRoute>
+                        <AllOrder></AllOrder>
+                    </AdminRoute>
+                ),
             },
             {
-                path: 'allAdvertisement',
-                element: <AdminRoute><AllAdvertisement></AllAdvertisement></AdminRoute>
+                path: "allAdvertisement",
+                element: (
+                    <AdminRoute>
+                        <AllAdvertisement></AllAdvertisement>
+                    </AdminRoute>
+                ),
             },
             {
-                path: 'allProductAdmin',
-                element: <AdminRoute><AllProductAdmin></AllProductAdmin></AdminRoute>
+                path: "allProductAdmin",
+                element: (
+                    <AdminRoute>
+                        <AllProductAdmin></AllProductAdmin>
+                    </AdminRoute>
+                ),
             },
-        ]
+        ],
     },
     {
-        path: '/*',
+        path: "/*",
         Component: ErrorPage,
-    }
-])
+    },
+]);
