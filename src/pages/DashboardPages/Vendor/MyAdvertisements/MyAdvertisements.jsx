@@ -42,7 +42,7 @@ const MyAdvertisements = () => {
 
         if (result.isConfirmed) {
             try {
-                const res = await axiosSecure.delete(`/myAds/delete/${id}`);
+                const res = await axiosSecure.delete(`/ads/delete/${id}`);
                 if (res.data.deletedCount > 0) {
                     toast.success("Ad deleted successfully!");
                     refetch();

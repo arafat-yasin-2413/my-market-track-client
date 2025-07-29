@@ -18,12 +18,8 @@ const MyProducts = () => {
         queryFn: async () => {
             const res = await axiosSecure.get(`/products?email=${user.email}`);
             return res.data;
-        
         },
     });
-
-
-    
 
     const statusColors = {
         pending: "bg-yellow-100 text-yellow-700",
@@ -92,8 +88,8 @@ const MyProducts = () => {
                                 <th className="px-4 py-3">Item Name</th>
                                 <th className="px-4 py-3">Item Image</th>
                                 <th className="px-4 py-3">Price</th>
-                                <th className="px-4 py-3">Market Name</th>
-                                <th className="px-4 py-3">Date</th>
+                                <th className="px-4 py-3">Rejection Reason</th>
+                                <th className="px-4 py-3">Admin Feedback</th>
                                 <th className="px-4 py-3">Status</th>
                                 <th className="px-4 py-3 text-center">
                                     Actions
@@ -113,17 +109,29 @@ const MyProducts = () => {
                                     </td>
                                     <td className="px-4 py-2">
                                         {
-                                            <img className="w-16" src={product.productImage} alt="" />
+                                            <img
+                                                className="w-16"
+                                                src={product.productImage}
+                                                alt=""
+                                            />
                                         }
                                     </td>
                                     <td className="px-4 py-2">
                                         {product.price} ৳
                                     </td>
                                     <td className="px-4 py-2">
-                                        {product.marketName}
+                                        {product.status === "pending" ||
+                                        product.status === "approved"
+                                            ? "No reason yet"
+                                            : product.rejectionReasons ||
+                                              "No reason provided"}
                                     </td>
                                     <td className="px-4 py-2">
-                                        {product.date}
+                                        {product.status === "pending" ||
+                                        product.status === "approved"
+                                            ? "No feedback yet"
+                                            : product.adminFeedback ||
+                                              "No feedback provided"}
                                     </td>
                                     <td className="px-4 py-2">
                                         <span
@@ -135,6 +143,7 @@ const MyProducts = () => {
                                             {product.status}
                                         </span>
                                     </td>
+
                                     <td className="px-4 py-2 text-center space-x-2">
                                         <button
                                             onClick={() =>
@@ -148,18 +157,17 @@ const MyProducts = () => {
                                             </h4>
                                         </button>
 
-                                        <Link to={`/dashboard/updateProduct/${product._id}`}>
-                                        
-                                            <button 
-                                            
-                                            className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
+                                        <Link
+                                            to={`/dashboard/updateProduct/${product._id}`}
+                                        >
+                                            <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded cursor-pointer">
                                                 <h4>
                                                     {" "}
                                                     <FaEdit></FaEdit>{" "}
                                                 </h4>
                                             </button>
                                         </Link>
-                                        
+
                                         <button
                                             onClick={() =>
                                                 handleDelete(product._id)
