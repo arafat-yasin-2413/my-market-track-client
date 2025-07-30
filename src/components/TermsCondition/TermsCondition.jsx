@@ -5,7 +5,7 @@ import { RiShieldCheckLine } from "react-icons/ri";
 const TermsConditions = () => {
     return (
         <motion.div
-            className="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg"
+            className="max-w-4xl mx-auto p-8 my-10 bg-white rounded-lg shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
