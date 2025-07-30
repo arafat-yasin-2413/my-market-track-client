@@ -79,13 +79,7 @@ const Footer = () => {
                             <Link to="/contact" className="link link-hover">
                                 Contact
                             </Link>
-                        </li>
-                        <li>
-                            <Link to="/jobs" className="link link-hover">
-                                Jobs
-                            </Link>
-                        </li>
-                        
+                        </li> 
                     </ul>
                 </nav>
 
