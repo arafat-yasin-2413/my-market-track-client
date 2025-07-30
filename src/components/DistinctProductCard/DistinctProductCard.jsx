@@ -36,7 +36,7 @@ const DistinctProductCard = ({ product }) => {
                     Current Price: ${product.price}
                 </p>
 
-                <div className="flex flex-col space-y-1 mb-4 max-h-28 overflow-y-auto border border-gray-200 rounded-md p-3 bg-gray-50">
+                <div className="flex flex-col  mb-4 max-h-28 overflow-y-auto border border-gray-200 rounded-md p-3 bg-gray-50">
                     {product.prices.map((priceObj, idx) => (
                         <div
                             key={idx}
@@ -51,7 +51,7 @@ const DistinctProductCard = ({ product }) => {
                 </div>
 
                 <Link to={`/products/details/${product._id}`}>
-                    <button className="btn btn-primary mt-auto self-start px-6 py-2 text-lg font-semibold rounded-md shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <button className="btn mt-auto self-start px-6 py-2 text-lg font-semibold rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 bg-blue-600 text-white">
                         View Details
                     </button>
                 </Link>

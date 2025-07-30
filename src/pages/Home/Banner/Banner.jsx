@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import banner4 from "/assets/banner/banner-4.jpg";
 import { Link } from "react-router";
 
+
 const Banner = () => {
     return (
         <div className="relative w-full h-1/3 md:h-screen rounded-b-2xl">
@@ -23,11 +24,26 @@ const Banner = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="absolute md:top-1/3 top-20 left-1/2 transform -translate-x-1/2 text-center text-white px-1 md:px-4"
             >
-                <h1 className="text-3xl md:text-6xl font-bold drop-shadow-lg leading-tight">
+                <motion.h1 
+                
+                animate={{
+                    textShadow: [
+                        "0px 0px 0px #22c55e",
+                        "0px 0px 10px #22c55e",
+                        "0px 0px 0px #22c55e",
+                    ],
+                }}
+                transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+                
+                className="text-3xl md:text-6xl font-bold drop-shadow-lg leading-tight">
                     Track Every Market Move,
                     <br className="hidden md:block" />
                     Stay Ahead with Confidence
-                </h1>
+                </motion.h1>
                 <p className="mt-4 text-md md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-sm">
                     MarketTrack empowers you with real-time data, trends, and
                     insights — everything you need to make smarter investment
