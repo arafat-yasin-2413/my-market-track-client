@@ -5,12 +5,12 @@ import { Link } from "react-router";
 
 const Banner = () => {
     return (
-        <div className="relative w-full h-screen rounded-b-2xl">
+        <div className="relative w-full h-1/3 md:h-screen rounded-b-2xl">
             
             <img
                 src={banner4}
                 alt="Market Banner"
-                className="w-full h-full object-cover rounded-b-2xl"
+                className="w-full h-1/3 md:h-full object-cover rounded-b-2xl"
             />
 
             
@@ -21,14 +21,14 @@ const Banner = () => {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-center text-white px-4"
+                className="absolute md:top-1/3 top-20 left-1/2 transform -translate-x-1/2 text-center text-white px-1 md:px-4"
             >
-                <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg leading-tight">
+                <h1 className="text-3xl md:text-6xl font-bold drop-shadow-lg leading-tight">
                     Track Every Market Move,
                     <br className="hidden md:block" />
                     Stay Ahead with Confidence
                 </h1>
-                <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-sm">
+                <p className="mt-4 text-md md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-sm">
                     MarketTrack empowers you with real-time data, trends, and
                     insights — everything you need to make smarter investment
                     decisions.
@@ -38,7 +38,7 @@ const Banner = () => {
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded text-lg font-semibold shadow cursor-pointer"
+                    className="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 md:px-6 md:py-3 rounded text-base  md:text-lg font-semibold shadow cursor-pointer"
                     >
                     Get Started
                 </motion.button>
