@@ -7,13 +7,14 @@ import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner
 import useAuth from "../../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { FaMoneyCheckDollar } from "react-icons/fa6";
 
 const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const { productId } = useParams();
     const axiosSecure = useAxiosSecure();
-    const {user} = useAuth();
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     // console.log("product id : ", productId);
@@ -28,24 +29,19 @@ const PaymentForm = () => {
         },
     });
 
-
     const userEmail = user?.email;
-    const { data: userInfo = {}} = useQuery({
+    const { data: userInfo = {} } = useQuery({
         queryKey: ["userInfo", userEmail],
-        queryFn: async()=>{
+        queryFn: async () => {
             const res = await axiosSecure.get(`/users/${userEmail}`);
             return res.data;
-
         },
         enabled: !!userEmail,
     });
 
-
-
     if (isPending) {
         return <LoadingSpinner></LoadingSpinner>;
     }
-
 
     // console.log('product info : ', productInfo);
     const amount = productInfo.price;
@@ -97,13 +93,12 @@ const PaymentForm = () => {
             },
         });
 
-        if(result.error) {
+        if (result.error) {
             // console.log(result.error.message);
             setError(result.error.message);
-        }
-        else{
-            setError('');
-            if(result.paymentIntent.status === 'succeeded'){
+        } else {
+            setError("");
+            if (result.paymentIntent.status === "succeeded") {
                 // console.log('Payment succeeded!');
                 // console.log(result);
                 const transactionId = result.paymentIntent.id;
@@ -116,12 +111,15 @@ const PaymentForm = () => {
                     amount: amount,
                     transactionId: transactionId,
                     paymentMethod: result.paymentIntent.payment_method_types,
-                }
+                };
 
-                const paymentRes = await axiosSecure.post('/payments', paymentData);
-                if(paymentRes.data.insertedId){
+                const paymentRes = await axiosSecure.post(
+                    "/payments",
+                    paymentData
+                );
+                if (paymentRes.data.insertedId) {
                     // console.log('Payment successfully logged to the db.');
-                    toast.success('Payment Successfully saved to DB.');
+                    toast.success("Payment Successfully saved to DB.");
 
                     // create order object
                     const orderData = {
@@ -130,17 +128,18 @@ const PaymentForm = () => {
                         product: productInfo,
                     };
 
-                    try{
-                        const orderRes = await axiosSecure.post("/orders", orderData);
-                        if(orderRes.data.insertedId) {
+                    try {
+                        const orderRes = await axiosSecure.post(
+                            "/orders",
+                            orderData
+                        );
+                        if (orderRes.data.insertedId) {
                             toast.success("Order saved to DB successfully.");
-                            navigate('/dashboard/paymentHistory');
-                        }
-                        else{
+                            navigate("/dashboard/paymentHistory");
+                        } else {
                             toast.info("Order not saved to DB!!");
                         }
-                    }
-                    catch(error){
+                    } catch (error) {
                         // console.log(error);
                         toast.error("Failed to save order!");
                     }
@@ -150,25 +149,44 @@ const PaymentForm = () => {
     };
 
     return (
-        <div>
-            <form
-                onSubmit={handleSubmit}
-                className="border rounded border-blue-200 max-w-md mt-10 p-4"
-            >
-                <CardElement className="p-4 border rounded border-gray-200"></CardElement>
-
-                {error && (
-                    <p className="text-red-500 mt-2 font-medium">{error}</p>
-                )}
-
-                <button
-                    className="btn w-full mt-4 bg-blue-500"
-                    type="submit"
-                    disabled={!stripe}
+        <div className="bg-gray-50 min-h-screen">
+            <div className="flex justify-center py-10">
+                <form
+                    onSubmit={handleSubmit}
+                    className="border rounded border-blue-200 max-w-md mt-10 p-4 w-full"
                 >
-                    Pay ${amount}
-                </button>
-            </form>
+                    <h2 className="text-center font-semibold text-3xl md:text-5xl mb-10 flex justify-center items-center gap-2">
+                        <span className="text-blue-500"><FaMoneyCheckDollar></FaMoneyCheckDollar></span>
+                        Pay with <span className="text-blue-500">Stripe</span>
+                    </h2>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">
+                            Your Email
+                        </label>
+                        <input
+                            type="email"
+                            value={user?.email}
+                            readOnly
+                            className="w-full px-4 py-2 border border-gray-300 rounded bg-gray-100 text-gray-800 cursor-not-allowed"
+                        />
+                    </div>
+
+                    <CardElement className="p-4 mt-4 border rounded border-gray-200"></CardElement>
+
+                    {error && (
+                        <p className="text-red-500 mt-2 font-medium">{error}</p>
+                    )}
+
+                    <button
+                        className="btn w-full mt-4 bg-blue-500 text-white text-xl"
+                        type="submit"
+                        disabled={!stripe}
+                    >
+                        Pay $ <span>{amount}</span>
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

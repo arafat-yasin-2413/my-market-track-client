@@ -68,99 +68,124 @@ const ProductDetails = () => {
                         />
                     </div>
 
-                    <div className="flex-1 space-y-4 text-gray-800">
-                        <h2 className="text-3xl font-bold text-gray-900">
+                    <div className="flex-1 text-gray-800">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-4">
                             {itemName}
                         </h2>
 
-                        <div>
-                            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                                Current Price
+                        <div className="flex items-center">
+                            <h3 className="text-base font-medium text-gray-800">
+                                Current Price:
                             </h3>
-                            <p className="text-2xl text-red-600 font-bold flex items-center">
-                                <TbCurrencyTaka className="mr-1" />
+                            <p className="text-2xl text-blue-600 font-bold flex items-center">
+                                <TbCurrencyTaka className="" />
                                 {selectedPrice}{" "}
-                                <span className="ml-2 text-base text-gray-500">
+                                <span className="ml-2 text-base text-black">
                                     per KG
                                 </span>
                             </p>
                         </div>
 
+                        {/* date of updated price */}
+                        <div className="bg-base-300 w-fit px-1 rounded border border-blue-200">
+                            <p className="text-base font-medium">
+                                Date: <span>{date}</span>
+                            </p>
+                        </div>
+
                         {prices.length > 1 && (
                             <div className="mt-6">
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                                <h3 className="text-base font-semibold text-gray-700 mb-2">
                                     Previous Prices
                                 </h3>
                                 <ul className="space-y-2 list-disc list-inside text-gray-700">
                                     {prices
                                         .filter((p) => p.date !== date)
                                         .map((p, index) => (
-                                            <li key={index}>
-                                                <span className="font-medium">
-                                                    {p.date}:
-                                                </span>{" "}
-                                                <TbCurrencyTaka className="inline-block mr-1" />
-                                                {p.price}
+                                            <li
+                                                key={index}
+                                                className="flex items-center gap-2"
+                                            >
+                                                <h4>
+                                                    <span className="font-semibold">
+                                                        {p.date}:
+                                                    </span>{" "}
+                                                </h4>
+                                                <h4 className="text-blue-500 font-semibold">
+                                                    <TbCurrencyTaka className="inline-block" />
+                                                    {p.price}
+                                                </h4>
                                             </li>
                                         ))}
                                 </ul>
                             </div>
                         )}
 
-                        <div className="space-y-1 text-sm">
+                        <div className="space-y-4 mt-6 bg-white p-6 rounded-lg shadow-md border border-gray-200">
                             <p>
-                                <span className="font-medium text-gray-700">
-                                    Date:
-                                </span>{" "}
-                                {date}
-                            </p>
-                            <p>
-                                <span className="font-medium text-gray-700">
+                                <span className="text-base md:text-xl font-semibold text-gray-800">
                                     Market:
                                 </span>{" "}
-                                {marketName}
+                                <span className="text-base md:text-xl tracking-wide font-medium text-blue-700">
+                                    {marketName}
+                                </span>
                             </p>
                             <p>
-                                <span className="font-medium text-gray-700">
+                                <span className="text-base md:text-xl font-semibold text-gray-800">
                                     Market Details:
                                 </span>{" "}
-                                {marketDescription}
+                                <span className="text-base md:text-xl tracking-wide font-medium text-gray-700">
+                                    {marketDescription}
+                                </span>
                             </p>
                             <p>
-                                <span className="font-medium text-gray-700">
+                                <span className="text-base md:text-xl font-semibold text-gray-800">
                                     Item Description:
                                 </span>{" "}
-                                {itemDescription}
+                                <span className="text-base md:text-xl tracking-wide font-medium text-gray-700">
+                                    {itemDescription}
+                                </span>
                             </p>
                             <p>
-                                <span className="font-medium text-gray-700">
+                                <span className="text-base md:text-xl font-semibold text-gray-800">
                                     Vendor:
                                 </span>{" "}
-                                {name}
+                                <span className="text-base md:text-xl tracking-wide font-medium text-blue-700">
+                                    {name}
+                                </span>
                             </p>
                             <p>
-                                <span className="font-medium text-gray-700">
+                                <span className="text-base md:text-xl font-semibold text-gray-800">
                                     Vendor Email:
                                 </span>{" "}
-                                {email}
+                                <span className="text-base md:text-xl tracking-wide font-medium text-gray-600">
+                                    {email}
+                                </span>
                             </p>
                             <p>
-                                <span className="font-medium text-gray-700">
+                                <span className="text-base md:text-xl font-semibold text-gray-800">
                                     Status:
                                 </span>{" "}
-                                {status}
+                                <span className="text-base md:text-xl tracking-wide font-medium text-black capitalize bg-blue-200 px-2 py-0.5 rounded">
+                                    {status}
+                                </span>
                             </p>
                         </div>
 
-                        <div className="mt-6 flex gap-4">
-                            <AddToWatchlist product={product}></AddToWatchlist>
+                        <div className="mt-6 flex flex-wrap gap-4">
+                            {/* Add to Watchlist */}
+                            <AddToWatchlist
+                                product={product}
+                                className="btn bg-blue-100 text-blue-800 hover:bg-blue-200 border-none rounded-full font-semibold px-5 py-2 transition"
+                            />
 
+                            {/* Buy Product */}
                             <Link to={`/dashboard/payment/${product._id}`}>
                                 <button
-                                    className={`px-5 py-2 btn rounded-full font-semibold transition duration-200 ${
+                                    className={`px-5 py-2 btn rounded-full font-semibold text-xl transition duration-200 ${
                                         isDisabled
-                                            ? "bg-green-200 cursor-not-allowed text-gray-700"
-                                            : "bg-green-600 hover:bg-green-500 text-white"
+                                            ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                            : "bg-white hover:bg-gray-900 hover:text-white text-black"
                                     }`}
                                 >
                                     Buy Product
@@ -171,7 +196,9 @@ const ProductDetails = () => {
                 </div>
 
                 <div className="w-full flex-1 lg:w-[400px]">
-                    <ProductPriceChart prices={product?.prices}></ProductPriceChart>
+                    <ProductPriceChart
+                        prices={product?.prices}
+                    ></ProductPriceChart>
                 </div>
             </div>
 
