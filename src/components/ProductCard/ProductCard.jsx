@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
             </Link>
 
             <div className="p-4 flex flex-col flex-grow">
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                <h2 className="text-base md:text-lg font-bold tracking-wide text-gray-800 mb-2">
                     {itemName}
                 </h2>
 
