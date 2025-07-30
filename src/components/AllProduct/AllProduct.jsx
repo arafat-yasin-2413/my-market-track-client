@@ -119,8 +119,10 @@ const AllProduct = () => {
                 {/* sort by date range */}
                 <div className="flex items-center gap-2 flex-wrap mt-4 md:mt-0">
                     <div>
-                        <label className="text-base md:text-xl font-bold">Start:</label>
-                        {" "}<DatePicker
+                        <label className="text-base md:text-xl font-bold">
+                            Start:
+                        </label>{" "}
+                        <DatePicker
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
                             dateFormat="dd/MM/yyyy"
@@ -130,8 +132,10 @@ const AllProduct = () => {
                     </div>
 
                     <div>
-                        <label className="text-base md:text-xl font-bold">End:</label>
-                        {" "}<DatePicker
+                        <label className="text-base md:text-xl font-bold">
+                            End:
+                        </label>{" "}
+                        <DatePicker
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
                             dateFormat="dd/MM/yyyy"
@@ -154,7 +158,14 @@ const AllProduct = () => {
                 {Array.isArray(displayProducts) &&
                 displayProducts.length > 0 ? (
                     displayProducts.map((product) => (
-                        <ProductCard key={product._id} product={product} />
+                        <ProductCard
+                            key={product._id}
+                            product={product}
+                        >
+
+
+                            
+                        </ProductCard>
                     ))
                 ) : (
                     <p className="col-span-full text-center text-gray-500">

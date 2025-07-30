@@ -10,7 +10,7 @@ const DistinctProductCard = ({ product }) => {
             initial={{ borderColor: "#d1d5db" }}
             animate={{ borderColor: ["#d1d5db", "#6b7280", "#d1d5db"] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="card bg-base-100 shadow-xl rounded-xl overflow-hidden flex flex-col border border-2"
+            className="card bg-base-100 shadow-xl rounded-xl overflow-hidden flex flex-col border-2"
         >
             <figure className="w-full h-56 overflow-hidden">
                 <img
