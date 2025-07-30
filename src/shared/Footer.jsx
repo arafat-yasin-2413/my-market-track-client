@@ -85,11 +85,7 @@ const Footer = () => {
                                 Jobs
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/press" className="link link-hover">
-                                Press kit
-                            </Link>
-                        </li>
+                        
                     </ul>
                 </nav>
 
@@ -104,16 +100,7 @@ const Footer = () => {
                                 Terms & Conditions
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/privacy" className="link link-hover">
-                                Privacy policy
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/cookies" className="link link-hover">
-                                Cookie policy
-                            </Link>
-                        </li>
+                        
                     </ul>
                 </nav>
             </div>

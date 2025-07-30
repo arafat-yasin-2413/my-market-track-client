@@ -5,9 +5,9 @@ import { FaUsers, FaShoppingCart, FaStore } from "react-icons/fa";
 import { MdBarChart } from "react-icons/md";
 
 const stats = [
-    { icon: <FaUsers />, label: "Happy Customers", count: 10000 },
-    { icon: <FaShoppingCart />, label: "Orders Delivered", count: 50000 },
-    { icon: <FaStore />, label: "Trusted Vendors", count: 200 },
+    { icon: <FaUsers />, label: "Happy Customers", count: 1000 },
+    { icon: <FaShoppingCart />, label: "Orders Delivered", count: 6000 },
+    { icon: <FaStore />, label: "Trusted Vendors", count: 80 },
 ];
 
 const SocialProof = () => {
