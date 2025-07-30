@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { Rating } from "@smastrom/react-rating";
 import ShowingReview from "../ShowingReview/ShowingReview";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-
+import { MdOutlineRateReview } from "react-icons/md";
 
 const ReviewAndComment = ({ product }) => {
     const { user } = useAuth();
@@ -23,10 +23,7 @@ const ReviewAndComment = ({ product }) => {
     const productId = product._id;
 
     // getting current user infos
-    const {
-        data: loggedInUser = {},
-        isLoading: userLoading,
-    } = useQuery({
+    const { data: loggedInUser = {}, isLoading: userLoading } = useQuery({
         queryKey: ["user", userEmail],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/:${userEmail}`);
@@ -82,16 +79,15 @@ const ReviewAndComment = ({ product }) => {
 
         try {
             setSubmitting(true);
-            
+
             await axiosSecure.post("/reviews", reviewData);
-            
+
             toast.success("Review Submitted Successfully.");
             setHasReviewed(true);
             setRating(0);
             setComment("");
 
             queryClient.invalidateQueries(["reviews", productId]);
-            
         } catch (error) {
             // console.log(error);
             toast.error("Failed to submit review!");
@@ -105,8 +101,15 @@ const ReviewAndComment = ({ product }) => {
     }
 
     return (
-        <div className="max-w-4xl mx-auto mt-10 bg-white shadow-md rounded-lg p-6 border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="w-full xl:w-1/2 mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
+            <h1 className="text-center text-3xl md:text-5xl font-bold mb-10 flex justify-center items-center gap-2">
+                <span className="text-blue-500">
+                    <MdOutlineRateReview></MdOutlineRateReview>
+                </span>{" "}
+                Review and Comment
+            </h1>
+
+            <h2 className="text-xl font-medium text-gray-800 mb-6">
                 Write a Review
             </h2>
 
@@ -118,7 +121,7 @@ const ReviewAndComment = ({ product }) => {
                 />
 
                 <textarea
-                    className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-700"
+                    className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-1 focus:ring-blue-400 text-gray-500 font-medium tracking-wider"
                     rows="4"
                     placeholder="Write your comment here..."
                     value={comment}
@@ -129,10 +132,10 @@ const ReviewAndComment = ({ product }) => {
                 <button
                     onClick={handleReviewSubmit}
                     disabled={submitting || hasReviewed}
-                    className={`py-2 px-6 rounded-md font-semibold transition ${
+                    className={`py-2 px-6 rounded-md font-semibold cursor-pointer transition ${
                         hasReviewed
                             ? "bg-gray-300 text-gray-700 cursor-not-allowed"
-                            : "bg-green-600 hover:bg-green-500 text-white"
+                            : "bg-blue-600 hover:bg-blue-700 text-white"
                     }`}
                 >
                     {hasReviewed

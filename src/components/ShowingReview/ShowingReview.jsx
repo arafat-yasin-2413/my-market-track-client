@@ -6,7 +6,7 @@ const ShowingReview = ({ reviewsForThisProduct }) => {
         <div>
             {reviewsForThisProduct.length > 0 && (
                 <div className="mt-10">
-                    <h3 className="text-xl font-semibold mb-4 text-gray-800">
+                    <h3 className="text-xl font-medium mb-4 text-gray-800">
                         All Reviews ({reviewsForThisProduct.length})
                     </h3>
                     <div className="space-y-6">
@@ -19,16 +19,16 @@ const ShowingReview = ({ reviewsForThisProduct }) => {
                                     <img
                                         src={review.photo}
                                         alt={review.name}
-                                        className="w-10 h-10 rounded-full"
+                                        className="w-10 h-10 rounded-full border border-blue-400"
                                     />
                                     <div>
-                                        <h4 className="font-semibold text-gray-800">
+                                        <h4 className="text-base font-semibold text-blue-400">
                                             {review.name}
                                         </h4>
-                                        <h4 className="text-gray-600">
+                                        <h4 className="text-gray-600 tracking-wider">
                                             {review.email}
                                         </h4>
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-xs  text-gray-600 font-semibold">
                                             {new Date(
                                                 review.date
                                             ).toLocaleDateString()}

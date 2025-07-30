@@ -191,6 +191,7 @@ const AllUser = () => {
                                     <td className="px-6 py-4">{index + 1}</td>
                                     <td className="px-6 py-4">
                                         <img
+                                            referrerPolicy="no-referrer"
                                             src={user.photo}
                                             alt={user.name}
                                             className="w-10 h-10 rounded-full object-cover"

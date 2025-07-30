@@ -175,6 +175,8 @@ const ProductDetails = () => {
                 </div>
             </div>
 
+            <div className="border border-b border-gray-300 my-10"></div>
+
             <ReviewAndComment product={product}></ReviewAndComment>
         </div>
     );
