@@ -6,12 +6,12 @@ import { Link } from "react-router";
 
 const Banner = () => {
     return (
-        <div className="relative w-full h-1/3 md:h-screen rounded-b-2xl">
+        <div className="relative w-full h-[50vh] xl:h-[60vh] rounded-b-2xl">
             
             <img
                 src={banner4}
                 alt="Market Banner"
-                className="w-full h-1/3 md:h-full object-cover rounded-b-2xl"
+                className="w-full h-full object-cover rounded-b-2xl"
             />
 
             
@@ -22,7 +22,7 @@ const Banner = () => {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="absolute md:top-1/3 top-20 left-1/2 transform -translate-x-1/2 text-center text-white px-1 md:px-4"
+                className="absolute top-10 lg:top-20 left-1/2 transform -translate-x-1/2 text-center text-white px-1 md:px-4"
             >
                 <motion.h1 
                 
@@ -39,7 +39,7 @@ const Banner = () => {
                     ease: "easeInOut",
                 }}
                 
-                className="text-3xl md:text-6xl font-bold drop-shadow-lg leading-tight">
+                className="text-2xl md:text-3xl xl:text-4xl font-bold drop-shadow-lg leading-tight">
                     Track Every Market Move,
                     <br className="hidden md:block" />
                     Stay Ahead with Confidence
