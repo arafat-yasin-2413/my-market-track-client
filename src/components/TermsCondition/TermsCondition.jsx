@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { RiShieldCheckLine } from "react-icons/ri";
 
 const TermsConditions = () => {
     return (
@@ -9,9 +10,30 @@ const TermsConditions = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
         >
-            <h1 className="text-4xl font-bold mb-8 text-center">
+            <motion.h1
+                animate={{
+                    y: [0, -10, 0],
+                }}
+                transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+                className="text-4xl font-bold mb-8 text-center flex justify-center items-center gap-2"
+            >
+                <motion.span
+                    animate={{ rotate: [0, 15, -15, 0] }}
+                    transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                    className="text-blue-600"
+                >
+                    <RiShieldCheckLine></RiShieldCheckLine>
+                </motion.span>
                 Terms and Conditions
-            </h1>
+            </motion.h1>
 
             <section className="mb-6">
                 <p className="mb-4">
