@@ -34,7 +34,8 @@ const AllProduct = () => {
     }, [allProduct]);
 
     const handleSort = async (type) => {
-        setActiveSort(type);
+        // console.log('sort type: ', type);
+        setActiveSort(type.toLowerCase().trim());
         try {
             const res = await axiosSecure.get(`/products/sort/${type}`);
             setDisplayProducts(res.data);
@@ -75,7 +76,10 @@ const AllProduct = () => {
             setActiveSort("");
         } catch (error) {
             const errorMessage = error.message;
-            return toast.error("Failed to filter products by date.",errorMessage);
+            return toast.error(
+                "Failed to filter products by date.",
+                errorMessage
+            );
         }
     };
 
@@ -89,10 +93,10 @@ const AllProduct = () => {
             <div className="md:flex items-center justify-between p-4">
                 {/* sort by price */}
                 <div className="flex items-center gap-4 flex-wrap">
-                    <p className="text-xl font-bold">Sort by:</p>
+                    <p className="text-base md:text-xl font-bold">Sort by:</p>
                     <button
                         onClick={() => handleSort("low")}
-                        className={`btn rounded-md border-gray-300 ${
+                        className={`btn font-bold  rounded-md border-gray-300 ${
                             activeSort === "low"
                                 ? "bg-yellow-400"
                                 : "bg-white hover:bg-yellow-400"
@@ -102,7 +106,7 @@ const AllProduct = () => {
                     </button>
                     <button
                         onClick={() => handleSort("high")}
-                        className={`btn rounded-md border-gray-300 ${
+                        className={`btn font-bold rounded-md border-gray-300 ${
                             activeSort === "high"
                                 ? "bg-yellow-400"
                                 : "bg-white hover:bg-yellow-400"
@@ -114,25 +118,31 @@ const AllProduct = () => {
 
                 {/* sort by date range */}
                 <div className="flex items-center gap-2 flex-wrap mt-4 md:mt-0">
-                    <label className="text-xl font-bold">Start:</label>
-                    <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="Start Date"
-                        className="border border-gray-300 p-1 rounded"
-                    />
-                    <label className="text-xl font-bold">End:</label>
-                    <DatePicker
-                        selected={endDate}
-                        onChange={(date) => setEndDate(date)}
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="End Date"
-                        className="border border-gray-300 p-1 rounded"
-                    />
+                    <div>
+                        <label className="text-base md:text-xl font-bold">Start:</label>
+                        {" "}<DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="Start Date"
+                            className="border border-gray-300 p-1 rounded"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="text-base md:text-xl font-bold">End:</label>
+                        {" "}<DatePicker
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date)}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="End Date"
+                            className="border border-gray-300 p-1 rounded"
+                        />
+                    </div>
+
                     <button
                         onClick={handleDateFilter}
-                        className="btn bg-green-400 rounded-md px-4 py-2"
+                        className="btn bg-black font-bold text-base tracking-widest text-white  rounded-md px-2 md:px-4 md:py-2 hover:bg-yellow-300 hover:text-black"
                     >
                         Filter
                     </button>
@@ -141,7 +151,8 @@ const AllProduct = () => {
 
             {/* showing all products */}
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-                {Array.isArray(displayProducts) && displayProducts.length > 0 ? (
+                {Array.isArray(displayProducts) &&
+                displayProducts.length > 0 ? (
                     displayProducts.map((product) => (
                         <ProductCard key={product._id} product={product} />
                     ))
