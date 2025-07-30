@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 
 const DistinctProductCard = ({ product }) => {
     // console.log(product);
 
     return (
-        <div className="card bg-base-100 shadow-xl rounded-xl overflow-hidden flex flex-col">
+        <motion.div
+            initial={{ borderColor: "#d1d5db" }}
+            animate={{ borderColor: ["#d1d5db", "#6b7280", "#d1d5db"] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="card bg-base-100 shadow-xl rounded-xl overflow-hidden flex flex-col border border-2"
+        >
             <figure className="w-full h-56 overflow-hidden">
                 <img
                     src={product.productImage}
@@ -50,7 +56,7 @@ const DistinctProductCard = ({ product }) => {
                     </button>
                 </Link>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

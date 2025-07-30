@@ -64,7 +64,7 @@ const AdsBanner = () => {
                                 alt={ad.title}
                                 className="w-full h-[400px] md:h-[500px] object-cover rounded"
                             />
-                            <div className="absolute top-1/3 md:left-12 text-white bg-black/50 p-4 rounded-md max-w-2xl">
+                            <div className="absolute top-1/3 md:left-12 text-white bg-black/50 p-4 rounded-md max-w-3xl">
                                 <h2 className="text-2xl md:text-4xl font-bold mb-2">
                                     {ad.title}
                                 </h2>
