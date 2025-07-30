@@ -64,23 +64,14 @@ const AdsBanner = () => {
                                 alt={ad.title}
                                 className="w-full h-[400px] md:h-[500px] object-cover rounded"
                             />
-                            <div className="absolute top-1/3 left-6 md:left-12 text-white bg-black/50 p-4 rounded-md max-w-xl">
+                            <div className="absolute top-1/3 md:left-12 text-white bg-black/50 p-4 rounded-md max-w-2xl">
                                 <h2 className="text-2xl md:text-4xl font-bold mb-2">
                                     {ad.title}
                                 </h2>
                                 <p className="text-sm md:text-base">
                                     {ad.description}
                                 </p>
-                                {/* {ad.link && (
-                                <a
-                                href={ad.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block mt-4 bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded text-white text-sm md:text-base transition"
-                                >
-                                    Learn More
-                                </a>
-                                )} */}
+                                
                             </div>
                         </div>
                     </SwiperSlide>

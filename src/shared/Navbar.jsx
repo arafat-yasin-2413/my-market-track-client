@@ -92,7 +92,7 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1 gap-1">{links}</ul>
             </div>
 
-            <div>{user && <h4>{user.email}</h4>}</div>
+            {/* <div>{user && <h4>{user.email}</h4>}</div> */}
 
             <div className="navbar-end gap-1">
                 {user ? (
