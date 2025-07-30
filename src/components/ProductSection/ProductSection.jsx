@@ -35,7 +35,7 @@ const ProductSection = () => {
 
 
 
-    console.log(allProduct);
+    // console.log(allProduct);
 
     return (
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">

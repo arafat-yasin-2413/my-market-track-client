@@ -25,7 +25,7 @@ const useAxiosSecure = () => {
             return res;
         },
         (error) => {
-            console.log("inside response interceptor : ", error.response?.status);
+            // console.log("inside response interceptor : ", error.response?.status);
             
             return Promise.reject(error);
         }

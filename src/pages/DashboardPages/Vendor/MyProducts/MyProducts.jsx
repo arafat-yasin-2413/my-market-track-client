@@ -30,7 +30,7 @@ const MyProducts = () => {
     const handleViewProduct = async (id) => {
         // console.log('id received : ',id);
         const result = await axiosSecure.get(`/products/${id}`);
-        console.log(result.data);
+        // console.log(result.data);
         const product = result.data;
 
         navigate(`/products/details/${id}`, { state: { product } });
@@ -50,7 +50,7 @@ const MyProducts = () => {
             if (result.isConfirmed) {
                 try {
                     const res = await axiosSecure.delete(`/products/${id}`);
-                    console.log(res.data);
+                    // console.log(res.data);
 
                     if (res.data?.deletedCount) {
                         Swal.fire(

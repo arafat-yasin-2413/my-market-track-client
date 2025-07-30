@@ -50,14 +50,14 @@ const ManageWatchlist = () => {
                     toast.warning("Something went wrong!");
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 Swal.fire('Error!', 'Failed to remove the item.', 'error');
             }
         }
     });
 };
 
-    console.log(watchlistItems);
+    // console.log(watchlistItems);
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>;
     }

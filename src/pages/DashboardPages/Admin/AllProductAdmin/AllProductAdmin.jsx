@@ -37,7 +37,7 @@ const AllProductAdmin = () => {
                 refetch();
             }
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             toast.error("Failed to approve product");
         }
     };
@@ -59,7 +59,7 @@ const AllProductAdmin = () => {
                 refetch();
             }
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             toast.error("Rejection failed");
         }
     };
@@ -83,7 +83,7 @@ const AllProductAdmin = () => {
                     refetch();
                 }
             } catch (error) {
-                console.error("Delete error:", error);
+                // console.error("Delete error:", error);
                 Swal.fire("Error!", "Failed to delete product.", "error");
             }
         }

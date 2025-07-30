@@ -75,7 +75,7 @@ const PaymentForm = () => {
             setError(error.message);
         } else {
             setError("");
-            console.log("[payment method]", paymentMethod);
+            // console.log("[payment method]", paymentMethod);
         }
 
         // create payment intent
@@ -83,7 +83,7 @@ const PaymentForm = () => {
             amountInCents,
             productId,
         });
-        console.log("res from intent", res);
+        // console.log("res from intent", res);
 
         const clientSecret = res.data.clientSecret;
 
@@ -98,14 +98,14 @@ const PaymentForm = () => {
         });
 
         if(result.error) {
-            console.log(result.error.message);
+            // console.log(result.error.message);
             setError(result.error.message);
         }
         else{
             setError('');
             if(result.paymentIntent.status === 'succeeded'){
-                console.log('Payment succeeded!');
-                console.log(result);
+                // console.log('Payment succeeded!');
+                // console.log(result);
                 const transactionId = result.paymentIntent.id;
 
                 // now create payment history
@@ -141,7 +141,7 @@ const PaymentForm = () => {
                         }
                     }
                     catch(error){
-                        console.log(error);
+                        // console.log(error);
                         toast.error("Failed to save order!");
                     }
                 }

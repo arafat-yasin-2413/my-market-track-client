@@ -14,7 +14,7 @@ import { MdCampaign } from "react-icons/md";
 const DashboardLayout = () => {
 
     const {role, isPending} = useUserRole();
-    console.log(role);
+    // console.log(role);
 
     return (
         <>

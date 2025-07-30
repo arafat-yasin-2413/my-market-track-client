@@ -39,14 +39,14 @@ const AddProductForm = () => {
 
         try {
             const res = await axios.post(imageUploadUrl, formData);
-            console.log(res.data);
+            // console.log(res.data);
             // console.log(res.data.data);
 
             const imageUrl = res.data.data.url;
             setValue("productImage", imageUrl);
             setPreviewImage(imageUrl);
         } catch (error) {
-            console.log("Upload error: ", error);
+            // console.log("Upload error: ", error);
         } finally {
             setUploading(false);
         }
@@ -78,11 +78,11 @@ const AddProductForm = () => {
             itemDescription: data.itemDescription || "simple description",
         };
 
-        console.log("Form data:", data);
+        // console.log("Form data:", data);
 
         try {
             const res = await axiosSecure.post("/addProduct", newProduct);
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.insertedId) {
                 toast.success("Product Added Successfully!");
                 reset();
@@ -92,7 +92,7 @@ const AddProductForm = () => {
                 toast.error("Failed to add product. Try again.");
             }
         } catch (error) {
-            console.error("error occured when adding product : ", error);
+            // console.error("error occured when adding product : ", error);
             toast.error("Something went wrong");
         }
     };

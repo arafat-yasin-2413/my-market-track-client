@@ -36,7 +36,7 @@ const AddToWatchlist = ({ product }) => {
                     );
                     setAlreadyAdded(res.data?.exist || false);
                 } catch (error) {
-                    console.log(error);
+                    // console.log(error);
                 }
             }
         };
@@ -63,7 +63,7 @@ const AddToWatchlist = ({ product }) => {
                 toast.error("Error occured when adding to watchlist!");
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             toast.error("Something went wrong!");
         }
     };

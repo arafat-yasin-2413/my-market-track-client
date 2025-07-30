@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 
 const DistinctProductCard = ({ product }) => {
-    console.log(product);
+    // console.log(product);
 
     return (
         <div className="card bg-base-100 shadow-xl rounded-xl overflow-hidden flex flex-col">

@@ -93,7 +93,7 @@ const ReviewAndComment = ({ product }) => {
             queryClient.invalidateQueries(["reviews", productId]);
             
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             toast.error("Failed to submit review!");
         } finally {
             setSubmitting(false);

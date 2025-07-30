@@ -34,7 +34,7 @@ const AllAdvertisement = () => {
                 setOpenStatusId(null);
             }
         } catch (error) {
-            console.error("Status update failed:", error);
+            // console.error("Status update failed:", error);
             toast.error("Failed to update status");
         }
     };
@@ -60,7 +60,7 @@ const AllAdvertisement = () => {
                         refetch();
                     }
                 } catch (error) {
-                    console.error("Delete failed:", error);
+                    // console.error("Delete failed:", error);
                     toast.error("Failed to delete the ad");
                 }
             }

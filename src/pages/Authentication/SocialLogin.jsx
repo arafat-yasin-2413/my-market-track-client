@@ -18,7 +18,7 @@ const SocialLogin = () => {
         signInWithGoogle()
         .then(async(result)=>{
             toast.success('Login with Google Successfull')
-            console.log(result.user);
+            // console.log(result.user);
 
             const user = result.user;
 
@@ -32,14 +32,14 @@ const SocialLogin = () => {
             }
 
             const res = await axiosPublic.post('/users', userInfo);
-            console.log('user update info : ', res.data);
+            // console.log('user update info : ', res.data);
 
 
 
             navigate(from);
         })
         .catch(error=>{
-            console.error(error);
+            // console.error(error);
         });
         
     }

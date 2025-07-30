@@ -55,7 +55,7 @@ const AddAdvertisement = () => {
         } catch (error) {
             setUploading(false);
             toast.error("Image upload failed!");
-            console.error(error);
+            // console.error(error);
         }
     };
 
@@ -82,7 +82,7 @@ const AddAdvertisement = () => {
                 toast.error("Failed to add advertisement");
             }
         } catch (err) {
-            console.error(err);
+            // console.error(err);
         }
     };
 

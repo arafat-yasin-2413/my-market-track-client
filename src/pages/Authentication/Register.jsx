@@ -22,12 +22,12 @@ const Register = () => {
 
     const onSubmit = (data) => {
         
-        console.log(data);
+        // console.log(data);
         
         createUser(data.email, data.password)
         .then( async (result) => {
             toast.success('Account Created Successfully')
-            console.log(result.user);
+            // console.log(result.user);
 
             // update user info to DB
             const userInfo = {
@@ -40,7 +40,7 @@ const Register = () => {
             }
 
             const userRes = await axiosPublic.post(`/users`,userInfo);
-            console.log(userRes.data);
+            // console.log(userRes.data);
 
 
 
@@ -51,10 +51,10 @@ const Register = () => {
             }
             updateUserProfile(userProfile)
             .then(()=>{
-                console.log('profile name, picture updated');
+                // console.log('profile name, picture updated');
             })
             .catch(error=>{
-                console.log('failed to upload picture.', error);
+                // console.log('failed to upload picture.', error);
             })
             navigate('/');
 
@@ -73,7 +73,7 @@ const Register = () => {
         .catch(error=>{
             // toast.error(error.message)
             toast.error("Auth/Email already in user!");
-            console.error(error);
+            // console.error(error);
         })
     };
 
@@ -87,7 +87,7 @@ const Register = () => {
         const imageUploadUrl=`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`
 
         const res = await axios.post(imageUploadUrl, formData);
-        console.log(res.data);
+        // console.log(res.data);
         // console.log(res.data.data);
         setProfilePic(res.data.data.url);
         

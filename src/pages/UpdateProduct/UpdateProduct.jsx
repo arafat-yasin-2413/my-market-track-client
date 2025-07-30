@@ -51,7 +51,7 @@ const UpdateProduct = () => {
                 setExistingPrices(product.prices || []);
                 setLoading(false);
             } catch (err) {
-                console.error("Failed to fetch product", err);
+                // console.error("Failed to fetch product", err);
                 toast.error("Failed to load product.");
             }
         };
@@ -80,7 +80,7 @@ const UpdateProduct = () => {
             setValue("productImage", imageUrl);
             setPreviewImage(imageUrl);
         } catch (error) {
-            console.log("Upload error: ", error);
+            // console.log("Upload error: ", error);
         } finally {
             setUploading(false);
         }
@@ -154,7 +154,7 @@ const UpdateProduct = () => {
                 toast.info("No changes made.");
             }
         } catch (err) {
-            console.error("Error updating product", err);
+            // console.error("Error updating product", err);
             toast.error("Failed to update product.");
         }
     };

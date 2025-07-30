@@ -22,12 +22,12 @@ const Login = () => {
 
 
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
 
         signIn(data.email, data.password)
         .then(result=>{
             toast.success('Login Successfull')
-            console.log(result.user);
+            // console.log(result.user);
             navigate(from);
         })
         .catch(error=>{
