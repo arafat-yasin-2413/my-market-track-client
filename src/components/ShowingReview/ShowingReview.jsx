@@ -35,14 +35,17 @@ const ShowingReview = ({ reviewsForThisProduct }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <Rating
-                                    value={review.rating}
-                                    readOnly
-                                    style={{ maxWidth: 120 }}
-                                />
-                                <p className="mt-2 text-gray-700">
-                                    {review.comment}
-                                </p>
+
+                                <div className="bg-white p-4 rounded-2xl border border-gray-100">
+                                    <Rating
+                                        value={review.rating}
+                                        readOnly
+                                        style={{ maxWidth: 120 }}
+                                    />
+                                    <p className="mt-2 text-[1.1rem] font-medium text-gray-700">
+                                        {review.comment}
+                                    </p>
+                                </div>
                             </div>
                         ))}
                     </div>
