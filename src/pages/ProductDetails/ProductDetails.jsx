@@ -58,17 +58,16 @@ const ProductDetails = () => {
 
     return (
         <div className="w-full mx-auto my-10 bg-white shadow-lg p-6 rounded-lg border border-gray-200">
-            <div className="flex flex-col lg:flex-row gap-8">
+            
+            <div className="flex flex-col justify-center items-start lg:flex-row gap-8">
+                
+                {/* product details side */}
                 <div className="flex-1">
 
-                    <h2 className="text-center mb-6 text-3xl md:text-4xl xl:text-5xl font-semibold flex justify-center items-center gap-2">
-                        <span><TbListDetails></TbListDetails></span>
+                    <h2 className="mb-6 text-3xl md:text-4xl xl:text-5xl font-semibold flex justify-center items-center gap-2">
+                        <span className="text-blue-600"><TbListDetails></TbListDetails></span>
                         Product Details
                     </h2>
-
-                    <div className="border border-b border-gray-300 mb-6">
-
-                    </div>
 
                     <div className="">
                         <img
@@ -79,7 +78,7 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="flex-1 text-gray-800">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-4">
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-4">
                             {itemName}
                         </h2>
 
@@ -205,6 +204,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
 
+                {/* product price trend side */}
                 <div className="w-full flex-1 lg:w-[400px]">
                     <ProductPriceChart
                         prices={product?.prices}

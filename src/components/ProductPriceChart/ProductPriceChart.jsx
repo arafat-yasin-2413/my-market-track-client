@@ -10,6 +10,10 @@ import {
     ResponsiveContainer,
 } from "recharts";
 import "react-datepicker/dist/react-datepicker.css";
+import { LuTrendingUpDown } from "react-icons/lu";
+
+
+
 
 const ProductPriceChart = ({ prices }) => {
     const [startDate, setStartDate] = useState(null);
@@ -64,8 +68,9 @@ const ProductPriceChart = ({ prices }) => {
     }));
 
     return (
-        <div className="bg-white shadow-xl border border-gray-200 rounded-xl p-6 w-full">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="bg-white rounded-xl w-full shadow-xl p-4">
+            <h2 className="text-center mb-6 text-3xl md:text-4xl xl:text-5xl font-semibold flex justify-center items-center gap-2">
+                <span className="text-blue-600"><LuTrendingUpDown></LuTrendingUpDown></span>
                 Price Trend
             </h2>
 
