@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
-import { TbCurrencyTaka } from "react-icons/tb";
+import { TbCurrencyTaka, TbListDetails } from "react-icons/tb";
 import AddToWatchlist from "../../components/AddToWatchlist/AddToWatchlist";
 import useUserRole from "../../hooks/useUserRole";
 import ReviewAndComment from "../../components/ReviewAndComment/ReviewAndComment";
@@ -60,11 +60,21 @@ const ProductDetails = () => {
         <div className="w-full mx-auto my-10 bg-white shadow-lg p-6 rounded-lg border border-gray-200">
             <div className="flex flex-col lg:flex-row gap-8">
                 <div className="flex-1">
+
+                    <h2 className="text-center mb-6 text-3xl md:text-4xl xl:text-5xl font-semibold flex justify-center items-center gap-2">
+                        <span><TbListDetails></TbListDetails></span>
+                        Product Details
+                    </h2>
+
+                    <div className="border border-b border-gray-300 mb-6">
+
+                    </div>
+
                     <div className="">
                         <img
                             src={productImage}
                             alt={itemName}
-                            className="w-full max-w-sm rounded-md shadow-md"
+                            className="w-full max-w-sm rounded-md shadow-md border border-gray-100"
                         />
                     </div>
 
