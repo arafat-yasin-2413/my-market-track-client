@@ -13,7 +13,7 @@ const ShowingReview = ({ reviewsForThisProduct }) => {
                         {reviewsForThisProduct.map((review, idx) => (
                             <div
                                 key={idx}
-                                className="bg-gray-50 border border-gray-200 rounded-md p-4"
+                                className="bg-gray-50 border border-blue-200 rounded-md p-4"
                             >
                                 <div className="flex items-center gap-4 mb-2">
                                     <img
