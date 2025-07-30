@@ -133,7 +133,7 @@ const ProductDetails = () => {
                         <div className="space-y-4 mt-6 bg-white p-6 rounded-lg shadow-md border border-gray-200">
                             <p>
                                 <span className="text-base md:text-xl font-semibold text-gray-800">
-                                    Market:
+                                    Market Name:
                                 </span>{" "}
                                 <span className="text-base md:text-xl tracking-wide font-medium text-blue-700">
                                     {marketName}
