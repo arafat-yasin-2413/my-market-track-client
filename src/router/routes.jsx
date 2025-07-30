@@ -30,6 +30,8 @@ import ViewPriceTrends from "../pages/DashboardPages/User/ViewPriceTrends/ViewPr
 import VendorOrAdmin from "../routes/VendorOrAdmin";
 import TermsConditions from "../components/TermsCondition/TermsCondition";
 import ProfilePage from "../shared/ProfilePage/ProfilePage";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import ContactPage from "../pages/ContactPage/ContactPage";
 
 export const router = createBrowserRouter([
     {
@@ -55,6 +57,14 @@ export const router = createBrowserRouter([
             {
                 path: "forbidden",
                 Component: ForbiddenPage,
+            },
+            {
+                path: "about",
+                Component: AboutUs,
+            },
+            {
+                path: "contact",
+                Component: ContactPage,
             },
             {
                 path: "/terms",
