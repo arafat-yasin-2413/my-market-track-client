@@ -25,7 +25,7 @@ const AddToWatchlist = ({ product }) => {
             return res.data;
         },
     });
-    // console.log(singleUser);
+
 
     useEffect(() => {
         const checkWatchlist = async () => {
