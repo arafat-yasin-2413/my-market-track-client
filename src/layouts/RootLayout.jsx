@@ -5,10 +5,26 @@ import Footer from '../shared/Footer';
 
 const RootLayout = () => {
     return (
-        <div className='max-w-11/12 mx-auto'>
+        // <section className='bg-base-200'>
+
+        // <div className=''>
+        //     <Navbar></Navbar>
+        // </div>
+        
+        // <div className='max-w-11/12 mx-auto'>
+        //     <Outlet></Outlet>
+        //     {/* <Footer></Footer> */}
+        // </div>
+        // </section>
+
+
+
+
+        <div>
             <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
+            <div>
+                <Outlet></Outlet>
+            </div>
         </div>
     );
 };

@@ -36,8 +36,8 @@ const Login = () => {
     }
 
     return (
-        <div className="relative bg-[url(/assets/banner/banner-4.jpg)] bg-cover bg-no-repeat bg-center  min-h-screen">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-96 bg-gray-100 p-8 rounded-lg shadow-2xl">
+        <div className="relative bg-[url(/assets/banner/banner-4.jpg)] bg-cover bg-no-repeat bg-center min-h-screen">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 lg:w-[420px] bg-white p-8 rounded-lg shadow-2xl">
                 <h2 className="text-2xl tracking-wide font-bold text-center my-4">
                     Login
                 </h2>
@@ -47,7 +47,7 @@ const Login = () => {
                     <input
                         type="email"
                         {...register("email", { required: true })}
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-4"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white"
                         placeholder="Email"
                     />
                     {errors.email?.type === "required" && (
@@ -67,7 +67,7 @@ const Login = () => {
                                     "Password must contain uppercase, lowercase, and a number",
                             },
                         })}
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-2 bg-white"
                         placeholder="Password"
                     />
                     {errors.password?.type === "required" && (
@@ -87,7 +87,7 @@ const Login = () => {
                     )}
 
 
-                    <div className="text-start text-sm my-2 font-semibold">
+                    <div className="text-start text-sm my-2 font-semibold text-gray-600">
                         <p>
                             Don't have an Account?{" "}
                             <Link
@@ -98,7 +98,7 @@ const Login = () => {
                             </Link>
                         </p>
                     </div>
-                    <button className="w-full bg-black text-white py-2 rounded-full mt-2 cursor-pointer">
+                    <button className="w-full bg-black text-white py-2 rounded mt-2 cursor-pointer">
                         Login
                     </button>
                 </form>
