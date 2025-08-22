@@ -43,19 +43,19 @@ const Login = () => {
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {/* email field */}
-                    <label>Email</label>
+                    <label className="font-medium">Email</label>
                     <input
                         type="email"
                         {...register("email", { required: true })}
-                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white"
-                        placeholder="Email"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
+                        placeholder="your email"
                     />
                     {errors.email?.type === "required" && (
                         <p className="text-red-500">Email is required</p>
                     )}
 
                     {/* password field */}
-                    <label>Password</label>
+                    <label className="font-medium">Password</label>
                     <input
                         type="password"
                         {...register("password", {
@@ -67,8 +67,8 @@ const Login = () => {
                                     "Password must contain uppercase, lowercase, and a number",
                             },
                         })}
-                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-2 bg-white"
-                        placeholder="Password"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-2 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
+                        placeholder="type your password"
                     />
                     {errors.password?.type === "required" && (
                         <p className="text-red-500">Password is required</p>
