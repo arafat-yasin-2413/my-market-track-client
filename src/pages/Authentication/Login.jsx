@@ -92,13 +92,13 @@ const Login = () => {
                             Don't have an Account?{" "}
                             <Link
                                 to="/register"
-                                className="text-blue-600 hover:underline"
+                                className="text-accent hover:underline"
                             >
                                 Register
                             </Link>
                         </p>
                     </div>
-                    <button className="w-full bg-black text-white py-2 rounded mt-2 cursor-pointer">
+                    <button className="w-full bg-accent hover:bg-accent/90 text-white font-semibold tracking-wider py-2 rounded mt-2 cursor-pointer">
                         Login
                     </button>
                 </form>

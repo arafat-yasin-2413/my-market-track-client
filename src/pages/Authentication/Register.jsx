@@ -107,7 +107,7 @@ const Register = () => {
                     <input
                         type="text"
                         {...register("name", { required: true })}
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2 tracking-wider text-[1.1rem]"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
                         placeholder="your name"
                     />
 
@@ -120,7 +120,7 @@ const Register = () => {
                     <input
                         type="email"
                         {...register("email", { required: true })}
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2 tracking-wider text-[1.1rem]"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
                         placeholder="your email"
                     />
                     {errors.email?.type === "required" && (
@@ -134,7 +134,7 @@ const Register = () => {
                         type="file"
                         name="photo"
                         required
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2 tracking-wider text-[1.1rem]"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
                         placeholder="your photo"
                     />
                   
@@ -152,7 +152,7 @@ const Register = () => {
                                     "Password must contain uppercase, lowercase, and a number",
                             },
                         })}
-                        className="w-full px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:border-blue-500 transition mb-2 font-semibold tracking-wider text-[1.1rem]"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
                         placeholder="Password"
                     />
 
@@ -179,13 +179,13 @@ const Register = () => {
                             Already have an Account?{" "}
                             <Link
                                 to="/login"
-                                className="text-blue-600 hover:underline"
+                                className="text-accent hover:underline"
                             >
                                 Login
                             </Link>
                         </p>
                     </div>
-                    <button className="w-full bg-black text-white py-2 rounded-full mt-2 cursor-pointer">
+                    <button className="w-full bg-accent hover:bg-accent/90 text-white font-semibold tracking-wider py-2 rounded mt-2 cursor-pointer">
                         Register
                     </button>
                 </form>

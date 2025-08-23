@@ -63,7 +63,7 @@ const Navbar = () => {
 
                             <button
                                 onClick={handleLogOut}
-                                className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200 -mr-2"
+                                className="bg-accent rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200 -mr-2"
                             >
                                 Logout
                             </button>
@@ -73,13 +73,13 @@ const Navbar = () => {
                             <div className="flex items-center gap-2 -mr-2">
                                 <Link
                                     to="/login"
-                                    className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
+                                    className="bg-accent rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
                                 >
                                     Login
                                 </Link>
                                 <Link
                                     to="/register"
-                                    className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
+                                    className="bg-accent rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
                                 >
                                     Register
                                 </Link>
