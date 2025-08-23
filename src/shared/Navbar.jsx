@@ -31,7 +31,12 @@ const Navbar = () => {
                             role="button"
                             className="lg:hidden cursor-pointer"
                         >
-                            <Icon icon="majesticons:menu" width="36" height="36" className="text-white" />
+                            <Icon
+                                icon="majesticons:menu"
+                                width="36"
+                                height="36"
+                                className="text-white"
+                            />
                         </div>
                         <ul
                             tabIndex={0}
@@ -44,7 +49,9 @@ const Navbar = () => {
                     <MarketTrackLogo></MarketTrackLogo>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <div className="list-none flex justify-center items-center gap-4"><MainLinks></MainLinks></div>
+                    <div className="list-none flex justify-center items-center gap-4">
+                        <MainLinks></MainLinks>
+                    </div>
                 </div>
 
                 {/* <div>{user && <h4>{user.email}</h4>}</div> */}
@@ -56,25 +63,27 @@ const Navbar = () => {
 
                             <button
                                 onClick={handleLogOut}
-                                className="btn bg-red-500 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 hover:bg-white hover:outline hover:outline-red-500 hover:text-red-600 hover:border-none cursor-pointer"
+                                className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
                             >
                                 Logout
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link
-                                to="/login"
-                                className="btn bg-blue-600 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 cursor-pointer"
-                            >
-                                Login
-                            </Link>
-                            <Link
-                                to="/register"
-                                className="btn bg-blue-700 text-white text-[0.8rem] tracking-wider hover:scale-105 transition duration-300 cursor-pointer"
-                            >
-                                Register
-                            </Link>
+                            <div className="flex items-center gap-2">
+                                <Link
+                                    to="/login"
+                                    className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to="/register"
+                                    className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
+                                >
+                                    Register
+                                </Link>
+                            </div>
                         </>
                     )}
                 </div>
