@@ -4,6 +4,7 @@ import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { AiTwotoneMail } from "react-icons/ai";
 
 import { Link } from "react-router";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Footer = () => {
     return (
@@ -11,7 +12,7 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
                 
                 <div className="flex flex-col justify-center items-center sm:items-start gap-4">
-                    <FaChartLine size={64} className="text-blue-600" />
+                <Icon icon="fa-solid:chart-line" width="48" height="48" className="text-accent" />
                     <p className="text-3xl font-semibold">MarketTrack</p>
                     <div className="flex gap-5 mt-3 text-gray-600">
                         <a
@@ -19,7 +20,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Facebook"
-                            className="hover:text-blue-600 transition"
+                            className="hover:text-accent transition"
                         >
                             <FaFacebookF size={24} />
                         </a>
@@ -28,7 +29,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Twitter"
-                            className="hover:text-blue-400 transition"
+                            className="hover:text-accent transition"
                         >
                             <FaTwitter size={24} />
                         </a>
@@ -37,7 +38,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="YouTube"
-                            className="hover:text-red-600 transition"
+                            className="hover:text-accent transition"
                         >
                             <FaYoutube size={24} />
                         </a>

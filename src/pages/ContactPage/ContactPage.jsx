@@ -12,7 +12,7 @@ const ContactPage = () => {
                 className="max-w-3xl mx-auto my-16 p-8 bg-white rounded-xl shadow-xl"
             >
                 <motion.h1
-                    className="text-4xl font-bold mb-6 text-center text-blue-600"
+                    className="text-4xl font-bold mb-6 text-center text-primary"
                     animate={{ y: [0, -10, 0] }}
                     transition={{
                         duration: 2,
@@ -30,7 +30,7 @@ const ContactPage = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <MdLocationOn className="text-blue-500 text-2xl" />
+                        <MdLocationOn className="text-accent text-2xl" />
                         <span>
                             123 Gulshan Avenue, Floor 5, Gulshan-2, Dhaka 1212,
                             Bangladesh
@@ -43,7 +43,7 @@ const ContactPage = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
-                        <MdPhone className="text-blue-500 text-2xl" />
+                        <MdPhone className="text-accent text-2xl" />
                         <span>+880 1711-123456</span>
                     </motion.div>
 
@@ -53,7 +53,7 @@ const ContactPage = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
                     >
-                        <MdEmail className="text-blue-500 text-2xl" />
+                        <MdEmail className="text-accent text-2xl" />
                         <span>contact@markettrack.com</span>
                     </motion.div>
                 </div>
