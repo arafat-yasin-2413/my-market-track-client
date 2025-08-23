@@ -51,14 +51,14 @@ const Footer = () => {
                         Contact Us
                     </h6>
                     <div className="flex items-start gap-3 mb-4">
-                        <MdLocationOn className="text-2xl text-red-500 mt-1" />
+                        <MdLocationOn className="text-2xl text-primary mt-1" />
                         <p className="text-gray-700">
                             123 Gulshan Avenue, Floor 5, <br />
                             Gulshan-2, Dhaka 1212, Bangladesh
                         </p>
                     </div>
                     <div className="flex items-center gap-3 mb-4">
-                        <MdPhone className="text-2xl text-green-600" />
+                        <MdPhone className="text-2xl text-primary" />
                         <p className="text-gray-700">+880 1711-123456</p>
                     </div>
                     <div className="flex items-center gap-3">

@@ -3,29 +3,30 @@ import { FiZap, FiBarChart2, FiLock, FiDollarSign } from "react-icons/fi";
 import Container from "../../../components/Container/Container";
 import MainTitle from "../../../components/MainTitle/MainTitle";
 
+const reasons = [
+    {
+        icon: FiZap,
+        title: "Easy to Use",
+        desc: "Clean, simple UI—no steep learning curve.",
+    },
+    {
+        icon: FiBarChart2,
+        title: "Real-Time Insights",
+        desc: "Up-to-date sales metrics at a glance.",
+    },
+    {
+        icon: FiLock,
+        title: "Secure Payments",
+        desc: "Stripe ensures fast and safe transactions.",
+    },
+    {
+        icon: FiDollarSign,
+        title: "Affordable Plans",
+        desc: "Flexible pricing for any business size.",
+    },
+];
+
 const WhyChooseUs = () => {
-    const reasons = [
-        {
-            icon: FiZap,
-            title: "Easy to Use",
-            desc: "Clean, simple UI—no steep learning curve.",
-        },
-        {
-            icon: FiBarChart2,
-            title: "Real-Time Insights",
-            desc: "Up-to-date sales metrics at a glance.",
-        },
-        {
-            icon: FiLock,
-            title: "Secure Payments",
-            desc: "Stripe ensures fast and safe transactions.",
-        },
-        {
-            icon: FiDollarSign,
-            title: "Affordable Plans",
-            desc: "Flexible pricing for any business size.",
-        },
-    ];
 
     return (
         <Container>

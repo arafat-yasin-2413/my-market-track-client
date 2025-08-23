@@ -8,29 +8,31 @@ import {
 import Container from "../../../components/Container/Container";
 import MainTitle from "../../../components/MainTitle/MainTitle";
 
+const steps = [
+    {
+        icon: FiUserPlus,
+        title: "Sign Up",
+        desc: "Create your MarketTrack account",
+    },
+    {
+        icon: FiPackage,
+        title: "Add Products",
+        desc: "List items and set up your store dashboard",
+    },
+    {
+        icon: FiTrendingUp,
+        title: "Track Prices",
+        desc: "Monitor growth with clear analytics",
+    },
+    {
+        icon: FiCreditCard,
+        title: "Pay with Stripe",
+        desc: "Receive secure payouts via Stripe",
+    },
+];
+
+
 const HowItWorks = () => {
-    const steps = [
-        {
-            icon: FiUserPlus,
-            title: "Sign Up",
-            desc: "Create your MarketTrack account",
-        },
-        {
-            icon: FiPackage,
-            title: "Add Products",
-            desc: "List items and set up your store dashboard",
-        },
-        {
-            icon: FiTrendingUp,
-            title: "Track Prices",
-            desc: "Monitor growth with clear analytics",
-        },
-        {
-            icon: FiCreditCard,
-            title: "Pay with Stripe",
-            desc: "Receive secure payouts via Stripe",
-        },
-    ];
 
     return (
         <Container>
