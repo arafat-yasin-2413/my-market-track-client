@@ -29,7 +29,7 @@ const DashboardLayout = () => {
         <>
             <Navbar></Navbar>
 
-            <section className="w-10/12 mx-auto">
+            <section className="w-full">
                 <div className="drawer lg:drawer-open">
                     <input
                         id="my-drawer-2"
