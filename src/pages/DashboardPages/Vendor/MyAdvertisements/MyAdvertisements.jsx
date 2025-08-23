@@ -8,6 +8,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import useAxios from "../../../../hooks/useAxios";
 import { HiSpeakerphone } from "react-icons/hi";
+import { Link } from "react-router";
 
 const MyAdvertisements = () => {
     const { user } = useAuth();
@@ -115,213 +116,236 @@ const MyAdvertisements = () => {
 
     if (isLoading) return <p className="text-center">Loading...</p>;
 
-    return (
-        <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4 gap-2 flex justify-center items-center">
-                <span className="text-blue-600">
-                    <HiSpeakerphone></HiSpeakerphone>
-                </span>{" "}
-                My Advertisements
-            </h2>
+    // console.log("my total ads : ", myAds.length);
+    if (myAds.length === 0) return <div className="my-32 flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
 
-            <div className="overflow-x-auto rounded shadow-md border">
-                <table className="min-w-full bg-white text-sm text-left">
-                    <thead className="bg-gray-100 text-gray-700 uppercase">
-                        <tr>
-                            <th className="py-3 px-4">SL</th>
-                            <th className="py-3 px-4">Ad Title</th>
-                            <th className="py-3 px-4">Short Description</th>
-                            <th className="py-3 px-4">Ad Image</th>
-                            <th className="py-3 px-4">Created At</th>
-                            <th className="py-3 px-4">Status</th>
-                            <th className="py-3 px-4">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {myAds.map((ad, index) => (
-                            <tr
-                                key={ad._id}
-                                className="border-t hover:bg-gray-50"
-                            >
-                                <td className="py-3 px-4 align-middle text-base">
-                                    {index + 1}
-                                </td>
-                                <td className="py-3 px-4 align-middle text-base">
-                                    {ad.title}
-                                </td>
-                                <td className="py-3 px-4 align-middle text-base">
-                                    {ad.description}
-                                </td>
-                                <td className="py-3 px-4 align-middle text-base">
-                                    <img
-                                        src={ad.image}
-                                        alt="ad"
-                                        className="w-16 h-16 object-cover rounded"
-                                    />
-                                </td>
-                                <td className="py-3 px-4 align-middle text-base">
-                                    {format(
-                                        new Date(ad.createdAt),
-                                        "dd MMMM yyyy"
-                                    )}
-                                </td>
-                                <td className="py-3 px-4 align-middle text-base">
-                                    <span className={getStatusColor(ad.status)}>
-                                        {ad.status}
-                                    </span>
-                                </td>
-                                <td className="py-3 px-4 align-middle text-base">
-                                    <div className="flex items-center gap-2">
-                                        <button
-                                            onClick={() => handleUpdate(ad)}
-                                            className="text-blue-600 hover:text-blue-800"
-                                            title="Update"
-                                        >
-                                            <FiEdit size={18} />
-                                        </button>
-                                        <button
-                                            onClick={() => handleDelete(ad._id)}
-                                            className="text-red-600 hover:text-red-800"
-                                            title="Delete"
-                                        >
-                                            <FiTrash2 size={18} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            {/* Update Modal */}
-            {showModal && selectedAd && (
-                <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-40"
-                    onClick={() => setShowModal(false)}
-                >
-                    <div
-                        className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl relative"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button
-                            className="absolute top-2 right-2 text-gray-500 hover:text-red-600"
-                            onClick={() => setShowModal(false)}
-                        >
-                            ✕
-                        </button>
-
-                        <h3 className="text-lg font-bold mb-4">
-                            Update Advertisement
-                        </h3>
-                        <form
-                            onSubmit={async (e) => {
-                                e.preventDefault();
-                                const form = e.target;
-                                const adTitle = form.adTitle.value;
-                                const shortDescription =
-                                    form.shortDescription.value;
-                                const email = form.email.value;
-
-                                let imageUrl = selectedAd.image;
-                                if (imageFile) {
-                                    imageUrl = await handleImageUpload(
-                                        imageFile
-                                    );
-                                    if (!imageUrl) return;
-                                }
-
-                                const updatedAd = {
-                                    title: adTitle,
-                                    description: shortDescription,
-                                    email: email,
-                                    image: imageUrl,
-                                };
-
-                                try {
-                                    const res = await axiosSecure.put(
-                                        `/myAds/update/${selectedAd._id}`,
-                                        updatedAd
-                                    );
-                                    if (res.data.modifiedCount > 0) {
-                                        toast.success(
-                                            "Ad updated successfully!"
-                                        );
-                                        refetch();
-                                        setShowModal(false);
-                                    } else {
-                                        toast.info("No changes were made.");
-                                    }
-                                } catch (err) {
-                                    toast.error("Update failed!");
-                                }
-                            }}
-                        >
-                            <div className="mb-3">
-                                <label className="block text-sm font-medium">
-                                    Ad Title
-                                </label>
-                                <input
-                                    type="text"
-                                    name="adTitle"
-                                    defaultValue={selectedAd.title}
-                                    className="input input-bordered w-full"
-                                    required
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="block text-sm font-medium">
-                                    Short Description
-                                </label>
-                                <textarea
-                                    name="shortDescription"
-                                    defaultValue={selectedAd.description}
-                                    className="textarea textarea-bordered w-full"
-                                    required
-                                ></textarea>
-                            </div>
-                            <div className="mb-3">
-                                <label className="block text-sm font-medium">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    defaultValue={user?.email}
-                                    className="input input-bordered w-full bg-gray-100"
-                                    readOnly
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="block text-sm font-medium">
-                                    Ad Image
-                                </label>
-                                <input
-                                    type="file"
-                                    name="image"
-                                    accept="image/*"
-                                    className="file-input file-input-bordered w-full"
-                                    onChange={handleImageChange}
-                                />
-                                <img
-                                    src={previewImage || selectedAd.image}
-                                    alt="ad preview"
-                                    className="mt-2 w-24 h-24 object-cover rounded border"
-                                />
-                            </div>
-                            <div className="text-right">
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary"
-                                >
-                                    Update
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
+        <p className="text-xl md:text-2xl">
+            You have no ads right now
+        </p>
+        <p>
+            <Link className="btn bg-accent text-white mt-4" to="/dashboard/addAdvertisement">Add some ads</Link>
+        </p>
         </div>
+    </div>
+
+    return (
+        
+
+        <>
+            <div className="p-6">
+                <h2 className="text-2xl font-bold mb-4 gap-2 flex justify-center items-center">
+                    <span className="text-blue-600">
+                        <HiSpeakerphone></HiSpeakerphone>
+                    </span>{" "}
+                    My Advertisements
+                </h2>
+
+                <div className="overflow-x-auto rounded shadow-md border">
+                    <table className="min-w-full bg-white text-sm text-left">
+                        <thead className="bg-gray-100 text-gray-700 uppercase">
+                            <tr>
+                                <th className="py-3 px-4">SL</th>
+                                <th className="py-3 px-4">Ad Title</th>
+                                <th className="py-3 px-4">Short Description</th>
+                                <th className="py-3 px-4">Ad Image</th>
+                                <th className="py-3 px-4">Created At</th>
+                                <th className="py-3 px-4">Status</th>
+                                <th className="py-3 px-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {myAds.map((ad, index) => (
+                                <tr
+                                    key={ad._id}
+                                    className="border-t hover:bg-gray-50"
+                                >
+                                    <td className="py-3 px-4 align-middle text-base">
+                                        {index + 1}
+                                    </td>
+                                    <td className="py-3 px-4 align-middle text-base">
+                                        {ad.title}
+                                    </td>
+                                    <td className="py-3 px-4 align-middle text-base">
+                                        {ad.description}
+                                    </td>
+                                    <td className="py-3 px-4 align-middle text-base">
+                                        <img
+                                            src={ad.image}
+                                            alt="ad"
+                                            className="w-16 h-16 object-cover rounded"
+                                        />
+                                    </td>
+                                    <td className="py-3 px-4 align-middle text-base">
+                                        {format(
+                                            new Date(ad.createdAt),
+                                            "dd MMMM yyyy"
+                                        )}
+                                    </td>
+                                    <td className="py-3 px-4 align-middle text-base">
+                                        <span
+                                            className={getStatusColor(
+                                                ad.status
+                                            )}
+                                        >
+                                            {ad.status}
+                                        </span>
+                                    </td>
+                                    <td className="py-3 px-4 align-middle text-base">
+                                        <div className="flex items-center gap-2">
+                                            <button
+                                                onClick={() => handleUpdate(ad)}
+                                                className="text-blue-600 hover:text-blue-800"
+                                                title="Update"
+                                            >
+                                                <FiEdit size={18} />
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(ad._id)
+                                                }
+                                                className="text-red-600 hover:text-red-800"
+                                                title="Delete"
+                                            >
+                                                <FiTrash2 size={18} />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Update Modal */}
+                {showModal && selectedAd && (
+                    <div
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-40"
+                        onClick={() => setShowModal(false)}
+                    >
+                        <div
+                            className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl relative"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                className="absolute top-2 right-2 text-gray-500 hover:text-red-600"
+                                onClick={() => setShowModal(false)}
+                            >
+                                ✕
+                            </button>
+
+                            <h3 className="text-lg font-bold mb-4">
+                                Update Advertisement
+                            </h3>
+                            <form
+                                onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    const form = e.target;
+                                    const adTitle = form.adTitle.value;
+                                    const shortDescription =
+                                        form.shortDescription.value;
+                                    const email = form.email.value;
+
+                                    let imageUrl = selectedAd.image;
+                                    if (imageFile) {
+                                        imageUrl = await handleImageUpload(
+                                            imageFile
+                                        );
+                                        if (!imageUrl) return;
+                                    }
+
+                                    const updatedAd = {
+                                        title: adTitle,
+                                        description: shortDescription,
+                                        email: email,
+                                        image: imageUrl,
+                                    };
+
+                                    try {
+                                        const res = await axiosSecure.put(
+                                            `/myAds/update/${selectedAd._id}`,
+                                            updatedAd
+                                        );
+                                        if (res.data.modifiedCount > 0) {
+                                            toast.success(
+                                                "Ad updated successfully!"
+                                            );
+                                            refetch();
+                                            setShowModal(false);
+                                        } else {
+                                            toast.info("No changes were made.");
+                                        }
+                                    } catch (err) {
+                                        toast.error("Update failed!");
+                                    }
+                                }}
+                            >
+                                <div className="mb-3">
+                                    <label className="block text-sm font-medium">
+                                        Ad Title
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="adTitle"
+                                        defaultValue={selectedAd.title}
+                                        className="input input-bordered w-full"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="block text-sm font-medium">
+                                        Short Description
+                                    </label>
+                                    <textarea
+                                        name="shortDescription"
+                                        defaultValue={selectedAd.description}
+                                        className="textarea textarea-bordered w-full"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <div className="mb-3">
+                                    <label className="block text-sm font-medium">
+                                        Email
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        defaultValue={user?.email}
+                                        className="input input-bordered w-full bg-gray-100"
+                                        readOnly
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="block text-sm font-medium">
+                                        Ad Image
+                                    </label>
+                                    <input
+                                        type="file"
+                                        name="image"
+                                        accept="image/*"
+                                        className="file-input file-input-bordered w-full"
+                                        onChange={handleImageChange}
+                                    />
+                                    <img
+                                        src={previewImage || selectedAd.image}
+                                        alt="ad preview"
+                                        className="mt-2 w-24 h-24 object-cover rounded border"
+                                    />
+                                </div>
+                                <div className="text-right">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 
