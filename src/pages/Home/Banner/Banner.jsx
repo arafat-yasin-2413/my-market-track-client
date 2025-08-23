@@ -7,14 +7,14 @@ import Container from "../../../components/Container/Container";
 const Banner = () => {
     return (
         <Container>
-            <div className="relative w-full h-[50vh] xl:h-[60vh] rounded-2xl">
+            <div className="relative w-full h-[50vh] xl:h-[60vh] rounded">
                 <img
                     src={banner4}
                     alt="Market Banner"
-                    className="w-full h-full object-cover rounded-2xl"
+                    className="w-full h-full object-cover rounded"
                 />
 
-                <div className="absolute inset-0 bg-black/50 rounded-2xl" />
+                <div className="absolute inset-0 bg-black/50 rounded" />
 
                 <motion.div
                     initial={{ y: -100, opacity: 0 }}

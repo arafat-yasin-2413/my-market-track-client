@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { motion } from "motion/react";
+import Container from "../Container/Container";
 
 const AdsBanner = () => {
     const axiosSecure = useAxiosSecure();
@@ -24,60 +25,63 @@ const AdsBanner = () => {
     }
 
     return (
-        <div className="mb-10">
-            <motion.h2
-                className="text-white text-center my-6 text-4xl md:text-5xl lg:text-8xl  font-bold drop-shadow-lg"
-                animate={{
-                    textShadow: [
-                        "0px 0px 0px #22c55e",
-                        "0px 0px 10px #22c55e",
-                        "0px 0px 0px #22c55e",
-                    ],
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
-            >
-                <span>Ads</span>{" "}
-                <span>Section</span>
-            </motion.h2>
+        <Container>
+            <div className="">
+                <motion.h2
+                    className="text-white text-center my-6 text-4xl md:text-5xl lg:text-8xl  font-bold drop-shadow-lg"
+                    animate={{
+                        textShadow: [
+                            "0px 0px 0px #22c55e",
+                            "0px 0px 10px #22c55e",
+                            "0px 0px 0px #22c55e",
+                        ],
+                    }}
+                    transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                >
+                    <span>Recent</span> <span>Ads</span>
+                </motion.h2>
 
-            <Swiper
-                modules={[Navigation, Autoplay, Pagination]}
-                Navigation
-                loop={true}
-                autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false,
-                }}
-                pagination={{ clickable: true }}
-                speed={600}
-                className="h-full rounded"
-            >
-                {ads.map((ad, index) => (
-                    <SwiperSlide key={ad._id || index}>
-                        <div className="relative z-0 w-1/2 mx-auto h-full">
-                            <img
-                                src={ad.image}
-                                alt={ad.title}
-                                className="w-full h-[400px] md:h-[500px] object-cover rounded"
-                            />
-                            <div className="absolute top-1/3 md:left-12 text-white bg-black/50 p-4 rounded-md max-w-3xl">
-                                <h2 className="text-2xl md:text-4xl font-bold mb-2">
-                                    {ad.title}
-                                </h2>
-                                <p className="text-sm md:text-base">
-                                    {ad.description}
-                                </p>
-                                
+                <Swiper
+                    modules={[Navigation, Autoplay, Pagination]}
+                    Navigation
+                    loop={true}
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    }}
+                    pagination={{ clickable: true }}
+                    speed={600}
+                    className="h-full rounded"
+                >
+                    {ads.map((ad, index) => (
+                        <SwiperSlide key={ad._id || index}>
+                            <div className="relative z-0 w-full mx-auto h-full">
+                                <img
+                                    src={ad.image}
+                                    alt={ad.title}
+                                    className="w-full h-[400px] md:h-[500px] object-cover rounded"
+                                />
+
+                                <div className="absolute inset-0 flex items-center justify-center text-white">
+                                    <div className="bg-black/50 p-4 rounded-md max-w-xl text-center">
+                                        <h2 className="text-2xl md:text-4xl font-bold mb-2">
+                                            {ad.title}
+                                        </h2>
+                                        <p className="text-sm md:text-base">
+                                            {ad.description}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-        </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
+        </Container>
     );
 };
 
