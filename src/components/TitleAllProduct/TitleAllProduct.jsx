@@ -5,7 +5,7 @@ import bg1 from "/assets/backgrounds/veg-bg1.jpg";
 
 const TitleAllProduct = () => {
     return (
-        <div className="relative w-full h-32 md:h-64 rounded-3xl overflow-hidden p-4">
+        <div className="relative w-full h-32 md:h-64 rounded-3xl overflow-hidden">
                 <img
                     src={bg1}
                     alt="Fresh Vegetables"

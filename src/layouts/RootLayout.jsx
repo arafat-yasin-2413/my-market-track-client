@@ -22,9 +22,10 @@ const RootLayout = () => {
 
         <div>
             <Navbar></Navbar>
-            <div className=''>
+            <div className='bg-base-200 py-10'>
                 <Outlet></Outlet>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

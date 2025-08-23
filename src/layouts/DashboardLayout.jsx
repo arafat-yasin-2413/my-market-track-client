@@ -66,7 +66,7 @@ const DashboardLayout = () => {
                         className="drawer-overlay"
                     ></label>
 
-                    <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                    <div className="menu bg-blue-200 text-base-content min-h-full w-80 p-4">
                     <MarketTrackLogo></MarketTrackLogo>
                     <div className="divider"></div>
                         <ul>
