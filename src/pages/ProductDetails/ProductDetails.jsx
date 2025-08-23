@@ -64,7 +64,7 @@ const ProductDetails = () => {
                     {/* product details side */}
                     <div className="flex-1">
                         <h2 className="mb-6 text-3xl md:text-4xl xl:text-5xl font-semibold flex justify-center items-center gap-2">
-                            <span className="text-blue-600">
+                            <span className="text-primary">
                                 <TbListDetails></TbListDetails>
                             </span>
                             Product Details
@@ -87,7 +87,7 @@ const ProductDetails = () => {
                                 <h3 className="text-base font-medium text-gray-800">
                                     Current Price:
                                 </h3>
-                                <p className="text-2xl text-blue-600 font-bold flex items-center">
+                                <p className="text-2xl text-accent font-bold flex items-center">
                                     <TbCurrencyTaka className="" />
                                     {selectedPrice}{" "}
                                     <span className="ml-2 text-base text-black">
@@ -97,7 +97,7 @@ const ProductDetails = () => {
                             </div>
 
                             {/* date of updated price */}
-                            <div className="bg-base-300 w-fit px-1 rounded border border-blue-200">
+                            <div className="bg-white w-fit px-1 rounded border border-accent">
                                 <p className="text-base font-medium">
                                     Date: <span>{date}</span>
                                 </p>
@@ -121,7 +121,7 @@ const ProductDetails = () => {
                                                             {p.date}:
                                                         </span>{" "}
                                                     </h4>
-                                                    <h4 className="text-blue-500 font-semibold">
+                                                    <h4 className="text-accent font-semibold">
                                                         <TbCurrencyTaka className="inline-block" />
                                                         {p.price}
                                                     </h4>
@@ -133,42 +133,42 @@ const ProductDetails = () => {
 
                             <div className="space-y-4 mt-6 bg-white p-6 rounded-lg shadow-md border border-gray-200">
                                 <p>
-                                    <span className="text-base md:text-xl font-semibold text-gray-800">
+                                    <span className="text-base md:text-xl text-gray-700 opacity-70">
                                         Market Name:
                                     </span>{" "}
-                                    <span className="text-base md:text-xl tracking-wide font-medium text-blue-700">
+                                    <span className="text-base md:text-xl tracking-wide font-medium text-primary">
                                         {marketName}
                                     </span>
                                 </p>
                                 <p>
-                                    <span className="text-base md:text-xl font-semibold text-gray-800">
+                                    <span className="text-base md:text-xl text-gray-700 opacity-70">
                                         Market Details:
                                     </span>{" "}
-                                    <span className="text-base md:text-xl tracking-wide font-medium text-gray-700">
+                                    <span className="text-base md:text-xl tracking-wide font-medium text-primary">
                                         {marketDescription}
                                     </span>
                                 </p>
                                 <p>
-                                    <span className="text-base md:text-xl font-semibold text-gray-800">
+                                    <span className="text-base md:text-xl text-gray-700 opacity-70">
                                         Item Description:
                                     </span>{" "}
-                                    <span className="text-base md:text-xl tracking-wide font-medium text-gray-700">
+                                    <span className="text-base md:text-xl tracking-wide font-medium text-primary">
                                         {itemDescription}
                                     </span>
                                 </p>
                                 <p>
-                                    <span className="text-base md:text-xl font-semibold text-gray-800">
+                                    <span className="text-base md:text-xl text-gray-700 opacity-70">
                                         Vendor:
                                     </span>{" "}
-                                    <span className="text-base md:text-xl tracking-wide font-medium text-blue-700">
+                                    <span className="text-base md:text-xl tracking-wide font-medium text-primary">
                                         {name}
                                     </span>
                                 </p>
                                 <p>
-                                    <span className="text-base md:text-xl font-semibold text-gray-800">
+                                    <span className="text-base md:text-xl text-gray-700 opacity-70">
                                         Vendor Email:
                                     </span>{" "}
-                                    <span className="text-base md:text-xl tracking-wide font-medium text-gray-600">
+                                    <span className="text-base md:text-xl tracking-wide text-primary">
                                         {email}
                                     </span>
                                 </p>
@@ -176,7 +176,7 @@ const ProductDetails = () => {
                                     <span className="text-base md:text-xl font-semibold text-gray-800">
                                         Status:
                                     </span>{" "}
-                                    <span className="text-base md:text-xl tracking-wide font-medium text-black capitalize bg-blue-200 px-2 py-0.5 rounded">
+                                    <span className="text-base md:text-xl tracking-wide font-medium text-accent capitalize bg-secondary  px-2 py-0.5 rounded">
                                         {status}
                                     </span>
                                 </p>
@@ -186,7 +186,7 @@ const ProductDetails = () => {
                                 {/* Add to Watchlist */}
                                 <AddToWatchlist
                                     product={product}
-                                    className="btn bg-blue-100 text-blue-800 hover:bg-blue-200 border-none rounded-full font-semibold px-5 py-2 transition"
+                                    className=""
                                 />
 
                                 {/* Buy Product */}
@@ -195,7 +195,7 @@ const ProductDetails = () => {
                                         className={`px-5 py-2 btn rounded-full font-semibold text-xl transition duration-200 ${
                                             isDisabled
                                                 ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                                                : "bg-white hover:bg-gray-900 hover:text-white text-black"
+                                                : "bg-primary hover:bg-primary/90 text-white"
                                         }`}
                                     >
                                         Buy Product

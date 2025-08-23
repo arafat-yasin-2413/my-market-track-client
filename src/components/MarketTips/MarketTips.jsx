@@ -120,7 +120,7 @@ const MarketTips = () => {
                                 whileHover={{ scale: 1.03 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
-                                <div className="text-primary text-xl">
+                                <div className="text-accent text-xl">
                                     {tip.icon}
                                 </div>
                                 <p className="text-base text-gray-700 font-semibold">

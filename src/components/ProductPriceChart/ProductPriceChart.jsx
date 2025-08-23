@@ -70,7 +70,7 @@ const ProductPriceChart = ({ prices }) => {
     return (
         <div className="bg-white rounded-xl w-full shadow-xl p-4">
             <h2 className="text-center mb-6 text-3xl md:text-4xl xl:text-5xl font-semibold flex justify-center items-center gap-2">
-                <span className="text-blue-600"><LuTrendingUpDown></LuTrendingUpDown></span>
+                <span className="text-primary"><LuTrendingUpDown></LuTrendingUpDown></span>
                 Price Trend
             </h2>
 

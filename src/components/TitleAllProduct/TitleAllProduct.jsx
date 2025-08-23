@@ -16,9 +16,9 @@ const TitleAllProduct = () => {
                         className="text-white text-4xl md:text-5xl lg:text-8xl  font-bold drop-shadow-lg"
                         animate={{
                             textShadow: [
-                                "0px 0px 0px #22c55e",
-                                "0px 0px 10px #22c55e",
-                                "0px 0px 0px #22c55e",
+                                "0px 0px 0px #ffffff",
+                                "0px 0px 10px #ffffff",
+                                "0px 0px 0px #ffffff",
                             ],
                         }}
                         transition={{
@@ -27,8 +27,8 @@ const TitleAllProduct = () => {
                             ease: "easeInOut",
                         }}
                     >
-                        <span className="text-green-500">Fresh</span> From{" "}
-                        <span className="text-green-500">Farm</span>
+                        <span className="text-primary">Fresh</span> From{" "}
+                        <span className="text-primary">Farm</span>
                     </motion.h2>
                 </div>
             </div>

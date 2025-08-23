@@ -25,11 +25,11 @@
 
 .nav.active{
     /* @apply bg-white text-blue-600 font-bold outline; */
-    @apply text-accent;
+    @apply text-accent font-bold;
 }
 
 .dashboardLink.active{
-    @apply bg-blue-100 font-bold text-blue-600
+    @apply bg-secondary font-bold text-accent;
 }
 
 

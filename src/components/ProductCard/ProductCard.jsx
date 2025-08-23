@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
                     {itemName}
                 </h2>
 
-                <div className="flex items-center text-blue-600 text-[1rem] font-bold mb-2">
+                <div className="flex items-center text-accent text-[1rem] font-bold mb-2">
                     <span className="flex justify-center items-center text-[1.4rem]">
                         <TbCurrencyTaka className="text-xl"></TbCurrencyTaka>
                         {price}
@@ -42,20 +42,20 @@ const ProductCard = ({ product }) => {
                 </div>
 
                 <div className="text-sm text-gray-500 mb-1 font-medium">
-                    <span className="inline-block bg-white font-semibold px-2 py-0.5 rounded-full mr-2 outline outline-blue-500">
+                    <span className="inline-block bg-white font-semibold px-2 py-0.5 rounded-full mr-2 outline outline-primary">
                         {date}
                     </span>
-                    <span className="inline-block bg-blue-200 text-black font-semibold px-2 py-0.5 rounded-full outline outline-blue-500">
+                    <span className="inline-block bg-secondary text-black font-semibold px-2 py-0.5 rounded-full outline outline-accent">
                         {marketName}
                     </span>
                 </div>
 
                 <p className="text-base font-semibold text-gray-700 mt-1">
-                    Vendor: <span className="font-bold text-blue-500">{name}</span>
+                    Vendor: <span className="font-bold text-primary">{name}</span>
                 </p>
 
                 <Link to={`/products/details/${_id}`}>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-semibold py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-4">
+                <button className="w-full bg-accent hover:bg-accent/90 cursor-pointer text-white font-semibold py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-4">
                     <FaEye /> View Details
                 </button>
                 </Link>

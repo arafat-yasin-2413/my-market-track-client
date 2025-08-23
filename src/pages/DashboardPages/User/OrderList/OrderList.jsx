@@ -47,7 +47,7 @@ const OrderList = () => {
 
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white rounded-xl shadow">
-                    <thead className="bg-blue-600 text-white">
+                    <thead className="bg-primary text-white">
                         <tr>
                             <th className="px-6 py-3 text-left">SL</th>
                             <th className="px-6 py-3 text-left">Product</th>
@@ -86,7 +86,7 @@ const OrderList = () => {
                                 </td>
                                 <td className="px-6 py-4">
                                     <Link to={`/products/details/${order?.product?._id}`}>
-                                    <button className="flex items-center gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded shadow-sm transition">
+                                    <button className="flex items-center gap-1 px-3 py-1 bg-accent hover:bg-accent/90 cursor-pointer text-white rounded shadow-sm transition">
                                         <FaEye />
                                         View Details
                                     </button>

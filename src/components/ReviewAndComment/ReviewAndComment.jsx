@@ -103,7 +103,7 @@ const ReviewAndComment = ({ product }) => {
     return (
         <div className="w-full xl:w-1/2 mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
             <h1 className="text-center text-3xl md:text-5xl font-bold mb-10 flex justify-center items-center gap-2">
-                <span className="text-blue-500">
+                <span className="text-primary">
                     <MdOutlineRateReview></MdOutlineRateReview>
                 </span>{" "}
                 Review and Comment
@@ -135,7 +135,7 @@ const ReviewAndComment = ({ product }) => {
                     className={`py-2 px-6 rounded-md font-semibold cursor-pointer transition ${
                         hasReviewed
                             ? "bg-gray-300 text-gray-700 cursor-not-allowed"
-                            : "bg-blue-600 hover:bg-blue-700 text-white"
+                            : "bg-accent hover:bg-accent/90 text-white"
                     }`}
                 >
                     {hasReviewed

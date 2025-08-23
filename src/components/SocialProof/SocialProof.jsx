@@ -63,7 +63,7 @@ const SocialProof = () => {
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
-                                <div className="text-3xl text-primary mb-2 mx-auto">
+                                <div className="text-3xl text-accent mb-2 mx-auto">
                                     {stat.icon}
                                 </div>
                                 <h3 className="text-2xl font-semibold">

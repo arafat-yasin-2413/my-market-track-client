@@ -156,8 +156,8 @@ const PaymentForm = () => {
                     className="border rounded border-blue-200 max-w-md mt-10 p-4 w-full"
                 >
                     <h2 className="text-center font-semibold text-3xl md:text-5xl mb-10 flex justify-center items-center gap-2">
-                        <span className="text-blue-500"><FaMoneyCheckDollar></FaMoneyCheckDollar></span>
-                        Pay with <span className="text-blue-500">Stripe</span>
+                        <span className="text-primary"><FaMoneyCheckDollar></FaMoneyCheckDollar></span>
+                        Pay with <span className="text-primary">Stripe</span>
                     </h2>
 
                     <div>
@@ -179,7 +179,7 @@ const PaymentForm = () => {
                     )}
 
                     <button
-                        className="btn w-full mt-4 bg-blue-500 text-white text-xl"
+                        className="btn w-full mt-4 bg-accent hover:bg-accent/90 text-white text-xl"
                         type="submit"
                         disabled={!stripe}
                     >

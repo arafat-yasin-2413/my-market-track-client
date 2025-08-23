@@ -7,6 +7,7 @@ import { FaEye } from "react-icons/fa6";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link, Navigate, useNavigate } from "react-router";
 import { FiBox } from "react-icons/fi";
+import MainTitle from "../../../../components/MainTitle/MainTitle";
 
 const MyProducts = () => {
     const { user } = useAuth();
@@ -78,9 +79,13 @@ const MyProducts = () => {
     };
 
     return (
-        <div className="bg-white shadow rounded-lg p-4">
+        <div className="bg-white rounded-lg p-4 my-10">
             {products.length > 0 ? (
                 <div className="overflow-x-auto rounded-lg shadow border border-gray-200">
+                    <div className="flex justify-center">
+                        <MainTitle text={"My Products"}></MainTitle>
+                    </div>
+
                     <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
                         <thead className="bg-gray-50 text-gray-700 text-left">
                             <tr>
