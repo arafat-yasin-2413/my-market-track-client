@@ -34,8 +34,8 @@ const WhyChooseUs = () => {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {reasons.map(({ icon: Icon, title, desc }, i) => (
-                        <div key={i} className="bg-white rounded-xl border p-5 flex flex-col justify-center items-center">
-                            <Icon className="w-8 h-8" />
+                        <div key={i} className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-center items-center">
+                            <Icon className="w-8 h-8 text-accent" />
                             <h3 className="mt-3 font-semibold text-lg">
                                 {title}
                             </h3>

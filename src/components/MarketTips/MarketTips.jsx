@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { MdTipsAndUpdates } from "react-icons/md";
+import Container from "../Container/Container";
 
 const tips = [
     {
@@ -66,58 +67,60 @@ const tips = [
 
 const MarketTips = () => {
     return (
-        <div>
-            <motion.section
-                className="p-6 max-w-5xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-            >
-                <motion.h2
-                    className="text-5xl font-bold mb-6 text-center flex justify-center items-center gap-2"
-                    animate={{
-                        y: [0, -10, 0],
-                    }}
-                    transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
+        <Container>
+            <div>
+                <motion.section
+                    className="max-w-5xl mx-auto"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
                 >
-                    <motion.span
-                        animate={{ rotate: [0, 15, -15, 0] }}
+                    <motion.h2
+                        className="text-5xl font-bold mb-6 text-center flex justify-center items-center gap-2"
+                        animate={{
+                            y: [0, -10, 0],
+                        }}
                         transition={{
-                            duration: 3,
+                            duration: 2,
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="text-yellow-500"
                     >
-                        <MdTipsAndUpdates />
-                    </motion.span>
-                    Quick Market Tips
-                </motion.h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {tips.map((tip, index) => (
-                        <motion.div
-                            key={index}
-                            className="flex items-start bg-base-100 shadow-md p-4 rounded-xl gap-3"
-                            whileHover={{ scale: 1.03 }}
-                            transition={{ type: "spring", stiffness: 300 }}
+                        <motion.span
+                            animate={{ rotate: [0, 15, -15, 0] }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+                            className="text-yellow-500"
                         >
-                            <div className="text-primary text-xl">
-                                {tip.icon}
-                            </div>
-                            <p className="text-base text-gray-700">
-                                {tip.text}
-                            </p>
-                        </motion.div>
-                    ))}
-                </div>
-            </motion.section>
-        </div>
+                            <MdTipsAndUpdates />
+                        </motion.span>
+                        Quick Market Tips
+                    </motion.h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {tips.map((tip, index) => (
+                            <motion.div
+                                key={index}
+                                className="flex items-start bg-base-100 shadow-md p-4 rounded-xl gap-3"
+                                whileHover={{ scale: 1.03 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                <div className="text-primary text-xl">
+                                    {tip.icon}
+                                </div>
+                                <p className="text-base text-gray-700">
+                                    {tip.text}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.section>
+            </div>
+        </Container>
     );
 };
 

@@ -11,10 +11,10 @@ const Banner = () => {
                 <img
                     src={banner4}
                     alt="Market Banner"
-                    className="w-full h-full object-cover rounded"
+                    className="w-full h-full object-cover rounded brightness-100 dark:brightness-100"
                 />
 
-                <div className="absolute inset-0 bg-black/50 rounded" />
+                <div className="absolute inset-0 bg-black/30 dark:bg-black/10 rounded" />
 
                 <motion.div
                     initial={{ y: -100, opacity: 0 }}

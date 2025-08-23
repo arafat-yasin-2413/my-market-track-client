@@ -1,6 +1,8 @@
 import React from "react";
 import { FaChartLine, FaFacebookF, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
+import { AiTwotoneMail } from "react-icons/ai";
+
 import { Link } from "react-router";
 
 const Footer = () => {
@@ -59,7 +61,9 @@ const Footer = () => {
                         <p className="text-gray-700">+880 1711-123456</p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <MdEmail className="text-2xl text-blue-600" />
+                        {/* <MdEmail className="text-2xl w-8 text-blue-600" /> */}
+                        <AiTwotoneMail size={28} className="text-blue-600" />
+
                         <p className="text-gray-700">contact@markettrack.com</p>
                     </div>
                 </div>
