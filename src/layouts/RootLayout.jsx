@@ -22,7 +22,7 @@ const RootLayout = () => {
 
         <div>
             <Navbar></Navbar>
-            <div>
+            <div className='w-10/12 mx-auto'>
                 <Outlet></Outlet>
             </div>
         </div>

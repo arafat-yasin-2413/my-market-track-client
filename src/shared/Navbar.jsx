@@ -22,10 +22,10 @@ const Navbar = () => {
     };
 
     return (
-        <div className="shadow-2xl bg-primary">
+        <div className="shadow-2xl bg-primary sticky z-50 top-0 backdrop-blur-md">
             <div className="navbar w-10/12 mx-auto">
                 <div className="navbar-start">
-                    <div className="dropdown">
+                    <div className="dropdown -ml-4">
                         <div
                             tabIndex={0}
                             role="button"
@@ -56,21 +56,21 @@ const Navbar = () => {
 
                 {/* <div>{user && <h4>{user.email}</h4>}</div> */}
 
-                <div className="navbar-end gap-1">
+                <div className="navbar-end gap-2">
                     {user ? (
                         <>
                             <DropdownProfile></DropdownProfile>
 
                             <button
                                 onClick={handleLogOut}
-                                className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"
+                                className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200 -mr-2"
                             >
                                 Logout
                             </button>
                         </>
                     ) : (
                         <>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 -mr-2">
                                 <Link
                                     to="/login"
                                     className="bg-primary border border-white rounded-md px-2 py-1 text-white font-semibold tracking-wider cursor-pointer hover:scale-102 transition duration-200"

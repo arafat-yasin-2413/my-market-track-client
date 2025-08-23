@@ -58,7 +58,7 @@ const AdsBanner = () => {
             >
                 {ads.map((ad, index) => (
                     <SwiperSlide key={ad._id || index}>
-                        <div className="relative w-1/2 mx-auto h-full">
+                        <div className="relative z-0 w-1/2 mx-auto h-full">
                             <img
                                 src={ad.image}
                                 alt={ad.title}
