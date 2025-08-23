@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { motion } from "motion/react";
 import Container from "../Container/Container";
+import MainTitle from "../MainTitle/MainTitle";
 
 const AdsBanner = () => {
     const axiosSecure = useAxiosSecure();
@@ -27,7 +28,7 @@ const AdsBanner = () => {
     return (
         <Container>
             <div className="">
-                <motion.h2
+                {/* <motion.h2
                     className="text-white text-center my-6 text-4xl md:text-5xl lg:text-8xl  font-bold drop-shadow-lg"
                     animate={{
                         textShadow: [
@@ -43,7 +44,9 @@ const AdsBanner = () => {
                     }}
                 >
                     <span>Recent</span> <span>Ads</span>
-                </motion.h2>
+                </motion.h2> */}
+
+                <MainTitle text={"Popular Ads"}></MainTitle>
 
                 <Swiper
                     modules={[Navigation, Autoplay, Pagination]}

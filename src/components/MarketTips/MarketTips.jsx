@@ -16,67 +16,73 @@ import {
 import { motion } from "framer-motion";
 import { MdTipsAndUpdates } from "react-icons/md";
 import Container from "../Container/Container";
+import MainTitle from "../MainTitle/MainTitle";
 
 const tips = [
     {
         icon: <FaLeaf />,
-        text: "Wash leafy greens in salt water to remove pesticides.",
+        text: "Always wash leafy greens in salt water thoroughly to remove any pesticides or dirt.",
     },
     {
         icon: <FaClock />,
-        text: "Buy fish early morning for maximum freshness.",
+        text: "Buy fresh fish early in the morning to ensure maximum freshness and better taste.",
     },
     {
         icon: <FaSnowflake />,
-        text: "Store meat below 5°C to prevent spoilage.",
+        text: "Store all kinds of meat below 5°C in the refrigerator to prevent spoilage safely.",
     },
     {
         icon: <FaCheckCircle />,
-        text: "Always check for bruises before buying fruits.",
+        text: "Always check fruits carefully for bruises, blemishes, or any damage before purchasing them.",
     },
     {
         icon: <FaFireAlt />,
-        text: "Use low flame to preserve nutrients in vegetables.",
+        text: "Use a low flame while cooking vegetables to preserve their nutrients and natural flavors.",
     },
     {
         icon: <FaCarrot />,
-        text: "Avoid peeling carrots to keep the fiber intact.",
+        text: "Avoid peeling carrots to keep all the fiber and nutrients intact for healthier meals.",
     },
     {
         icon: <FaRecycle />,
-        text: "Compost vegetable waste to reuse as fertilizer.",
+        text: "Compost vegetable and kitchen waste properly to reuse it later as natural fertilizer for plants.",
     },
     {
         icon: <FaTint />,
-        text: "Soak pulses for 4-6 hours before cooking for better digestion.",
+        text: "Soak pulses and lentils for 4-6 hours before cooking to improve digestion and taste.",
     },
     {
         icon: <FaAppleAlt />,
-        text: "Apples should be stored in a cool, dark place.",
+        text: "Store apples in a cool, dark, and dry place to maintain their freshness longer.",
     },
-    { icon: <FaSmile />, text: "Happy cooking starts with fresh ingredients!" },
+    {
+        icon: <FaSmile />,
+        text: "Happy cooking always starts with fresh ingredients following preparation steps carefully.",
+    },
     {
         icon: <FaBoxes />,
-        text: "Store onions and potatoes separately to avoid spoilage.",
+        text: "Store onions and potatoes separately in a dry place to avoid spoilage and sprouting quickly.",
     },
     {
         icon: <FaThermometerHalf />,
-        text: "Don’t refrigerate tomatoes – keep them at room temperature.",
+        text: "Do not refrigerate tomatoes; keep them at room temperature to retain flavor and texture.",
     },
 ];
+
+
 
 const MarketTips = () => {
     return (
         <Container>
             <div>
                 <motion.section
-                    className="max-w-5xl mx-auto"
+                    className="w-full mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                 >
-                    <motion.h2
+                    {/* <motion.h2
                         className="text-5xl font-bold mb-6 text-center flex justify-center items-center gap-2"
                         animate={{
                             y: [0, -10, 0],
@@ -99,9 +105,14 @@ const MarketTips = () => {
                             <MdTipsAndUpdates />
                         </motion.span>
                         Quick Market Tips
-                    </motion.h2>
+                    </motion.h2> */}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+
+                    <MainTitle text={"Quick Market Tips"}></MainTitle>
+
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {tips.map((tip, index) => (
                             <motion.div
                                 key={index}
@@ -112,7 +123,7 @@ const MarketTips = () => {
                                 <div className="text-primary text-xl">
                                     {tip.icon}
                                 </div>
-                                <p className="text-base text-gray-700">
+                                <p className="text-base text-gray-700 font-semibold">
                                     {tip.text}
                                 </p>
                             </motion.div>

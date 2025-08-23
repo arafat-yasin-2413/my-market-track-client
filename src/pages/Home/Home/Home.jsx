@@ -7,6 +7,7 @@ import SocialProof from '../../../components/SocialProof/SocialProof';
 import HowItWorks from '../HowItWorks/HowItWorks';
 import WhyChooseUs from '../WhyChooseUs/WhyChooseUs';
 import Newsletter from '../NewsLetter/NewsLetter';
+import MarqueeText from '../MarqueeText/MarqueeText';
 
 
 const Home = () => {
@@ -16,15 +17,13 @@ const Home = () => {
 
     return (
         <div>
-            
+            <MarqueeText></MarqueeText>
+
             <Banner></Banner>
             
-
             <AdsBanner></AdsBanner>
 
-
             <ProductSection></ProductSection>
-
 
             <HowItWorks></HowItWorks>
 

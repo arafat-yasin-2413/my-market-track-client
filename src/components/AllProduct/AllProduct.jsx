@@ -7,6 +7,7 @@ import TitleAllProduct from "../TitleAllProduct/TitleAllProduct";
 import DatePicker from "react-datepicker";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import Container from "../Container/Container";
+import MainTitle from "../MainTitle/MainTitle";
 
 const AllProduct = () => {
     const axiosSecure = useAxiosSecure();
@@ -90,6 +91,7 @@ const AllProduct = () => {
     return (
         <>
             <Container>
+                <MainTitle text={"All Products"}></MainTitle>
                 <TitleAllProduct />
 
                 <div className="md:flex items-center justify-between mt-10">

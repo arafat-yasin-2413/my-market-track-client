@@ -1,28 +1,33 @@
 import React from "react";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
-import { FaUsers, FaShoppingCart, FaStore } from "react-icons/fa";
+import { FaUsers, FaShoppingCart, FaStore, FaLeaf, FaClock, FaStar } from "react-icons/fa";
 import { MdBarChart } from "react-icons/md";
 import Container from "../Container/Container";
+import MainTitle from "../MainTitle/MainTitle";
 
 const stats = [
     { icon: <FaUsers />, label: "Happy Customers", count: 1000 },
     { icon: <FaShoppingCart />, label: "Orders Delivered", count: 6000 },
     { icon: <FaStore />, label: "Trusted Vendors", count: 80 },
+    { icon: <FaLeaf />, label: "Fresh Products", count: 500 },
+    { icon: <FaClock />, label: "Years of Service", count: 10 },
+    { icon: <FaStar />, label: "5-Star Reviews", count: 1200 },
 ];
+
 
 const SocialProof = () => {
     return (
         <Container>
             <div>
                 <motion.section
-                    className="max-w-4xl mx-auto"
+                    className="w-full mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                 >
-                    <motion.h2
+                    {/* <motion.h2
                         className="text-5xl font-bold mb-6 text-center flex justify-center items-center gap-2"
                         animate={{
                             y: [0, -10, 0],
@@ -45,12 +50,16 @@ const SocialProof = () => {
                             <MdBarChart></MdBarChart>
                         </motion.span>
                         Social Proof
-                    </motion.h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                    </motion.h2> */}
+
+                    <MainTitle text={"Latest Stats"}></MainTitle>
+
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
                         {stats.map((stat, index) => (
                             <motion.div
                                 key={index}
-                                className="bg-base-100 shadow-md p-6 rounded-xl"
+                                className="bg-base-100 shadow-md p-6 rounded-xl flex flex-col justify-center items-center"
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >

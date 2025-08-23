@@ -1,6 +1,7 @@
 import React from "react";
 import { FiMail, FiBell, FiShield, FiTrendingUp } from "react-icons/fi";
 import Container from "../../../components/Container/Container";
+import MainTitle from "../../../components/MainTitle/MainTitle";
 
 const Newsletter = () => {
     const perks = [
@@ -24,22 +25,20 @@ const Newsletter = () => {
     return (
         <Container>
             <section>
-                <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                    Subscribe to Our Newsletter
-                </h2>
+                <MainTitle text={"Subscribe to Our Newsletter"}></MainTitle>
 
                 {/* Perks as grid cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     {perks.map(({ icon: Icon, title, desc }, i) => (
                         <div
                             key={i}
-                            className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-center items-center"
+                            className="bg-white rounded-xl border border-gray-200 px-5 py-10 flex flex-col justify-center items-center hover:scale-105 transition duration-200"
                         >
                             <Icon className="w-8 h-8 text-accent" />
-                            <h3 className="mt-3 font-semibold text-lg">
+                            <h3 className="mt-3 font-semibold text-xl mb-2">
                                 {title}
                             </h3>
-                            <p className="text-sm opacity-80 mt-1">{desc}</p>
+                            <p className="text-base tracking-wider font-medium mt-1">{desc}</p>
                         </div>
                     ))}
                 </div>

@@ -51,7 +51,7 @@ const DistinctProductCard = ({ product }) => {
                 </div>
 
                 <Link to={`/products/details/${product._id}`}>
-                    <button className="btn mt-auto self-start px-6 py-2 text-lg font-semibold rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 bg-blue-600 text-white">
+                    <button className="btn mt-auto self-start px-6 py-2 text-lg font-semibold rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 bg-accent hover:bg-accent/90 text-white">
                         View Details
                     </button>
                 </Link>

@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import DistinctProductCard from "../DistinctProductCard/DistinctProductCard";
 import { motion } from "motion/react";
 import Container from "../Container/Container";
+import MainTitle from "../MainTitle/MainTitle";
+import ProductCard from "../ProductCard/ProductCard";
 
 const ProductSection = () => {
     const axiosSecure = useAxiosSecure();
@@ -39,7 +41,7 @@ const ProductSection = () => {
     return (
         <Container>
             <div className="">
-                <motion.h2
+                {/* <motion.h2
                     className="text-white text-center my-6 text-4xl md:text-5xl lg:text-8xl  font-bold drop-shadow-lg"
                     animate={{
                         textShadow: [
@@ -55,13 +57,16 @@ const ProductSection = () => {
                     }}
                 >
                     <span>Top</span> <span>Products</span>
-                </motion.h2>
+                </motion.h2> */}
+
+
+                <MainTitle text={"Top Products"}></MainTitle>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {allProduct.map((product) => (
-                        <DistinctProductCard
+                        <ProductCard
                             key={product._id}
                             product={product}
-                        ></DistinctProductCard>
+                        ></ProductCard>
                     ))}
                 </div>
             </div>
