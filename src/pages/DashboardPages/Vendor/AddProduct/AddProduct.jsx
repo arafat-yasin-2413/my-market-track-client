@@ -299,7 +299,7 @@ const AddProductForm = () => {
                 <div className="text-center">
                     <button
                         type="submit"
-                        className="px-6 py-2 text-white font-semibold rounded bg-accent hover:bg-accent/90 transition cursor-pointer"
+                        className="px-6 py-2 text-white font-semibold rounded bg-bg-orange-500 hover:bg-bg-orange-500/90 transition cursor-pointer"
                     >
                         Submit Product
                     </button>

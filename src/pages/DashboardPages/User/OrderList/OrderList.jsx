@@ -86,7 +86,7 @@ const OrderList = () => {
                                 </td>
                                 <td className="px-6 py-4">
                                     <Link to={`/products/details/${order?.product?._id}`}>
-                                    <button className="flex items-center gap-1 px-3 py-1 bg-accent hover:bg-accent/90 cursor-pointer text-white rounded shadow-sm transition">
+                                    <button className="flex items-center gap-1 px-3 py-1 bg-bg-orange-500 hover:bg-bg-orange-500/90 cursor-pointer text-white rounded shadow-sm transition">
                                         <FaEye />
                                         View Details
                                     </button>

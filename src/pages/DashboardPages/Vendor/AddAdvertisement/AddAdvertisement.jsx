@@ -182,7 +182,7 @@ const AddAdvertisement = () => {
                     <button
                         type="submit"
                         disabled={uploading}
-                        className="bg-accent hover:bg-accent/90 cursor-pointer text-white px-5 py-2 rounded  transition"
+                        className="bg-bg-orange-500 hover:bg-bg-orange-500/90 cursor-pointer text-white px-5 py-2 rounded  transition"
                     >
                         {uploading ? "Uploading..." : "Submit Advertisement"}
                     </button>

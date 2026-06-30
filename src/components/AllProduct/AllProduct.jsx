@@ -104,8 +104,8 @@ const AllProduct = () => {
                             onClick={() => handleSort("low")}
                             className={`btn font-bold  rounded-md border-gray-300 ${
                                 activeSort === "low"
-                                    ? "bg-accent text-white"
-                                    : "bg-white hover:bg-accent/80"
+                                    ? "bg-orange-500 text-white"
+                                    : "bg-white hover:bg-bg-orange-500/80"
                             }`}
                         >
                             Price Low to High
@@ -114,8 +114,8 @@ const AllProduct = () => {
                             onClick={() => handleSort("high")}
                             className={`btn font-bold rounded-md border-gray-300 ${
                                 activeSort === "high"
-                                    ? "bg-accent text-white"
-                                    : "bg-white hover:bg-accent/80"
+                                    ? "bg-bg-orange-500 text-white"
+                                    : "bg-white hover:bg-bg-orange-500/80"
                             }`}
                         >
                             Price High to Low
@@ -152,7 +152,7 @@ const AllProduct = () => {
 
                         <button
                             onClick={handleDateFilter}
-                            className="btn bg-accent hover:bg-accent/90 font-bold text-base tracking-widest text-white  rounded-md px-2 md:px-4 md:py-2"
+                            className="btn bg-bg-orange-500 hover:bg-bg-orange-500/90 font-bold text-base tracking-widest text-white  rounded-md px-2 md:px-4 md:py-2"
                         >
                             Filter
                         </button>

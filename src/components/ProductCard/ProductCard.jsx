@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
                     {itemName}
                 </h2>
 
-                <div className="flex items-center text-accent text-[1rem] font-bold mb-2">
+                <div className="flex items-center text-orange-500 text-[1rem] font-bold mb-2">
                     <span className="flex justify-center items-center text-[1.4rem]">
                         <TbCurrencyTaka className="text-xl"></TbCurrencyTaka>
                         {price}
@@ -45,7 +45,7 @@ const ProductCard = ({ product }) => {
                     <span className="inline-block bg-white font-semibold px-2 py-0.5 rounded-full mr-2 outline outline-primary">
                         {date}
                     </span>
-                    <span className="inline-block bg-secondary text-black font-semibold px-2 py-0.5 rounded-full outline outline-accent">
+                    <span className="inline-block bg-secondary text-black font-semibold px-2 py-0.5 rounded-full outline outline-bg-orange-500">
                         {marketName}
                     </span>
                 </div>
@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
                 </p>
 
                 <Link to={`/products/details/${_id}`}>
-                <button className="w-full bg-accent hover:bg-accent/90 cursor-pointer text-white font-semibold py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-4">
+                <button className="w-full bg-orange-500 hover:bg-bg-orange-500/90 cursor-pointer text-white font-semibold py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-4">
                     <FaEye /> View Details
                 </button>
                 </Link>

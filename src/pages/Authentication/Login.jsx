@@ -47,7 +47,7 @@ const Login = () => {
                     <input
                         type="email"
                         {...register("email", { required: true })}
-                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-4 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-bg-orange-500 transition mb-4 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
                         placeholder="your email"
                     />
                     {errors.email?.type === "required" && (
@@ -67,7 +67,7 @@ const Login = () => {
                                     "Password must contain uppercase, lowercase, and a number",
                             },
                         })}
-                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-accent transition mb-2 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
+                        className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-bg-orange-500 transition mb-2 bg-white placeholder-gray-500 placeholder:text-sm placeholder:tracking-wider"
                         placeholder="type your password"
                     />
                     {errors.password?.type === "required" && (
@@ -92,13 +92,13 @@ const Login = () => {
                             Don't have an Account?{" "}
                             <Link
                                 to="/register"
-                                className="text-accent hover:underline"
+                                className="text-bg-orange-500 hover:underline"
                             >
                                 Register
                             </Link>
                         </p>
                     </div>
-                    <button className="w-full bg-accent hover:bg-accent/90 text-white font-semibold tracking-wider py-2 rounded mt-2 cursor-pointer">
+                    <button className="w-full bg-bg-orange-500 hover:bg-accebg-orange-500nt/90 text-white font-semibold tracking-wider py-2 rounded mt-2 cursor-pointer">
                         Login
                     </button>
                 </form>

@@ -13,16 +13,16 @@ const ShowingReview = ({ reviewsForThisProduct }) => {
                         {reviewsForThisProduct.map((review, idx) => (
                             <div
                                 key={idx}
-                                className="bg-gray-50 border border-accent rounded-md p-4"
+                                className="bg-gray-50 border border-bg-orange-500 rounded-md p-4"
                             >
                                 <div className="flex items-center gap-4 mb-2">
                                     <img
                                         src={review.photo}
                                         alt={review.name}
-                                        className="w-10 h-10 rounded-full border-2 border-accent"
+                                        className="w-10 h-10 rounded-full border-2 border-bg-orange-500"
                                     />
                                     <div>
-                                        <h4 className="text-base font-semibold text-accent">
+                                        <h4 className="text-base font-semibold text-bg-orange-500">
                                             {review.name}
                                         </h4>
                                         <h4 className="text-primary tracking-wider">

@@ -124,7 +124,7 @@ const MyAdvertisements = () => {
             You have no ads right now
         </p>
         <p>
-            <Link className="btn bg-accent text-white mt-4" to="/dashboard/addAdvertisement">Add some ads</Link>
+            <Link className="btn bg-orange-500 text-white mt-4" to="/dashboard/addAdvertisement">Add some ads</Link>
         </p>
         </div>
     </div>

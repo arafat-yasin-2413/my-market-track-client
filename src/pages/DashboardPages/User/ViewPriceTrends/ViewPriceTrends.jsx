@@ -90,7 +90,7 @@ const ViewPriceTrends = () => {
                                     onClick={() => setSelectedItem(item)}
                                     className={`cursor-pointer px-3 py-2 rounded-md ${
                                         selectedItem?._id === item._id
-                                            ? "bg-accent/80 font-bold"
+                                            ? "bg-bg-orange-500/80 font-bold"
                                             : "hover:bg-gray-200"
                                     }`}
                                 >

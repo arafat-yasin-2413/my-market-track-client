@@ -87,7 +87,7 @@ const ProductDetails = () => {
                                 <h3 className="text-base font-medium text-gray-800">
                                     Current Price:
                                 </h3>
-                                <p className="text-2xl text-accent font-bold flex items-center">
+                                <p className="text-2xl text-bg-orange-500 font-bold flex items-center">
                                     <TbCurrencyTaka className="" />
                                     {selectedPrice}{" "}
                                     <span className="ml-2 text-base text-black">
@@ -97,7 +97,7 @@ const ProductDetails = () => {
                             </div>
 
                             {/* date of updated price */}
-                            <div className="bg-white w-fit px-1 rounded border border-accent">
+                            <div className="bg-white w-fit px-1 rounded border border-bg-orange-500">
                                 <p className="text-base font-medium">
                                     Date: <span>{date}</span>
                                 </p>
@@ -121,7 +121,7 @@ const ProductDetails = () => {
                                                             {p.date}:
                                                         </span>{" "}
                                                     </h4>
-                                                    <h4 className="text-accent font-semibold">
+                                                    <h4 className="text-bg-orange-500 font-semibold">
                                                         <TbCurrencyTaka className="inline-block" />
                                                         {p.price}
                                                     </h4>
@@ -176,7 +176,7 @@ const ProductDetails = () => {
                                     <span className="text-base md:text-xl font-semibold text-gray-800">
                                         Status:
                                     </span>{" "}
-                                    <span className="text-base md:text-xl tracking-wide font-medium text-accent capitalize bg-secondary  px-2 py-0.5 rounded">
+                                    <span className="text-base md:text-xl tracking-wide font-medium text-bg-orange-500 capitalize bg-secondary  px-2 py-0.5 rounded">
                                         {status}
                                     </span>
                                 </p>

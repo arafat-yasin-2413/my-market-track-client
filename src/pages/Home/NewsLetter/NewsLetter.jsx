@@ -52,7 +52,7 @@ const Newsletter = () => {
                             key={i}
                             className="bg-white rounded-xl border border-gray-200 px-5 py-10 flex flex-col justify-center items-center hover:scale-105 transition duration-200"
                         >
-                            <Icon className="w-8 h-8 text-accent" />
+                            <Icon className="w-8 h-8 text-orange-500" />
                             <h3 className="mt-3 font-semibold text-xl mb-2">
                                 {title}
                             </h3>
@@ -66,7 +66,7 @@ const Newsletter = () => {
                 {/* Form as a card */}
                 <div className="bg-white rounded-xl border border-gray-200 p-5">
                     <div className="flex items-center gap-2 my-4 justify-center text-xl font-semibold">
-                        <FiMail className="w-6 h-6 text-accent" />
+                        <FiMail className="w-6 h-6 text-orange-500" />
                         <p>Get the latest in your inbox</p>
                     </div>
 
@@ -79,7 +79,7 @@ const Newsletter = () => {
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="border rounded-lg px-3 py-2 w-64 tracking-wider border-gray-200 focus:outline-none focus:border-accent"
+                            className="border rounded-lg px-3 py-2 w-64 tracking-wider border-gray-200 focus:outline-none focus:border-orange-500"
                         />
 
                         <button
@@ -87,7 +87,7 @@ const Newsletter = () => {
                             disabled={!isValidEmail(email)}
                             className={`rounded-lg px-4 py-2 border font-semibold cursor-pointer ${
                                 isValidEmail(email)
-                                    ? "bg-accent text-white hover:bg-accent/90"
+                                    ? "bg-orange-500 text-white hover:bg-orange-500/90"
                                     : "bg-secondary text-primary cursor-not-allowed"
                             }`}
                         >

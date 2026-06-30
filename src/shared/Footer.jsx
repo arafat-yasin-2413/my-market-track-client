@@ -8,11 +8,12 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Footer = () => {
     return (
-        <footer className="bg-primary/30 text-base-content px-10 py-12">
+        <footer className="bg-primary/10 px-10 py-12">
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
                 
                 <div className="flex flex-col justify-center items-center sm:items-start gap-4">
-                <Icon icon="fa-solid:chart-line" width="48" height="48" className="text-accent" />
+                    
+                <Icon icon="fa-solid:chart-line" width="48" height="48" className="text-orange-500" />
                     <p className="text-3xl font-semibold">MarketTrack</p>
                     <div className="flex gap-5 mt-3 text-gray-600">
                         <a
@@ -20,7 +21,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Facebook"
-                            className="hover:text-accent transition"
+                            className="hover:text-orange-500 transition"
                         >
                             <FaFacebookF size={24} />
                         </a>
@@ -29,7 +30,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Twitter"
-                            className="hover:text-accent transition"
+                            className="hover:text-orange-500 transition"
                         >
                             <FaTwitter size={24} />
                         </a>
@@ -38,7 +39,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="YouTube"
-                            className="hover:text-accent transition"
+                            className="hover:text-orange-500 transition"
                         >
                             <FaYoutube size={24} />
                         </a>
@@ -47,23 +48,23 @@ const Footer = () => {
 
                 {/* Contact Info */}
                 <div>
-                    <h6 className="footer-title mb-4 text-xl font-semibold">
+                    <h6 className="footer-title mb-4 text-xl font-semibold text-primary">
                         Contact Us
                     </h6>
                     <div className="flex items-start gap-3 mb-4">
-                        <MdLocationOn className="text-2xl text-primary mt-1" />
+                        <MdLocationOn className="text-2xl text-orange-500 mt-1" />
                         <p className="text-gray-700">
                             123 Gulshan Avenue, Floor 5, <br />
                             Gulshan-2, Dhaka 1212, Bangladesh
                         </p>
                     </div>
                     <div className="flex items-center gap-3 mb-4">
-                        <MdPhone className="text-2xl text-primary" />
+                        <MdPhone className="text-2xl text-orange-500" />
                         <p className="text-gray-700">+880 1711-123456</p>
                     </div>
                     <div className="flex items-center gap-3">
                         {/* <MdEmail className="text-2xl w-8 text-blue-600" /> */}
-                        <AiTwotoneMail size={28} className="text-blue-600" />
+                        <AiTwotoneMail size={28} className="text-orange-500" />
 
                         <p className="text-gray-700">contact@markettrack.com</p>
                     </div>

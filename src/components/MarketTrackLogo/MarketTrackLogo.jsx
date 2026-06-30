@@ -9,7 +9,7 @@ const MarketTrackLogo = () => {
             <div>
                 <p className="flex justify-center items-center gap-0.5 text-xl ml-2 font-extrabold">
                     {/* <FaChartLine className="text-blue-600"></FaChartLine> */}
-                <Icon icon="fa-solid:chart-line" width="24" height="24" className="text-accent" /><span className="text-white">Market Track</span>
+                <Icon icon="fa-solid:chart-line" width="24" height="24" className="text-bg-orange-500" /><span className="text-white">Market Track</span>
                 </p>
             </div>
         </Link>

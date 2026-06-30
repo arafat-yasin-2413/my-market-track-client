@@ -135,7 +135,7 @@ const ReviewAndComment = ({ product }) => {
                     className={`py-2 px-6 rounded-md font-semibold cursor-pointer transition ${
                         hasReviewed
                             ? "bg-gray-300 text-gray-700 cursor-not-allowed"
-                            : "bg-accent hover:bg-accent/90 text-white"
+                            : "bg-bg-orange-500 hover:bg-bg-orange-500/90 text-white"
                     }`}
                 >
                     {hasReviewed

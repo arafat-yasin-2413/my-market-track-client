@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import banner4 from "/assets/banner/banner-4.jpg";
 import { Link } from "react-router";
 import Container from "../../../components/Container/Container";
+import { Button } from "@/components/ui/button";
 
 const Banner = () => {
     return (
@@ -47,14 +48,9 @@ const Banner = () => {
                         investment decisions.
                     </p>
                     <Link to="/allProduct">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="mt-8 bg-accent hover:bg-accent/90 text-white px-3 py-1 md:px-6 md:py-3 rounded text-base  md:text-lg font-semibold shadow cursor-pointer"
-                        >
-                            Get Started
-                        </motion.button>
+                        <Button variant="ghost" className="bg-orange-500 cursor-pointer">Get Started</Button>
                     </Link>
+                    
                 </motion.div>
             </div>
         </Container>

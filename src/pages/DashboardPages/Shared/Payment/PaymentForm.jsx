@@ -179,7 +179,7 @@ const PaymentForm = () => {
                     )}
 
                     <button
-                        className="btn w-full mt-4 bg-accent hover:bg-accent/90 text-white text-xl"
+                        className="btn w-full mt-4 bg-bg-orange-500 hover:bg-orange-500/90 text-white text-xl"
                         type="submit"
                         disabled={!stripe}
                     >

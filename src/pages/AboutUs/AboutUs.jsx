@@ -19,7 +19,7 @@ const AboutUs = () => {
                         ease: "easeInOut",
                     }}
                 >
-                    About <span className="text-accent">Market Track</span>
+                    About <span className="text-bg-orange-500">Market Track</span>
                 </motion.h1>
 
                 <motion.p
@@ -28,7 +28,7 @@ const AboutUs = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 1 }}
                 >
-                    <span className="text-accent">MarketTrack</span> is a cutting-edge platform designed to provide
+                    <span className="text-bg-orange-500">MarketTrack</span> is a cutting-edge platform designed to provide
                     real-time insights, product tracking, and analytics across
                     multiple marketplaces. With a focus on transparency and
                     data-driven decisions, we empower users to stay ahead in the

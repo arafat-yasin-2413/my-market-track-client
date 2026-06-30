@@ -77,7 +77,7 @@ const AddToWatchlist = ({ product }) => {
             className={`px-5 py-2 btn rounded-full font-semibold transition duration-200 ${
                 isDisabled
                     ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                    : "bg-accent hover:bg-accent/90 text-white tracking-wider"
+                    : "bg-orange-500 hover:bg-orange-500/90 text-white tracking-wider"
             }`}
         >
             {alreadyAdded ? "Already in Watchlist" : "Add To Watchlist"}
