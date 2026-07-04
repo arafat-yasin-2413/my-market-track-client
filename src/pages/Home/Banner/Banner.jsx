@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import banner4 from "/assets/banner/banner-4.jpg";
 import { Link } from "react-router";
 import Container from "../../../components/Container/Container";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/moving-border";
 
 const Banner = () => {
     return (
@@ -21,8 +21,7 @@ const Banner = () => {
                     initial={{ y: -100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="absolute top-10 lg:top-20 left-1/2 transform -translate-x-1/2 text-center text-white px-1 md:px-4"
-                >
+                    className="absolute top-10 lg:top-20 left-1/2 transform -translate-x-1/2 text-center text-white px-1 md:px-4">
                     <motion.h1
                         animate={{
                             textShadow: [
@@ -36,8 +35,7 @@ const Banner = () => {
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="text-2xl md:text-3xl xl:text-4xl font-bold drop-shadow-lg leading-tight"
-                    >
+                        className="text-2xl md:text-3xl xl:text-4xl font-bold drop-shadow-lg leading-tight">
                         Track Every Market Move,
                         <br className="hidden md:block" />
                         Stay Ahead with Confidence
@@ -47,10 +45,10 @@ const Banner = () => {
                         and insights — everything you need to make smarter
                         investment decisions.
                     </p>
-                    <Link to="/allProduct">
-                        <Button variant="ghost" className="bg-orange-500 cursor-pointer">Get Started</Button>
-                    </Link>
-                    
+
+                    <Button className="text-xl">
+                        <Link href="/allProduct">Get Started</Link>
+                    </Button>
                 </motion.div>
             </div>
         </Container>
