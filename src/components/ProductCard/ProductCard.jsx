@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
                 />
             </Link>
 
-            <div className="p-4 flex flex-col flex-grow">
+            <div className="p-4 flex flex-col grow">
                 <h2 className="text-base md:text-lg font-bold tracking-wide text-gray-800 mb-2">
                     {itemName}
                 </h2>
@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
                 </p>
 
                 <Link to={`/products/details/${_id}`}>
-                <button className="w-full bg-orange-500 hover:bg-bg-orange-500/90 cursor-pointer text-white font-semibold py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-4">
+                <button className="w-full bg-orange-500 hover:bg-orange-500/90 cursor-pointer text-white font-semibold py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-4">
                     <FaEye /> View Details
                 </button>
                 </Link>
