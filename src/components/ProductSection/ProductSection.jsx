@@ -35,6 +35,7 @@ const ProductSection = () => {
         );
     }
 
+    // console all product
     // console.log(allProduct);
 
     return (
