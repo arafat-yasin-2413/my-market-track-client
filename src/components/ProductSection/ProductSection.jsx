@@ -2,8 +2,6 @@ import React from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
-import DistinctProductCard from "../DistinctProductCard/DistinctProductCard";
-import { motion } from "motion/react";
 import Container from "../Container/Container";
 import MainTitle from "../MainTitle/MainTitle";
 import ProductCard from "../ProductCard/ProductCard";
