@@ -32,3 +32,5 @@ config.bat
 .envrc
 .venv/
 venv/
+
+.vercel
