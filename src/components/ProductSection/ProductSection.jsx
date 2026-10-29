@@ -8,7 +8,8 @@ import ProductCard from "../ProductCard/ProductCard";
 
 const ProductSection = () => {
     const axiosSecure = useAxiosSecure();
-
+    // axios
+// axios tanstack
     const {
         data: allProduct = [],
         isLoading,
