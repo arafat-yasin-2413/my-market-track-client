@@ -14,7 +14,6 @@ import {
     FaTint,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { MdTipsAndUpdates } from "react-icons/md";
 import Container from "../Container/Container";
 import MainTitle from "../MainTitle/MainTitle";
 
